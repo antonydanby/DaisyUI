@@ -110,7 +110,6 @@ Each demo exists as a VCL and an FMX application with identical content.
 | `Basic-04` | Countdown, list, stat, chat, progress |
 | `Basic-05` | Utilities, SVG, status, select, tables |
 | `Edits-01` | Menus, text input, text area, select, toggle, calendar and date picker |
-| `PeakSVG-01` | SVG image support |
 
 Every demo has a Theme Controller to switch between two themes.
 
