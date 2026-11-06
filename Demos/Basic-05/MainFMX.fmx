@@ -1,0 +1,1700 @@
+object Form19: TForm19
+  Left = 0
+  Top = 0
+  Caption = 
+    'DaisyUI FMX demo - panel, label, SVG image, status, select and t' +
+    'able'
+  ClientHeight = 760
+  ClientWidth = 1280
+  Fill.Kind = Solid
+  Position = ScreenCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+  object lblTheme: TLabel
+    StyledSettings = [Family]
+    Position.X = 24.000000000000000000
+    Position.Y = 26.000000000000000000
+    Size.Width = 72.000000000000000000
+    Size.Height = 15.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 14.000000000000000000
+    Text = 'Theme:'
+    TabOrder = 1
+  end
+  object lblStatusLine: TLabel
+    StyledSettings = [Family]
+    Position.X = 560.000000000000000000
+    Position.Y = 26.000000000000000000
+    Size.Width = 60.000000000000000000
+    Size.Height = 15.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 14.000000000000000000
+    TabOrder = 44
+  end
+  object chkTitleBar: TDaisyFmxCheckBox
+    Cursor = crHandPoint
+    Position.X = 300.000000000000000000
+    Position.Y = 18.000000000000000000
+    Size.Width = 158.000000000000000000
+    Size.Height = 30.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 43
+    Checked = True
+    Text = 'Theme the title bar'
+    OnChange = chkTitleBarChange
+  end
+  object selTheme: TDaisyFmxSelect
+    Cursor = crHandPoint
+    Hint = ''
+    Position.X = 80.000000000000000000
+    Position.Y = 12.000000000000000000
+    Size.Width = 200.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Items.Strings = (
+      'Light'
+      'Dark'
+      'Cupcake'
+      'Dracula'
+      'Corporate'
+      'Pastel'
+      'Wireframe'
+      'CMYK'
+      'Winter'
+      'Dim'
+      'Nord'
+      'Silk'
+      'Bumblebee'
+      'Emerald'
+      'Halloween'
+      'Garden'
+      'Forest'
+      'Lofi'
+      'Fantasy'
+      'Autumn')
+    ItemIndex = 0
+    Placeholder = 'Pick one'
+    OnChange = ThemeSelectChange
+  end
+  object themeCtl: TDaisyFmxThemeController
+    Cursor = crHandPoint
+    Position.X = 1000.000000000000000000
+    Position.Y = 14.000000000000000000
+    Size.Width = 130.000000000000000000
+    Size.Height = 28.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 90
+    Kind = tkSwap
+    Text = 'Dark mode'
+    OnChange = ThemeControllerChange
+  end
+  object pcMain: TDaisyFmxPageControl
+    Align = Client
+    Margins.Top = 60.000000000000000000
+    Size.Width = 1280.000000000000000000
+    Size.Height = 700.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    ActivePageIndex = 0
+    object tsStatus: TDaisyFmxTabSheet
+      Position.X = 1.000000000000000000
+      Position.Y = 41.000000000000000000
+      Size.Width = 1278.000000000000000000
+      Size.Height = 658.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Status'
+      object lblStatusSizes: TLabel
+        StyledSettings = [Family]
+        Position.X = 24.000000000000000000
+        Position.Y = 16.000000000000000000
+        Size.Width = 60.000000000000000000
+        Size.Height = 15.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 14.000000000000000000
+        Text = 'Sizes'
+      end
+      object lblStatusColors: TLabel
+        StyledSettings = [Family]
+        Position.X = 300.000000000000000000
+        Position.Y = 16.000000000000000000
+        Size.Width = 65.000000000000000000
+        Size.Height = 15.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 14.000000000000000000
+        Text = 'Colors'
+      end
+      object lblStatusMore: TLabel
+        StyledSettings = [Family]
+        Position.X = 660.000000000000000000
+        Position.Y = 16.000000000000000000
+        Size.Width = 277.000000000000000000
+        Size.Height = 15.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 14.000000000000000000
+        Text = 'Ping, bounce, emoji and SVG'
+      end
+      object stSizeXs: TDaisyFmxStatus
+        SizeKind = dzXS
+        HitTest = False
+        Position.X = 24.000000000000000000
+        Position.Y = 48.000000000000000000
+        Size.Width = 8.000000000000000000
+        Size.Height = 8.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 60
+      end
+      object stSizeSm: TDaisyFmxStatus
+        SizeKind = dzSM
+        HitTest = False
+        Position.X = 64.000000000000000000
+        Position.Y = 48.000000000000000000
+        Size.Width = 8.000000000000000000
+        Size.Height = 8.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 61
+      end
+      object stSizeMd: TDaisyFmxStatus
+        HitTest = False
+        Position.X = 104.000000000000000000
+        Position.Y = 48.000000000000000000
+        Size.Width = 16.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 62
+      end
+      object stSizeLg: TDaisyFmxStatus
+        SizeKind = dzLG
+        HitTest = False
+        Position.X = 144.000000000000000000
+        Position.Y = 48.000000000000000000
+        Size.Width = 24.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 63
+      end
+      object stSizeXl: TDaisyFmxStatus
+        SizeKind = dzXL
+        HitTest = False
+        Position.X = 184.000000000000000000
+        Position.Y = 48.000000000000000000
+        Size.Width = 32.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 64
+      end
+      object stNeutral: TDaisyFmxStatus
+        Variant = dvNeutral
+        HitTest = False
+        Position.X = 300.000000000000000000
+        Position.Y = 48.000000000000000000
+        Size.Width = 16.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 65
+      end
+      object stPrimary: TDaisyFmxStatus
+        Variant = dvPrimary
+        HitTest = False
+        Position.X = 336.000000000000000000
+        Position.Y = 48.000000000000000000
+        Size.Width = 16.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 66
+      end
+      object stSecondary: TDaisyFmxStatus
+        Variant = dvSecondary
+        HitTest = False
+        Position.X = 372.000000000000000000
+        Position.Y = 48.000000000000000000
+        Size.Width = 16.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 67
+      end
+      object stAccent: TDaisyFmxStatus
+        Variant = dvAccent
+        HitTest = False
+        Position.X = 408.000000000000000000
+        Position.Y = 48.000000000000000000
+        Size.Width = 16.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 68
+      end
+      object stInfo: TDaisyFmxStatus
+        Variant = dvInfo
+        HitTest = False
+        Position.X = 444.000000000000000000
+        Position.Y = 48.000000000000000000
+        Size.Width = 16.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 69
+      end
+      object stSuccess: TDaisyFmxStatus
+        Variant = dvSuccess
+        HitTest = False
+        Position.X = 480.000000000000000000
+        Position.Y = 48.000000000000000000
+        Size.Width = 16.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 70
+      end
+      object stWarning: TDaisyFmxStatus
+        Variant = dvWarning
+        HitTest = False
+        Position.X = 516.000000000000000000
+        Position.Y = 48.000000000000000000
+        Size.Width = 16.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 71
+      end
+      object stError: TDaisyFmxStatus
+        Variant = dvError
+        HitTest = False
+        Position.X = 552.000000000000000000
+        Position.Y = 48.000000000000000000
+        Size.Width = 16.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 72
+      end
+      object stPing: TDaisyFmxStatus
+        Variant = dvInfo
+        HitTest = False
+        Position.X = 660.000000000000000000
+        Position.Y = 48.000000000000000000
+        Size.Width = 16.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 73
+        Animation = saPing
+      end
+      object stBounce: TDaisyFmxStatus
+        Variant = dvPrimary
+        HitTest = False
+        Position.X = 700.000000000000000000
+        Position.Y = 44.000000000000000000
+        Size.Width = 16.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 74
+        Animation = saBounce
+      end
+      object stEmoji: TDaisyFmxStatus
+        SizeKind = dzLG
+        HitTest = False
+        Position.X = 740.000000000000000000
+        Position.Y = 44.000000000000000000
+        Size.Width = 36.000000000000000000
+        Size.Height = 36.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 75
+        Emoji = #55357#56613
+      end
+      object stSvg: TDaisyFmxStatus
+        Variant = dvSuccess
+        SizeKind = dzLG
+        HitTest = False
+        Position.X = 780.000000000000000000
+        Position.Y = 44.000000000000000000
+        Size.Width = 36.000000000000000000
+        Size.Height = 36.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 76
+        SVG.Strings = (
+          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" '
+          'fill="none" stroke="currentColor" stroke-width="3">'
+          '<path d="M4.5 12.75l6 6 9-13.5"/>'
+          '</svg>')
+      end
+    end
+    object tsSelect: TDaisyFmxTabSheet
+      Position.X = 1.000000000000000000
+      Position.Y = 41.000000000000000000
+      Size.Width = 1278.000000000000000000
+      Size.Height = 658.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Select'
+      object selBasic: TDaisyFmxSelect
+        Cursor = crHandPoint
+        Hint = ''
+        Position.X = 24.000000000000000000
+        Position.Y = 16.000000000000000000
+        Size.Width = 190.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 4
+        Items.Strings = (
+          'Crimson'
+          'Amber'
+          'Emerald'
+          'Azure')
+        Placeholder = 'Pick one'
+      end
+      object selGhost: TDaisyFmxSelect
+        Style = dsGhost
+        Cursor = crHandPoint
+        Hint = ''
+        Position.X = 230.000000000000000000
+        Position.Y = 16.000000000000000000
+        Size.Width = 190.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 5
+        Items.Strings = (
+          'Crimson'
+          'Amber'
+          'Emerald'
+          'Azure')
+        Placeholder = 'Pick one'
+      end
+      object selLegend: TDaisyFmxSelect
+        Cursor = crHandPoint
+        Hint = 'Pick the best one'
+        Position.X = 436.000000000000000000
+        Position.Y = 16.000000000000000000
+        Size.Width = 190.000000000000000000
+        Size.Height = 86.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 6
+        Items.Strings = (
+          'Crimson'
+          'Amber'
+          'Emerald'
+          'Azure')
+        Placeholder = 'Pick one'
+        Legend = 'Browsers'
+      end
+      object selBefore: TDaisyFmxSelect
+        Cursor = crHandPoint
+        Hint = ''
+        Position.X = 642.000000000000000000
+        Position.Y = 16.000000000000000000
+        Size.Width = 190.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 7
+        Items.Strings = (
+          'Crimson'
+          'Amber'
+          'Emerald'
+          'Azure')
+        Placeholder = 'Pick one'
+        LabelText = 'Type'
+        LabelMode = slmBefore
+      end
+      object selAfter: TDaisyFmxSelect
+        Cursor = crHandPoint
+        Hint = ''
+        Position.X = 848.000000000000000000
+        Position.Y = 16.000000000000000000
+        Size.Width = 190.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 8
+        Items.Strings = (
+          'Crimson'
+          'Amber'
+          'Emerald'
+          'Azure')
+        Placeholder = 'Pick one'
+        LabelText = 'Colour'
+        LabelMode = slmAfter
+      end
+      object selFloating: TDaisyFmxSelect
+        Cursor = crHandPoint
+        Hint = ''
+        Position.X = 1054.000000000000000000
+        Position.Y = 24.000000000000000000
+        Size.Width = 190.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 9
+        Items.Strings = (
+          'Crimson'
+          'Amber'
+          'Emerald'
+          'Azure')
+        Placeholder = 'Pick one'
+        LabelText = 'Colour'
+        LabelMode = slmFloating
+      end
+      object selXs: TDaisyFmxSelect
+        SizeKind = dzXS
+        Cursor = crHandPoint
+        Hint = ''
+        Position.X = 24.000000000000000000
+        Position.Y = 116.000000000000000000
+        Size.Width = 190.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 10
+        Items.Strings = (
+          'Crimson'
+          'Amber'
+          'Emerald'
+          'Azure')
+        Placeholder = 'Extra small'
+      end
+      object selSm: TDaisyFmxSelect
+        SizeKind = dzSM
+        Cursor = crHandPoint
+        Hint = ''
+        Position.X = 230.000000000000000000
+        Position.Y = 116.000000000000000000
+        Size.Width = 190.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 11
+        Items.Strings = (
+          'Crimson'
+          'Amber'
+          'Emerald'
+          'Azure')
+        Placeholder = 'Small'
+      end
+      object selMd: TDaisyFmxSelect
+        Cursor = crHandPoint
+        Hint = ''
+        Position.X = 436.000000000000000000
+        Position.Y = 116.000000000000000000
+        Size.Width = 190.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 12
+        Items.Strings = (
+          'Crimson'
+          'Amber'
+          'Emerald'
+          'Azure')
+        Placeholder = 'Medium'
+      end
+      object selLg: TDaisyFmxSelect
+        SizeKind = dzLG
+        Cursor = crHandPoint
+        Hint = ''
+        Position.X = 642.000000000000000000
+        Position.Y = 116.000000000000000000
+        Size.Width = 190.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 13
+        Items.Strings = (
+          'Crimson'
+          'Amber'
+          'Emerald'
+          'Azure')
+        Placeholder = 'Large'
+      end
+      object selXl: TDaisyFmxSelect
+        SizeKind = dzXL
+        Cursor = crHandPoint
+        Hint = ''
+        Position.X = 848.000000000000000000
+        Position.Y = 116.000000000000000000
+        Size.Width = 190.000000000000000000
+        Size.Height = 56.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 14
+        Items.Strings = (
+          'Crimson'
+          'Amber'
+          'Emerald'
+          'Azure')
+        Placeholder = 'Extra large'
+      end
+      object selPrimary: TDaisyFmxSelect
+        Variant = dvPrimary
+        Cursor = crHandPoint
+        Hint = ''
+        Position.X = 24.000000000000000000
+        Position.Y = 188.000000000000000000
+        Size.Width = 190.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 15
+        Items.Strings = (
+          'Crimson'
+          'Amber'
+          'Emerald'
+          'Azure')
+        Placeholder = 'Primary'
+      end
+      object selSecondary: TDaisyFmxSelect
+        Variant = dvSecondary
+        Cursor = crHandPoint
+        Hint = ''
+        Position.X = 230.000000000000000000
+        Position.Y = 188.000000000000000000
+        Size.Width = 190.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 16
+        Items.Strings = (
+          'Crimson'
+          'Amber'
+          'Emerald'
+          'Azure')
+        Placeholder = 'Secondary'
+      end
+      object selAccent: TDaisyFmxSelect
+        Variant = dvAccent
+        Cursor = crHandPoint
+        Hint = ''
+        Position.X = 436.000000000000000000
+        Position.Y = 188.000000000000000000
+        Size.Width = 190.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 17
+        Items.Strings = (
+          'Crimson'
+          'Amber'
+          'Emerald'
+          'Azure')
+        Placeholder = 'Accent'
+      end
+      object selInfo: TDaisyFmxSelect
+        Variant = dvInfo
+        Cursor = crHandPoint
+        Hint = ''
+        Position.X = 642.000000000000000000
+        Position.Y = 188.000000000000000000
+        Size.Width = 190.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 18
+        Items.Strings = (
+          'Crimson'
+          'Amber'
+          'Emerald'
+          'Azure')
+        Placeholder = 'Info'
+      end
+      object selSuccess: TDaisyFmxSelect
+        Variant = dvSuccess
+        Cursor = crHandPoint
+        Hint = ''
+        Position.X = 848.000000000000000000
+        Position.Y = 188.000000000000000000
+        Size.Width = 190.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 19
+        Items.Strings = (
+          'Crimson'
+          'Amber'
+          'Emerald'
+          'Azure')
+        Placeholder = 'Success'
+      end
+      object selWarning: TDaisyFmxSelect
+        Variant = dvWarning
+        Cursor = crHandPoint
+        Hint = ''
+        Position.X = 1054.000000000000000000
+        Position.Y = 188.000000000000000000
+        Size.Width = 190.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 20
+        Items.Strings = (
+          'Crimson'
+          'Amber'
+          'Emerald'
+          'Azure')
+        Placeholder = 'Warning'
+      end
+      object selError: TDaisyFmxSelect
+        Variant = dvError
+        Cursor = crHandPoint
+        Hint = ''
+        Position.X = 24.000000000000000000
+        Position.Y = 244.000000000000000000
+        Size.Width = 190.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 21
+        Items.Strings = (
+          'Crimson'
+          'Amber'
+          'Emerald'
+          'Azure')
+        Placeholder = 'Error'
+      end
+      object selDisabled: TDaisyFmxSelect
+        Cursor = crHandPoint
+        Enabled = False
+        Hint = ''
+        Position.X = 230.000000000000000000
+        Position.Y = 244.000000000000000000
+        Size.Width = 190.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 22
+        Items.Strings = (
+          'Crimson'
+          'Amber'
+          'Emerald'
+          'Azure')
+        Placeholder = 'Disabled'
+      end
+      object selEmoji: TDaisyFmxSelect
+        Cursor = crHandPoint
+        Hint = ''
+        Position.X = 436.000000000000000000
+        Position.Y = 244.000000000000000000
+        Size.Width = 190.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 23
+        Items.Strings = (
+          'Crimson'
+          'Amber'
+          'Emerald'
+          'Azure')
+        Placeholder = 'With emoji'
+        Emoji = #55356#57256
+      end
+      object selSvg: TDaisyFmxSelect
+        Cursor = crHandPoint
+        Hint = ''
+        Position.X = 642.000000000000000000
+        Position.Y = 244.000000000000000000
+        Size.Width = 190.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 24
+        Items.Strings = (
+          'Crimson'
+          'Amber'
+          'Emerald'
+          'Azure')
+        Placeholder = 'With SVG'
+        SVG.Strings = (
+          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" '
+          'fill="none" stroke="currentColor" stroke-width="2">'
+          '<path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"/>'
+          '</svg>')
+      end
+      object selSoft: TDaisyFmxSelect
+        Variant = dvPrimary
+        Style = dsSoft
+        Cursor = crHandPoint
+        Hint = ''
+        Position.X = 848.000000000000000000
+        Position.Y = 244.000000000000000000
+        Size.Width = 190.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 25
+        Items.Strings = (
+          'Crimson'
+          'Amber'
+          'Emerald'
+          'Azure')
+        Placeholder = 'Soft'
+      end
+      object selDash: TDaisyFmxSelect
+        Style = dsDash
+        Cursor = crHandPoint
+        Hint = ''
+        Position.X = 1054.000000000000000000
+        Position.Y = 244.000000000000000000
+        Size.Width = 190.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 26
+        Items.Strings = (
+          'Crimson'
+          'Amber'
+          'Emerald'
+          'Azure')
+        Placeholder = 'Dashed'
+      end
+    end
+    object tsTable: TDaisyFmxTabSheet
+      Position.X = 1.000000000000000000
+      Position.Y = 41.000000000000000000
+      Size.Width = 1278.000000000000000000
+      Size.Height = 658.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Table'
+      object tbBasic: TDaisyFmxTable
+        Position.X = 24.000000000000000000
+        Position.Y = 16.000000000000000000
+        Size.Width = 580.000000000000000000
+        Size.Height = 176.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 27
+        Columns = <
+          item
+            Caption = 'Name'
+          end
+          item
+            Caption = 'Job'
+          end
+          item
+            Caption = 'Favorite Color'
+          end>
+        Rows = <
+          item
+            Cells.Strings = (
+              'Cy Ganderton'
+              'Quality Control Specialist'
+              'Blue')
+          end
+          item
+            Cells.Strings = (
+              'Hart Hagerty'
+              'Desktop Support Technician'
+              'Purple')
+          end
+          item
+            Cells.Strings = (
+              'Brice Swyre'
+              'Tax Accountant'
+              'Red')
+          end>
+      end
+      object tbActive: TDaisyFmxTable
+        Position.X = 640.000000000000000000
+        Position.Y = 16.000000000000000000
+        Size.Width = 580.000000000000000000
+        Size.Height = 176.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 28
+        Columns = <
+          item
+            Caption = 'Name'
+          end
+          item
+            Caption = 'Job'
+          end
+          item
+            Caption = 'Favorite Color'
+          end>
+        Rows = <
+          item
+            Cells.Strings = (
+              'Cy Ganderton'
+              'Quality Control Specialist'
+              'Blue')
+          end
+          item
+            Cells.Strings = (
+              'Hart Hagerty'
+              'Desktop Support Technician'
+              'Purple')
+            Active = True
+          end
+          item
+            Cells.Strings = (
+              'Brice Swyre'
+              'Tax Accountant'
+              'Red')
+          end>
+      end
+      object tbBordered: TDaisyFmxTable
+        Position.X = 24.000000000000000000
+        Position.Y = 216.000000000000000000
+        Size.Width = 580.000000000000000000
+        Size.Height = 178.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 29
+        Columns = <
+          item
+            Caption = 'Name'
+          end
+          item
+            Caption = 'Job'
+          end
+          item
+            Caption = 'Favorite Color'
+          end>
+        Rows = <
+          item
+            Cells.Strings = (
+              'Cy Ganderton'
+              'Quality Control Specialist'
+              'Blue')
+          end
+          item
+            Cells.Strings = (
+              'Hart Hagerty'
+              'Desktop Support Technician'
+              'Purple')
+          end
+          item
+            Cells.Strings = (
+              'Brice Swyre'
+              'Tax Accountant'
+              'Red')
+          end>
+        Bordered = True
+      end
+      object tbHover: TDaisyFmxTable
+        Position.X = 640.000000000000000000
+        Position.Y = 216.000000000000000000
+        Size.Width = 580.000000000000000000
+        Size.Height = 176.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 30
+        Columns = <
+          item
+            Caption = 'Name'
+          end
+          item
+            Caption = 'Job'
+          end
+          item
+            Caption = 'Favorite Color'
+          end>
+        Rows = <
+          item
+            Cells.Strings = (
+              'Cy Ganderton'
+              'Quality Control Specialist'
+              'Blue')
+          end
+          item
+            Cells.Strings = (
+              'Hart Hagerty'
+              'Desktop Support Technician'
+              'Purple')
+          end
+          item
+            Cells.Strings = (
+              'Brice Swyre'
+              'Tax Accountant'
+              'Red')
+          end>
+        HoverRows = True
+      end
+      object tbZebra: TDaisyFmxTable
+        Position.X = 24.000000000000000000
+        Position.Y = 416.000000000000000000
+        Size.Width = 580.000000000000000000
+        Size.Height = 176.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 31
+        Columns = <
+          item
+            Caption = 'Name'
+          end
+          item
+            Caption = 'Job'
+          end
+          item
+            Caption = 'Favorite Color'
+          end>
+        Rows = <
+          item
+            Cells.Strings = (
+              'Cy Ganderton'
+              'Quality Control Specialist'
+              'Blue')
+          end
+          item
+            Cells.Strings = (
+              'Hart Hagerty'
+              'Desktop Support Technician'
+              'Purple')
+          end
+          item
+            Cells.Strings = (
+              'Brice Swyre'
+              'Tax Accountant'
+              'Red')
+          end>
+        Zebra = True
+      end
+      object tbCheckbox: TDaisyFmxTable
+        Position.X = 640.000000000000000000
+        Position.Y = 416.000000000000000000
+        Size.Width = 580.000000000000000000
+        Size.Height = 176.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 32
+        Columns = <
+          item
+            Caption = 'Column 4'
+            Kind = ckCheckbox
+          end
+          item
+            Caption = 'Name'
+          end
+          item
+            Caption = 'Job'
+          end
+          item
+            Caption = 'Favorite Color'
+          end>
+        Rows = <
+          item
+            Cells.Strings = (
+              ''
+              'Cy Ganderton'
+              'Quality Control Specialist'
+              'Blue')
+          end
+          item
+            Cells.Strings = (
+              ''
+              'Hart Hagerty'
+              'Desktop Support Technician'
+              'Purple')
+            Checked = True
+          end
+          item
+            Cells.Strings = (
+              ''
+              'Brice Swyre'
+              'Tax Accountant'
+              'Red')
+          end>
+      end
+    end
+    object tsTableMore: TDaisyFmxTabSheet
+      Position.X = 1.000000000000000000
+      Position.Y = 41.000000000000000000
+      Size.Width = 1278.000000000000000000
+      Size.Height = 658.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Table more'
+      object tbAvatar: TDaisyFmxTable
+        Position.X = 24.000000000000000000
+        Position.Y = 16.000000000000000000
+        Size.Width = 580.000000000000000000
+        Size.Height = 260.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 33
+        Columns = <
+          item
+            Caption = 'Column 4'
+            Kind = ckCheckbox
+          end
+          item
+            Caption = 'Name'
+            Kind = ckAvatar
+          end
+          item
+            Caption = 'Job'
+          end
+          item
+            Caption = 'Favorite Color'
+            Kind = ckBadge
+          end
+          item
+            Caption = 'Column 8'
+            Kind = ckButton
+          end>
+        Rows = <
+          item
+            Cells.Strings = (
+              ''
+              'Hart Hagerty|United States'
+              'Desktop Support Technician'
+              'Purple'
+              'details')
+            Icon.Emoji = #55357#56832
+            Variant = dvPrimary
+          end
+          item
+            Cells.Strings = (
+              ''
+              'Brice Swyre|China'
+              'Tax Accountant'
+              'Red'
+              'details')
+            Icon.Emoji = #55358#56598
+            Variant = dvError
+          end
+          item
+            Cells.Strings = (
+              ''
+              'Marjy Ferencz|Russia'
+              'Office Assistant I'
+              'Crimson'
+              'details')
+            Icon.Emoji = #55357#56420
+            Variant = dvAccent
+          end>
+        OnButtonClick = TableButtonClick
+      end
+      object tbFooter: TDaisyFmxTable
+        Position.X = 640.000000000000000000
+        Position.Y = 16.000000000000000000
+        Size.Width = 580.000000000000000000
+        Size.Height = 220.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 34
+        Columns = <
+          item
+            Caption = 'Name'
+          end
+          item
+            Caption = 'Job'
+          end
+          item
+            Caption = 'Favorite Color'
+          end>
+        Rows = <
+          item
+            Cells.Strings = (
+              'Cy Ganderton'
+              'Quality Control Specialist'
+              'Blue')
+          end
+          item
+            Cells.Strings = (
+              'Hart Hagerty'
+              'Desktop Support Technician'
+              'Purple')
+          end
+          item
+            Cells.Strings = (
+              'Brice Swyre'
+              'Tax Accountant'
+              'Red')
+          end>
+        ShowFooter = True
+      end
+      object tbPinRows: TDaisyFmxTable
+        Position.X = 24.000000000000000000
+        Position.Y = 302.000000000000000000
+        Size.Width = 580.000000000000000000
+        Size.Height = 220.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 35
+        Columns = <
+          item
+            Caption = 'Name'
+          end
+          item
+            Caption = 'Job'
+          end
+          item
+            Caption = 'Favorite Color'
+          end>
+        Rows = <
+          item
+            Cells.Strings = (
+              'Cy Ganderton'
+              'Quality Control Specialist'
+              'Blue')
+          end
+          item
+            Cells.Strings = (
+              'Hart Hagerty'
+              'Desktop Support Technician'
+              'Purple')
+          end
+          item
+            Cells.Strings = (
+              'Brice Swyre'
+              'Tax Accountant'
+              'Red')
+          end
+          item
+            Cells.Strings = (
+              'Marjy Ferencz'
+              'Office Assistant I'
+              'Crimson')
+          end
+          item
+            Cells.Strings = (
+              'Yancy Tear'
+              'Community Outreach Specialist'
+              'Indigo')
+          end
+          item
+            Cells.Strings = (
+              'Irma Vasilik'
+              'Editor'
+              'Orange')
+          end
+          item
+            Cells.Strings = (
+              'Meghann Durtnal'
+              'Staff Accountant IV'
+              'Yellow')
+          end
+          item
+            Cells.Strings = (
+              'Sammy Seston'
+              'Accountant I'
+              'Teal')
+          end>
+        ShowFooter = True
+        PinRows = True
+        AutoHeight = False
+      end
+      object tbPinCols: TDaisyFmxTable
+        Position.X = 640.000000000000000000
+        Position.Y = 302.000000000000000000
+        Size.Width = 580.000000000000000000
+        Size.Height = 220.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 36
+        Columns = <
+          item
+            Caption = 'Name'
+            Pinned = True
+          end
+          item
+            Caption = 'Job'
+          end
+          item
+            Caption = 'Company'
+          end
+          item
+            Caption = 'Location'
+          end
+          item
+            Caption = 'Last Login'
+          end
+          item
+            Caption = 'Favorite Color'
+            Pinned = True
+          end>
+        Rows = <
+          item
+            Cells.Strings = (
+              'Cy Ganderton'
+              'Quality Control Specialist'
+              'Littel, Schaden and Vandervort'
+              'Canada'
+              '12/16/2020'
+              'Blue')
+          end
+          item
+            Cells.Strings = (
+              'Hart Hagerty'
+              'Desktop Support Technician'
+              'Zemlak, Daniel and Leannon'
+              'United States'
+              '12/5/2020'
+              'Purple')
+          end
+          item
+            Cells.Strings = (
+              'Brice Swyre'
+              'Tax Accountant'
+              'Carroll Group'
+              'China'
+              '8/15/2020'
+              'Red')
+          end
+          item
+            Cells.Strings = (
+              'Marjy Ferencz'
+              'Office Assistant I'
+              'Rowe-Schoen'
+              'Russia'
+              '3/25/2021'
+              'Crimson')
+          end
+          item
+            Cells.Strings = (
+              'Yancy Tear'
+              'Community Outreach Specialist'
+              'Wyman-Ledner'
+              'Brazil'
+              '5/22/2020'
+              'Indigo')
+          end>
+        PinRows = True
+        AutoHeight = False
+      end
+    end
+    object tsTableSizes: TDaisyFmxTabSheet
+      Position.X = 1.000000000000000000
+      Position.Y = 41.000000000000000000
+      Size.Width = 1278.000000000000000000
+      Size.Height = 658.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Table sizes'
+      object tbXs: TDaisyFmxTable
+        SizeKind = dzXS
+        Position.X = 24.000000000000000000
+        Position.Y = 16.000000000000000000
+        Size.Width = 580.000000000000000000
+        Size.Height = 69.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 37
+        Columns = <
+          item
+            Caption = 'Name'
+          end
+          item
+            Caption = 'Job'
+          end
+          item
+            Caption = 'Favorite Color'
+          end>
+        Rows = <
+          item
+            Cells.Strings = (
+              'Cy Ganderton'
+              'Quality Control Specialist'
+              'Blue')
+          end
+          item
+            Cells.Strings = (
+              'Hart Hagerty'
+              'Desktop Support Technician'
+              'Purple')
+          end>
+      end
+      object tbSm: TDaisyFmxTable
+        SizeKind = dzSM
+        Position.X = 640.000000000000000000
+        Position.Y = 16.000000000000000000
+        Size.Width = 580.000000000000000000
+        Size.Height = 99.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 38
+        Columns = <
+          item
+            Caption = 'Name'
+          end
+          item
+            Caption = 'Job'
+          end
+          item
+            Caption = 'Favorite Color'
+          end>
+        Rows = <
+          item
+            Cells.Strings = (
+              'Cy Ganderton'
+              'Quality Control Specialist'
+              'Blue')
+          end
+          item
+            Cells.Strings = (
+              'Hart Hagerty'
+              'Desktop Support Technician'
+              'Purple')
+          end>
+      end
+      object tbMd: TDaisyFmxTable
+        Position.X = 24.000000000000000000
+        Position.Y = 160.000000000000000000
+        Size.Width = 580.000000000000000000
+        Size.Height = 132.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 39
+        Columns = <
+          item
+            Caption = 'Name'
+          end
+          item
+            Caption = 'Job'
+          end
+          item
+            Caption = 'Favorite Color'
+          end>
+        Rows = <
+          item
+            Cells.Strings = (
+              'Cy Ganderton'
+              'Quality Control Specialist'
+              'Blue')
+          end
+          item
+            Cells.Strings = (
+              'Hart Hagerty'
+              'Desktop Support Technician'
+              'Purple')
+          end>
+      end
+      object tbLg: TDaisyFmxTable
+        SizeKind = dzLG
+        Position.X = 640.000000000000000000
+        Position.Y = 160.000000000000000000
+        Size.Width = 580.000000000000000000
+        Size.Height = 171.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 40
+        Columns = <
+          item
+            Caption = 'Name'
+          end
+          item
+            Caption = 'Job'
+          end
+          item
+            Caption = 'Favorite Color'
+          end>
+        Rows = <
+          item
+            Cells.Strings = (
+              'Cy Ganderton'
+              'Quality Control Specialist'
+              'Blue')
+          end
+          item
+            Cells.Strings = (
+              'Hart Hagerty'
+              'Desktop Support Technician'
+              'Purple')
+          end>
+      end
+      object tbXl: TDaisyFmxTable
+        SizeKind = dzXL
+        Position.X = 24.000000000000000000
+        Position.Y = 344.000000000000000000
+        Size.Width = 580.000000000000000000
+        Size.Height = 213.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 41
+        Columns = <
+          item
+            Caption = 'Name'
+          end
+          item
+            Caption = 'Job'
+          end
+          item
+            Caption = 'Favorite Color'
+          end>
+        Rows = <
+          item
+            Cells.Strings = (
+              'Cy Ganderton'
+              'Quality Control Specialist'
+              'Blue')
+          end
+          item
+            Cells.Strings = (
+              'Hart Hagerty'
+              'Desktop Support Technician'
+              'Purple')
+          end>
+      end
+      object tbRtl: TDaisyFmxTable
+        Position.X = 640.000000000000000000
+        Position.Y = 344.000000000000000000
+        Size.Width = 580.000000000000000000
+        Size.Height = 176.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 42
+        Columns = <
+          item
+            Caption = 'Name'
+          end
+          item
+            Caption = 'Job'
+          end
+          item
+            Caption = 'Favorite Color'
+          end>
+        Rows = <
+          item
+            Cells.Strings = (
+              'Cy Ganderton'
+              'Quality Control Specialist'
+              'Blue')
+          end
+          item
+            Cells.Strings = (
+              'Hart Hagerty'
+              'Desktop Support Technician'
+              'Purple')
+          end
+          item
+            Cells.Strings = (
+              'Brice Swyre'
+              'Tax Accountant'
+              'Red')
+          end>
+        RightToLeft = True
+      end
+    end
+    object tsSvg: TDaisyFmxTabSheet
+      Position.X = 1.000000000000000000
+      Position.Y = 41.000000000000000000
+      Size.Width = 1278.000000000000000000
+      Size.Height = 658.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'SVG'
+      object svgHeart: TDaisyFmxSVGImage
+        Variant = dvError
+        HitTest = False
+        Position.X = 24.000000000000000000
+        Position.Y = 16.000000000000000000
+        Size.Width = 64.000000000000000000
+        Size.Height = 64.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 57
+        SVG.Strings = (
+          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" '
+          'fill="none" stroke="currentColor" stroke-width="1.5">'
+          
+            '<path d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.12' +
+            '6-4.312 2.733'
+          
+            ' -.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7' +
+            '.22 9 12 9 12s9-4.78 9-12Z"/>'
+          '</svg>')
+      end
+      object svgCheck: TDaisyFmxSVGImage
+        Variant = dvSuccess
+        HitTest = False
+        Position.X = 104.000000000000000000
+        Position.Y = 16.000000000000000000
+        Size.Width = 64.000000000000000000
+        Size.Height = 64.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 58
+        SVG.Strings = (
+          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" '
+          'fill="none" stroke="currentColor" stroke-width="2">'
+          '<path d="M4.5 12.75l6 6 9-13.5"/>'
+          '</svg>')
+      end
+      object svgSettings: TDaisyFmxSVGImage
+        Variant = dvPrimary
+        HitTest = False
+        Position.X = 184.000000000000000000
+        Position.Y = 16.000000000000000000
+        Size.Width = 64.000000000000000000
+        Size.Height = 64.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 59
+        SVG.Strings = (
+          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" '
+          'fill="none" stroke="currentColor" stroke-width="2" '
+          'stroke-linecap="round" stroke-linejoin="round">'
+          '<path d="M6 9l6 6l6 -6"/>'
+          '<path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"/>'
+          '</svg>')
+      end
+      object svgColor: TDaisyFmxSVGImage
+        HitTest = False
+        Position.X = 264.000000000000000000
+        Position.Y = 16.000000000000000000
+        Size.Width = 64.000000000000000000
+        Size.Height = 64.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 120
+        SVG.Strings = (
+          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">'
+          '<circle cx="12" cy="12" r="10" fill="#FFC107"/>'
+          '<circle cx="8.5" cy="10" r="1.5" fill="#333333"/>'
+          '<circle cx="15.5" cy="10" r="1.5" fill="#333333"/>'
+          
+            '<path d="M7 14.5c1.2 2.5 8.8 2.5 10 0" fill="none" stroke="#E651' +
+            '00" '
+          'stroke-width="1.8" stroke-linecap="round"/>'
+          '</svg>')
+        Colored = True
+      end
+      object DaisyFmxSVGImage1: TDaisyFmxSVGImage
+        HitTest = False
+        Position.X = 344.000000000000000000
+        Position.Y = 16.000000000000000000
+        Size.Width = 128.000000000000000000
+        Size.Height = 105.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 121
+        SVG.Strings = (
+          
+            '<svg viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="h' +
+            'ttp://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarri' +
+            'er" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-li' +
+            'necap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCar' +
+            'rier"><path d="M543.74 255c210.2-42.94 322.79 28.73 346.37 214C9' +
+            '04.38 652.15 874 930.76 563 930.76q-35.73-0.9-108.27 0C178.08 90' +
+            '3 132.15 652.15 146.43 469 170 283.73 282.6 212.06 492.8 255c5.8' +
+            '6 1.49 15.78 1.55 20.37 0 14.83 1.54 24.71 1.48 30.57 0z" fill="' +
+            '#FFFFFF"></path><path d="M885.45 439.64q2.73 14.16 4.66 29.34C90' +
+            '4.38 652.15 874 930.76 563 930.76q-35.73-0.9-108.27 0c-88.34-8.8' +
+            '6-153.15-40.47-200-85.36-20.43-72.24-23.51-150.22-18.17-218.74 2' +
+            '3.58-185.26 136.17-256.93 346.37-214 5.86 1.49 15.78 1.55 20.37 ' +
+            '0 14.78 1.55 24.7 1.49 30.56 0 110.33-22.54 193.77-13.5 251.57 2' +
+            '7z" fill="#FFC6C6"></path><path d="M687.43 244.66c118.81 12.08 1' +
+            '85.2 87 202.68 224.32C904.38 652.15 874 930.76 563 930.76q-35.73' +
+            '-0.9-108.27 0c-58-5.82-105.92-21.46-145.22-44.24 223.8 24.26 333' +
+            '.76-44.77 395.87-262.59 32.82-115.12 28.75-256-18-379.27z" fill=' +
+            '"#FF9368"></path><path d="M405.59 339.46a135.21 61.95 0 1 0 270.' +
+            '42 0 135.21 61.95 0 1 0-270.42 0Z" fill="#FFC6C6"></path><path d' +
+            '="M453.84 951.26l-1.15-0.12c-68.87-6.91-128.3-27.68-176.65-61.74' +
+            'C233 859 198.34 818 173.14 767.27c-50.37-101.34-53.43-219-47.13-' +
+            '299.87l0.1-1c5.83-45.76 17.1-85.6 33.52-118.42 17-33.9 39.88-61.' +
+            '34 68.11-81.56 31.69-22.69 70.78-36.75 116.17-41.8 44.05-4.9 95.' +
+            '52-1.43 153 10.31l0.93 0.21a31.48 31.48 0 0 0 9.21 0.31l3.82-1.2' +
+            '9 4.45 0.47c17.13 1.79 22.49 0.75 23.4 0.52l0.93-0.21c57.46-11.7' +
+            '4 108.94-15.21 153-10.31 45.39 5 84.47 19.11 116.17 41.8 28.18 2' +
+            '0.21 51.13 47.65 68.09 81.57 16.41 32.81 27.69 72.65 33.52 118.4' +
+            '2l0.1 1c9.32 119.51 0.32 283.71-95.45 387.23C755.77 918.74 671 9' +
+            '51.24 563 951.24h-0.52c-23.45-0.59-59.62-0.59-107.5 0zM518 909.8' +
+            '4c18.15 0 33.27 0.15 45.25 0.45 50.49 0 95.42-7.82 133.56-23.18 ' +
+            '34.28-13.8 63.95-34.09 88.19-60.3 47.27-51.1 100.32-154.3 84.72-' +
+            '355.73-5.26-41-15.17-76.21-29.45-104.77-13.94-27.88-32.56-50.31-' +
+            '55.27-66.58-25.92-18.56-58.51-30.13-96.85-34.4-39.7-4.42-86.76-1' +
+            '.17-139.87 9.65-8 1.92-18.5 2.15-33.69 0.73a70 70 0 0 1-26.22-0.' +
+            '73c-53.12-10.82-100.18-14.07-139.88-9.65-38.34 4.26-70.93 15.84-' +
+            '96.85 34.4-22.76 16.3-41.38 38.7-55.33 66.58-14.29 28.56-24.2 63' +
+            '.81-29.45 104.77-3.8 49.11-2.73 96.45 3.17 140.73 6.89 51.73 20.' +
+            '3 97.9 39.85 137.23 47.26 95.07 130 149.31 245.83 161.24 23.58-0' +
+            '.28 44.41-0.44 62.29-0.44z" fill=""></path><path d="M516.59 388.' +
+            '26c-36.82 0-73.57-14.47-109.24-43a22.53 22.53 0 1 1 28.15-35.18c' +
+            '55.32 44.27 106.86 44.27 162.18 0a22.53 22.53 0 1 1 28.15 35.18c' +
+            '-35.66 28.53-72.42 43-109.24 43z" fill=""></path><path d="M518.2' +
+            '8 363.59a22.55 22.55 0 0 1-21.66-28.77c32.47-112.64 71.48-185.13' +
+            ' 119.27-221.62a22.53 22.53 0 1 1 27.35 35.8c-39.27 30-74 96.71-1' +
+            '03.32 198.29a22.54 22.54 0 0 1-21.64 16.3z" fill=""></path><path' +
+            ' d="M412.75 277.52q87.12 0 157.75-78.84-70.63-78.84-157.75-78.84' +
+            'T255 198.68q70.62 78.84 157.75 78.84z" fill="#89D66D"></path><pa' +
+            'th d="M416.86 298c-63.88 0-122.09-28.82-173-85.66l-12.24-13.67L2' +
+            '43.85 185c50.92-56.84 109.12-85.65 173-85.65s122.09 28.82 173 85' +
+            '.65l12.24 13.67-12.24 13.67C538.95 269.18 480.74 298 416.86 298z' +
+            ' m-129.48-99.32c17.84 17.55 36.49 31.25 55.63 40.81a164.13 164.1' +
+            '3 0 0 0 147.69 0c19.14-9.57 37.79-23.26 55.63-40.81-17.84-17.55-' +
+            '36.49-31.25-55.63-40.81a164.13 164.13 0 0 0-147.69 0c-19.13 9.56' +
+            '-37.79 23.25-55.63 40.81z" fill=""></path><path d="M396.72 182.1' +
+            '6h143.35a15.36 15.36 0 0 1 15.36 15.36 15.36 15.36 0 0 1-15.36 1' +
+            '5.36H396.72a15.36 15.36 0 0 1-15.36-15.36 15.36 15.36 0 0 1 15.3' +
+            '6-15.36z" fill="#015200"></path></g></svg>')
+        Colored = True
+      end
+    end
+    object tsUtilities: TDaisyFmxTabSheet
+      Position.X = 1.000000000000000000
+      Position.Y = 41.000000000000000000
+      Size.Width = 1278.000000000000000000
+      Size.Height = 658.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Utilities'
+      object pnlPlain: TDaisyFmxPanel
+        Position.X = 24.000000000000000000
+        Position.Y = 16.000000000000000000
+        Size.Width = 280.000000000000000000
+        Size.Height = 120.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        object lblPanelTitle: TDaisyFmxLabel
+          SizeKind = dzLG
+          HitTest = False
+          Position.X = 16.000000000000000000
+          Position.Y = 16.000000000000000000
+          Size.Width = 106.000000000000000000
+          Size.Height = 23.941406250000000000
+          Size.PlatformDefault = False
+          Text = 'A plain panel'
+        end
+        object lblPanelText: TDaisyFmxLabel
+          HitTest = False
+          Position.X = 16.000000000000000000
+          Position.Y = 52.000000000000000000
+          Size.Width = 248.000000000000000000
+          Size.Height = 37.242187500000000000
+          Size.PlatformDefault = False
+          Text = 'Panels accept child controls, so they can hold anything.'
+          WordWrap = True
+          Muted = True
+        end
+      end
+      object pnlPrimary: TDaisyFmxPanel
+        Variant = dvPrimary
+        Position.X = 320.000000000000000000
+        Position.Y = 16.000000000000000000
+        Size.Width = 280.000000000000000000
+        Size.Height = 120.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        object lblPrimaryTitle: TDaisyFmxLabel
+          SizeKind = dzLG
+          HitTest = False
+          Position.X = 16.000000000000000000
+          Position.Y = 16.000000000000000000
+          Size.Width = 128.000000000000000000
+          Size.Height = 23.941406250000000000
+          Size.PlatformDefault = False
+          Text = 'A primary panel'
+        end
+        object lblPrimaryText: TDaisyFmxLabel
+          HitTest = False
+          Position.X = 16.000000000000000000
+          Position.Y = 52.000000000000000000
+          Size.Width = 248.000000000000000000
+          Size.Height = 18.621093750000000000
+          Size.PlatformDefault = False
+          Text = 'The label picks up the panel colours.'
+          WordWrap = True
+        end
+      end
+      object dlbHeading: TDaisyFmxLabel
+        SizeKind = dzXL
+        HitTest = False
+        Position.X = 640.000000000000000000
+        Position.Y = 16.000000000000000000
+        Size.Width = 191.000000000000000000
+        Size.Height = 29.261718750000000000
+        Size.PlatformDefault = False
+        TabOrder = 52
+        Text = 'A big heading label'
+      end
+      object dlbBody: TDaisyFmxLabel
+        HitTest = False
+        Position.X = 640.000000000000000000
+        Position.Y = 56.000000000000000000
+        Size.Width = 222.000000000000000000
+        Size.Height = 18.621093750000000000
+        Size.PlatformDefault = False
+        TabOrder = 53
+        Text = 'A normal label in the current theme'
+      end
+      object dlbMuted: TDaisyFmxLabel
+        HitTest = False
+        Position.X = 640.000000000000000000
+        Position.Y = 84.000000000000000000
+        Size.Width = 204.000000000000000000
+        Size.Height = 18.621093750000000000
+        Size.PlatformDefault = False
+        TabOrder = 54
+        Text = 'A muted label for secondary text'
+        Muted = True
+      end
+      object dlbEmoji: TDaisyFmxLabel
+        SizeKind = dzLG
+        HitTest = False
+        Position.X = 640.000000000000000000
+        Position.Y = 112.000000000000000000
+        Size.Width = 286.000000000000000000
+        Size.Height = 23.941406250000000000
+        Size.PlatformDefault = False
+        TabOrder = 55
+        Text = 'Colour emoji: '#55357#56832' '#55357#56960' '#55356#57225' '#55357#56613' '#55356#57173' '#55358#56598
+      end
+      object dlbWrap: TDaisyFmxLabel
+        HitTest = False
+        Position.X = 640.000000000000000000
+        Position.Y = 148.000000000000000000
+        Size.Width = 560.000000000000000000
+        Size.Height = 37.242187500000000000
+        Size.PlatformDefault = False
+        TabOrder = 56
+        Text = 
+          'Labels can wrap long text over several lines, and they are drawn' +
+          ' with Direct2D so emoji such as '#55357#56832' stay in colour.'
+        WordWrap = True
+      end
+    end
+  end
+  object Styler: TDaisyFmxFormStyler
+    Left = 1088
+    Top = 32
+  end
+end

@@ -1,0 +1,1059 @@
+object Form15: TForm15
+  Left = 0
+  Top = 0
+  Caption = 'DaisyUI FMX demo - badges'
+  ClientHeight = 440
+  ClientWidth = 920
+  Position = ScreenCenter
+  OnShow = FormShow
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object lblTheme: TLabel
+    AutoSize = True
+    StyledSettings = [Family]
+    Position.X = 24.000000000000000000
+    Position.Y = 22.000000000000000000
+    Size.Width = 60.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 14.000000000000000000
+    Text = 'Theme:'
+    TabOrder = 90
+  end
+  object Styler: TDaisyFmxFormStyler
+  end
+  object selTheme: TDaisyFmxSelect
+    Cursor = crHandPoint
+    Hint = ''
+    Position.X = 90.000000000000000000
+    Position.Y = 14.000000000000000000
+    Size.Width = 200.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 91
+    Items.Strings = (
+      'Light'
+      'Dark'
+      'Cupcake'
+      'Dracula'
+      'Corporate'
+      'Pastel'
+      'Wireframe'
+      'CMYK'
+      'Winter'
+      'Dim'
+      'Nord'
+      'Silk'
+      'Bumblebee'
+      'Emerald'
+      'Halloween'
+      'Garden'
+      'Forest'
+      'Lofi'
+      'Fantasy'
+      'Autumn')
+    ItemIndex = 0
+    Placeholder = 'Pick one'
+    OnChange = ThemeSelectChange
+  end
+  object chkTitleBar: TDaisyFmxCheckBox
+    Cursor = crHandPoint
+    Position.X = 320.000000000000000000
+    Position.Y = 22.000000000000000000
+    Size.Width = 260.000000000000000000
+    Size.Height = 24.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 95
+    Text = 'Theme the window title bar'
+    Checked = True
+    OnChange = chkTitleBarChange
+  end
+  object themeCtl: TDaisyFmxThemeController
+    Cursor = crHandPoint
+    Position.X = 620.000000000000000000
+    Position.Y = 20.000000000000000000
+    Size.Width = 76.000000000000000000
+    Size.Height = 28.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 90
+    Kind = tkSunMoon
+    OnChange = ThemeControllerChange
+  end
+  object pcMain: TDaisyFmxPageControl
+    Align = Client
+    Margins.Left = 16.000000000000000000
+    Margins.Top = 64.000000000000000000
+    Margins.Right = 16.000000000000000000
+    Margins.Bottom = 16.000000000000000000
+    Size.Width = 888.000000000000000000
+    Size.Height = 360.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 96
+    object tsBadges: TDaisyFmxTabSheet
+      Text = 'Badges'
+      object lblBadge: TLabel
+        AutoSize = True
+        StyledSettings = [Family]
+        Position.X = 24.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 60.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.VertAlign = Leading
+        Text = 'Badge'
+      end
+      object lblSizes: TLabel
+        AutoSize = True
+        StyledSettings = [Family]
+        Position.X = 24.000000000000000000
+        Position.Y = 84.000000000000000000
+        Size.Width = 100.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.VertAlign = Leading
+        Text = 'Badge sizes'
+      end
+      object lblColors: TLabel
+        AutoSize = True
+        StyledSettings = [Family]
+        Position.X = 24.000000000000000000
+        Position.Y = 168.000000000000000000
+        Size.Width = 140.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.VertAlign = Leading
+        Text = 'Badge with colors'
+      end
+      object bdgDefault: TDaisyFmxBadge
+        Position.X = 24.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 56.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Badge'
+      end
+      object bdgNeutral: TDaisyFmxBadge
+        Position.X = 128.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 68.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvNeutral
+        Text = 'neutral'
+      end
+      object bdgPrimary: TDaisyFmxBadge
+        Position.X = 232.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 68.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvPrimary
+        Text = 'primary'
+      end
+      object bdgSecondary: TDaisyFmxBadge
+        Position.X = 336.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 84.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvSecondary
+        Text = 'secondary'
+      end
+      object bdgAccent: TDaisyFmxBadge
+        Position.X = 440.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 64.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvAccent
+        Text = 'accent'
+      end
+      object bdgGhost: TDaisyFmxBadge
+        Position.X = 544.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 56.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Style = dsGhost
+        Text = 'ghost'
+      end
+      object bdgXS: TDaisyFmxBadge
+        Position.X = 24.000000000000000000
+        Position.Y = 124.000000000000000000
+        Size.Width = 70.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvPrimary
+        SizeKind = dzXS
+        Text = 'Xsmall'
+      end
+      object bdgSM: TDaisyFmxBadge
+        Position.X = 128.000000000000000000
+        Position.Y = 122.000000000000000000
+        Size.Width = 64.000000000000000000
+        Size.Height = 20.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvPrimary
+        SizeKind = dzSM
+        Text = 'Small'
+      end
+      object bdgMD: TDaisyFmxBadge
+        Position.X = 232.000000000000000000
+        Position.Y = 120.000000000000000000
+        Size.Width = 72.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvPrimary
+        Text = 'Medium'
+      end
+      object bdgLG: TDaisyFmxBadge
+        Position.X = 336.000000000000000000
+        Position.Y = 118.000000000000000000
+        Size.Width = 70.000000000000000000
+        Size.Height = 28.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvPrimary
+        SizeKind = dzLG
+        Text = 'Large'
+      end
+      object bdgXL: TDaisyFmxBadge
+        Position.X = 440.000000000000000000
+        Position.Y = 116.000000000000000000
+        Size.Width = 84.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvPrimary
+        SizeKind = dzXL
+        Text = 'Xlarge'
+      end
+      object bdgColNeutral: TDaisyFmxBadge
+        Position.X = 24.000000000000000000
+        Position.Y = 200.000000000000000000
+        Size.Width = 68.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvNeutral
+        Text = 'neutral'
+      end
+      object bdgColPrimary: TDaisyFmxBadge
+        Position.X = 128.000000000000000000
+        Position.Y = 200.000000000000000000
+        Size.Width = 68.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvPrimary
+        Text = 'primary'
+      end
+      object bdgColSecondary: TDaisyFmxBadge
+        Position.X = 232.000000000000000000
+        Position.Y = 200.000000000000000000
+        Size.Width = 84.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvSecondary
+        Text = 'secondary'
+      end
+      object bdgColAccent: TDaisyFmxBadge
+        Position.X = 336.000000000000000000
+        Position.Y = 200.000000000000000000
+        Size.Width = 64.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvAccent
+        Text = 'accent'
+      end
+      object bdgColInfo: TDaisyFmxBadge
+        Position.X = 440.000000000000000000
+        Position.Y = 200.000000000000000000
+        Size.Width = 48.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvInfo
+        Text = 'info'
+      end
+      object bdgColSuccess: TDaisyFmxBadge
+        Position.X = 544.000000000000000000
+        Position.Y = 200.000000000000000000
+        Size.Width = 68.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvSuccess
+        Text = 'success'
+      end
+      object bdgColWarning: TDaisyFmxBadge
+        Position.X = 648.000000000000000000
+        Position.Y = 200.000000000000000000
+        Size.Width = 72.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvWarning
+        Text = 'warning'
+      end
+      object bdgColError: TDaisyFmxBadge
+        Position.X = 752.000000000000000000
+        Position.Y = 200.000000000000000000
+        Size.Width = 52.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvError
+        Text = 'error'
+      end
+    end
+    object tsStyles: TDaisyFmxTabSheet
+      Text = 'Styles'
+      object lblSoft: TLabel
+        AutoSize = True
+        StyledSettings = [Family]
+        Position.X = 24.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 170.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.VertAlign = Leading
+        Text = 'Badge with soft style'
+      end
+      object lblOutline: TLabel
+        AutoSize = True
+        StyledSettings = [Family]
+        Position.X = 24.000000000000000000
+        Position.Y = 80.000000000000000000
+        Size.Width = 190.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.VertAlign = Leading
+        Text = 'Badge with outline style'
+      end
+      object lblDash: TLabel
+        AutoSize = True
+        StyledSettings = [Family]
+        Position.X = 24.000000000000000000
+        Position.Y = 152.000000000000000000
+        Size.Width = 170.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.VertAlign = Leading
+        Text = 'Badge with dash style'
+      end
+      object bdgSoftNeutral: TDaisyFmxBadge
+        Position.X = 24.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 68.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvNeutral
+        Style = dsSoft
+        Text = 'neutral'
+      end
+      object bdgSoftPrimary: TDaisyFmxBadge
+        Position.X = 128.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 68.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvPrimary
+        Style = dsSoft
+        Text = 'primary'
+      end
+      object bdgSoftSecondary: TDaisyFmxBadge
+        Position.X = 232.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 84.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvSecondary
+        Style = dsSoft
+        Text = 'secondary'
+      end
+      object bdgSoftAccent: TDaisyFmxBadge
+        Position.X = 336.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 64.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvAccent
+        Style = dsSoft
+        Text = 'accent'
+      end
+      object bdgSoftInfo: TDaisyFmxBadge
+        Position.X = 440.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 48.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvInfo
+        Style = dsSoft
+        Text = 'info'
+      end
+      object bdgSoftSuccess: TDaisyFmxBadge
+        Position.X = 544.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 68.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvSuccess
+        Style = dsSoft
+        Text = 'success'
+      end
+      object bdgSoftWarning: TDaisyFmxBadge
+        Position.X = 648.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 72.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvWarning
+        Style = dsSoft
+        Text = 'warning'
+      end
+      object bdgSoftError: TDaisyFmxBadge
+        Position.X = 752.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 52.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvError
+        Style = dsSoft
+        Text = 'error'
+      end
+      object bdgOutNeutral: TDaisyFmxBadge
+        Position.X = 24.000000000000000000
+        Position.Y = 112.000000000000000000
+        Size.Width = 68.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvNeutral
+        Style = dsOutline
+        Text = 'neutral'
+      end
+      object bdgOutPrimary: TDaisyFmxBadge
+        Position.X = 128.000000000000000000
+        Position.Y = 112.000000000000000000
+        Size.Width = 68.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvPrimary
+        Style = dsOutline
+        Text = 'primary'
+      end
+      object bdgOutSecondary: TDaisyFmxBadge
+        Position.X = 232.000000000000000000
+        Position.Y = 112.000000000000000000
+        Size.Width = 84.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvSecondary
+        Style = dsOutline
+        Text = 'secondary'
+      end
+      object bdgOutAccent: TDaisyFmxBadge
+        Position.X = 336.000000000000000000
+        Position.Y = 112.000000000000000000
+        Size.Width = 64.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvAccent
+        Style = dsOutline
+        Text = 'accent'
+      end
+      object bdgOutInfo: TDaisyFmxBadge
+        Position.X = 440.000000000000000000
+        Position.Y = 112.000000000000000000
+        Size.Width = 48.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvInfo
+        Style = dsOutline
+        Text = 'info'
+      end
+      object bdgOutSuccess: TDaisyFmxBadge
+        Position.X = 544.000000000000000000
+        Position.Y = 112.000000000000000000
+        Size.Width = 68.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvSuccess
+        Style = dsOutline
+        Text = 'success'
+      end
+      object bdgOutWarning: TDaisyFmxBadge
+        Position.X = 648.000000000000000000
+        Position.Y = 112.000000000000000000
+        Size.Width = 72.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvWarning
+        Style = dsOutline
+        Text = 'warning'
+      end
+      object bdgOutError: TDaisyFmxBadge
+        Position.X = 752.000000000000000000
+        Position.Y = 112.000000000000000000
+        Size.Width = 52.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvError
+        Style = dsOutline
+        Text = 'error'
+      end
+      object bdgDashNeutral: TDaisyFmxBadge
+        Position.X = 24.000000000000000000
+        Position.Y = 184.000000000000000000
+        Size.Width = 68.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvNeutral
+        Style = dsDash
+        Text = 'neutral'
+      end
+      object bdgDashPrimary: TDaisyFmxBadge
+        Position.X = 128.000000000000000000
+        Position.Y = 184.000000000000000000
+        Size.Width = 68.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvPrimary
+        Style = dsDash
+        Text = 'primary'
+      end
+      object bdgDashSecondary: TDaisyFmxBadge
+        Position.X = 232.000000000000000000
+        Position.Y = 184.000000000000000000
+        Size.Width = 84.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvSecondary
+        Style = dsDash
+        Text = 'secondary'
+      end
+      object bdgDashAccent: TDaisyFmxBadge
+        Position.X = 336.000000000000000000
+        Position.Y = 184.000000000000000000
+        Size.Width = 64.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvAccent
+        Style = dsDash
+        Text = 'accent'
+      end
+      object bdgDashInfo: TDaisyFmxBadge
+        Position.X = 440.000000000000000000
+        Position.Y = 184.000000000000000000
+        Size.Width = 48.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvInfo
+        Style = dsDash
+        Text = 'info'
+      end
+      object bdgDashSuccess: TDaisyFmxBadge
+        Position.X = 544.000000000000000000
+        Position.Y = 184.000000000000000000
+        Size.Width = 68.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvSuccess
+        Style = dsDash
+        Text = 'success'
+      end
+      object bdgDashWarning: TDaisyFmxBadge
+        Position.X = 648.000000000000000000
+        Position.Y = 184.000000000000000000
+        Size.Width = 72.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvWarning
+        Style = dsDash
+        Text = 'warning'
+      end
+      object bdgDashError: TDaisyFmxBadge
+        Position.X = 752.000000000000000000
+        Position.Y = 184.000000000000000000
+        Size.Width = 52.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvError
+        Style = dsDash
+        Text = 'error'
+      end
+    end
+    object tsSpecial: TDaisyFmxTabSheet
+      Text = 'Special'
+      object lblNeutral: TLabel
+        AutoSize = True
+        StyledSettings = [Family]
+        Position.X = 24.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 340.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.VertAlign = Leading
+        Text = 'Neutral badge with outline or dash style'
+      end
+      object lblGhost: TLabel
+        AutoSize = True
+        StyledSettings = [Family]
+        Position.X = 440.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 100.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.VertAlign = Leading
+        Text = 'Badge ghost'
+      end
+      object lblEmpty: TLabel
+        AutoSize = True
+        StyledSettings = [Family]
+        Position.X = 24.000000000000000000
+        Position.Y = 80.000000000000000000
+        Size.Width = 110.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.VertAlign = Leading
+        Text = 'Empty badge'
+      end
+      object lblIcon: TLabel
+        AutoSize = True
+        StyledSettings = [Family]
+        Position.X = 24.000000000000000000
+        Position.Y = 160.000000000000000000
+        Size.Width = 140.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.VertAlign = Leading
+        Text = 'Badge with icon'
+      end
+      object bdgNeutralOutline: TDaisyFmxBadge
+        Position.X = 24.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 68.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvNeutral
+        Style = dsOutline
+        Text = 'outline'
+      end
+      object bdgNeutralDash: TDaisyFmxBadge
+        Position.X = 128.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 52.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvNeutral
+        Style = dsDash
+        Text = 'dash'
+      end
+      object bdgGhostMD: TDaisyFmxBadge
+        Position.X = 440.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 56.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Style = dsGhost
+        Text = 'ghost'
+      end
+      object bdgGhostLG: TDaisyFmxBadge
+        Position.X = 544.000000000000000000
+        Position.Y = 38.000000000000000000
+        Size.Width = 64.000000000000000000
+        Size.Height = 28.000000000000000000
+        Size.PlatformDefault = False
+        Style = dsGhost
+        SizeKind = dzLG
+        Text = 'ghost'
+      end
+      object bdgEmptyXS: TDaisyFmxBadge
+        Position.X = 24.000000000000000000
+        Position.Y = 116.000000000000000000
+        Size.Width = 16.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvPrimary
+        SizeKind = dzXS
+        Text = ''
+      end
+      object bdgEmptySM: TDaisyFmxBadge
+        Position.X = 72.000000000000000000
+        Position.Y = 114.000000000000000000
+        Size.Width = 20.000000000000000000
+        Size.Height = 20.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvSecondary
+        SizeKind = dzSM
+        Text = ''
+      end
+      object bdgEmptyMD: TDaisyFmxBadge
+        Position.X = 120.000000000000000000
+        Position.Y = 112.000000000000000000
+        Size.Width = 24.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvAccent
+        Text = ''
+      end
+      object bdgEmptyLG: TDaisyFmxBadge
+        Position.X = 168.000000000000000000
+        Position.Y = 110.000000000000000000
+        Size.Width = 28.000000000000000000
+        Size.Height = 28.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvInfo
+        SizeKind = dzLG
+        Text = ''
+      end
+      object bdgEmptyXL: TDaisyFmxBadge
+        Position.X = 216.000000000000000000
+        Position.Y = 108.000000000000000000
+        Size.Width = 32.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvError
+        SizeKind = dzXL
+        Text = ''
+      end
+      object bdgIconInfo: TDaisyFmxBadge
+        Position.X = 24.000000000000000000
+        Position.Y = 192.000000000000000000
+        Size.Width = 72.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvInfo
+        Icon = diInfo
+        Text = 'Info'
+      end
+      object bdgIconSuccess: TDaisyFmxBadge
+        Position.X = 128.000000000000000000
+        Position.Y = 192.000000000000000000
+        Size.Width = 90.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvSuccess
+        Icon = diSuccess
+        Text = 'Success'
+      end
+      object bdgIconWarning: TDaisyFmxBadge
+        Position.X = 248.000000000000000000
+        Position.Y = 192.000000000000000000
+        Size.Width = 90.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvWarning
+        Icon = diWarning
+        IconPosition = bipRight
+        Text = 'Warning'
+      end
+      object bdgIconError: TDaisyFmxBadge
+        Position.X = 368.000000000000000000
+        Position.Y = 192.000000000000000000
+        Size.Width = 72.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvError
+        Icon = diError
+        IconPosition = bipRight
+        Text = 'Error'
+      end
+      object bdgIconAuto: TDaisyFmxBadge
+        Position.X = 470.000000000000000000
+        Position.Y = 192.000000000000000000
+        Size.Width = 90.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvSuccess
+        Style = dsSoft
+        Icon = diAuto
+        Text = 'Auto icon'
+      end
+    end
+    object tsButtons: TDaisyFmxTabSheet
+      Text = 'Buttons'
+      object lblButton: TLabel
+        AutoSize = True
+        StyledSettings = [Family]
+        Position.X = 24.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 140.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.VertAlign = Leading
+        Text = 'Badge in a button'
+      end
+      object lblStatus: TLabel
+        Position.X = 24.000000000000000000
+        Position.Y = 100.000000000000000000
+        Size.Width = 400.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Click a badge button above'
+      end
+      object btnInbox: TDaisyFmxBadgeButton
+        Cursor = crHandPoint
+        Position.X = 24.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 136.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        OnClick = BadgeButtonClick
+        Text = 'Inbox'
+        BadgeText = '+99'
+      end
+      object btnInboxSecondary: TDaisyFmxBadgeButton
+        Cursor = crHandPoint
+        Position.X = 176.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 136.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        OnClick = BadgeButtonClick
+        Text = 'Inbox'
+        BadgeText = '+99'
+        BadgeVariant = dvSecondary
+      end
+      object btnNotify: TDaisyFmxBadgeButton
+        Cursor = crHandPoint
+        Position.X = 328.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 200.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvPrimary
+        TabOrder = 2
+        OnClick = BadgeButtonClick
+        Text = 'Notifications'
+        BadgeText = '12'
+        BadgeVariant = dvAccent
+      end
+      object btnBadgeIcon: TDaisyFmxBadgeButton
+        Cursor = crHandPoint
+        Position.X = 544.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 160.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvNeutral
+        TabOrder = 3
+        OnClick = BadgeButtonClick
+        Text = 'Messages'
+        BadgeText = 'New'
+        BadgeVariant = dvSuccess
+        BadgeIcon = diSuccess
+      end
+      object btnBadgeSmall: TDaisyFmxBadgeButton
+        Cursor = crHandPoint
+        Position.X = 720.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 136.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        Style = dsOutline
+        SizeKind = dzSM
+        TabOrder = 4
+        OnClick = BadgeButtonClick
+        Text = 'Alerts'
+        BadgeText = '3'
+        BadgeVariant = dvError
+        BadgeStyle = dsSoft
+        BadgeSize = dzXS
+      end
+    end
+    object tsSvg: TDaisyFmxTabSheet
+      Text = 'SVG'
+      object lblSvg: TLabel
+        AutoSize = True
+        StyledSettings = [Family]
+        Position.X = 24.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 260.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.VertAlign = Leading
+        Text = 'SVG icons (SVG property)'
+      end
+      object btnSvgHeart: TDaisyFmxButton
+        Cursor = crHandPoint
+        Position.X = 24.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 112.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvPrimary
+        TabOrder = 5
+        Text = 'Like'
+        SVG.Strings = (
+          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">'
+          '<path d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>'
+          '</svg>')
+      end
+      object btnSvgNext: TDaisyFmxButton
+        Cursor = crHandPoint
+        Position.X = 152.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 112.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvSecondary
+        TabOrder = 6
+        Text = 'Next'
+        SVG.Strings = (
+          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">'
+          '<path d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>'
+          '</svg>')
+        IconPosition = bipRight
+      end
+      object btnSvgAdd: TDaisyFmxButton
+        Cursor = crHandPoint
+        Position.X = 280.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 112.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvSuccess
+        Style = dsOutline
+        TabOrder = 7
+        Text = 'Add'
+        SVG.Strings = (
+          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">'
+          '<path d="M12 4.5v15m7.5-7.5h-15"/>'
+          '</svg>')
+      end
+      object btnSvgBell: TDaisyFmxSquareButton
+        Cursor = crHandPoint
+        Position.X = 408.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 40.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvAccent
+        TabOrder = 8
+        Text = ''
+        SVG.Strings = (
+          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">'
+          '<path d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"/>'
+          '</svg>')
+      end
+      object btnSvgCheck: TDaisyFmxCircleButton
+        Cursor = crHandPoint
+        Position.X = 464.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 40.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvSuccess
+        TabOrder = 9
+        Text = ''
+        SVG.Strings = (
+          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">'
+          '<path d="M4.5 12.75l6 6 9-13.5"/>'
+          '</svg>')
+      end
+      object bdgSvgHeart: TDaisyFmxBadge
+        Position.X = 520.000000000000000000
+        Position.Y = 48.000000000000000000
+        Size.Width = 70.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvPrimary
+        Text = 'Liked'
+        SVG.Strings = (
+          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">'
+          '<path d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>'
+          '</svg>')
+      end
+      object bdgSvgCheck: TDaisyFmxBadge
+        Position.X = 604.000000000000000000
+        Position.Y = 48.000000000000000000
+        Size.Width = 70.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvSuccess
+        Style = dsSoft
+        Text = 'Done'
+        SVG.Strings = (
+          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">'
+          '<path d="M4.5 12.75l6 6 9-13.5"/>'
+          '</svg>')
+      end
+      object btnSvgBadge: TDaisyFmxBadgeButton
+        Cursor = crHandPoint
+        Position.X = 688.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 176.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvNeutral
+        TabOrder = 10
+        OnClick = BadgeButtonClick
+        Text = 'Alerts'
+        SVG.Strings = (
+          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">'
+          '<path d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"/>'
+          '</svg>')
+        BadgeText = '5'
+        BadgeVariant = dvError
+        BadgeSVG.Strings = (
+          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">'
+          '<path d="M12 4.5v15m7.5-7.5h-15"/>'
+          '</svg>')
+      end
+      object btnSvgSettings: TDaisyFmxButton
+        Cursor = crHandPoint
+        Position.X = 24.000000000000000000
+        Position.Y = 92.000000000000000000
+        Size.Width = 144.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvNeutral
+        Style = dsOutline
+        TabOrder = 11
+        Text = 'Tabler'
+        SVG.Strings = (
+          '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">'
+          '<path stroke="none" d="M0 0h24v24H0z" fill="none" />'
+          '<path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065" />'
+          '<path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />'
+          '</svg>')
+      end
+      object btnSvgHome: TDaisyFmxButton
+        Cursor = crHandPoint
+        Position.X = 184.000000000000000000
+        Position.Y = 92.000000000000000000
+        Size.Width = 144.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Variant = dvInfo
+        TabOrder = 12
+        Text = 'Material'
+        SVG.Strings = (
+          '<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">'
+          '<path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/>'
+          '</svg>')
+      end
+    end
+  end
+end

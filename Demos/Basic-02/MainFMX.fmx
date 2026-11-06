@@ -1,0 +1,1468 @@
+object Form13: TForm13
+  Left = 0
+  Top = 0
+  Caption = 'DaisyUI FMX demo - buttons, dropdown, FAB, accordion'
+  ClientHeight = 540
+  ClientWidth = 1040
+  Position = ScreenCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+  object lblTheme: TLabel
+    AutoSize = True
+    StyledSettings = [Family]
+    Position.X = 16.000000000000000000
+    Position.Y = 22.000000000000000000
+    Size.Width = 60.000000000000000000
+    Size.Height = 19.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 14.000000000000000000
+    Text = 'Theme:'
+    TabOrder = 0
+  end
+  object selTheme: TDaisyFmxSelect
+    Cursor = crHandPoint
+    Hint = ''
+    Position.X = 82.000000000000000000
+    Position.Y = 12.000000000000000000
+    Size.Width = 200.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Items.Strings = (
+      'Light'
+      'Dark'
+      'Cupcake'
+      'Dracula'
+      'Corporate'
+      'Pastel'
+      'Wireframe'
+      'CMYK'
+      'Winter'
+      'Dim'
+      'Nord'
+      'Silk'
+      'Bumblebee'
+      'Emerald'
+      'Halloween'
+      'Garden'
+      'Forest'
+      'Lofi'
+      'Fantasy'
+      'Autumn')
+    ItemIndex = 0
+    Placeholder = 'Pick one'
+    OnChange = ThemeSelectChange
+  end
+  object chkTitleBar: TDaisyFmxCheckBox
+    Cursor = crHandPoint
+    Position.X = 310.000000000000000000
+    Position.Y = 18.000000000000000000
+    Size.Width = 210.000000000000000000
+    Size.Height = 30.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    Checked = True
+    Text = 'Theme the window title bar'
+    OnChange = chkTitleBarChange
+  end
+  object themeCtl: TDaisyFmxThemeController
+    Cursor = crHandPoint
+    Position.X = 532.000000000000000000
+    Position.Y = 18.000000000000000000
+    Size.Width = 50.000000000000000000
+    Size.Height = 30.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 90
+    Kind = tkToggleIcons
+    OnChange = ThemeControllerChange
+  end
+  object pcMain: TDaisyFmxPageControl
+    Align = Client
+    Margins.Left = 8.000000000000000000
+    Margins.Top = 60.000000000000000000
+    Margins.Right = 8.000000000000000000
+    Margins.Bottom = 8.000000000000000000
+    Size.Width = 1024.000000000000000000
+    Size.Height = 472.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    ActivePageIndex = 0
+    object tsAccordion: TDaisyFmxTabSheet
+      Position.X = 1.000000000000000000
+      Position.Y = 41.000000000000000000
+      Size.Width = 1022.000000000000000000
+      Size.Height = 430.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Accordion'
+      object lblAccordion: TLabel
+        AutoSize = True
+        StyledSettings = [Family]
+        Position.X = 16.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 200.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.VertAlign = Leading
+        Text = 'Accordion (arrow)'
+      end
+      object lblJoined: TLabel
+        AutoSize = True
+        StyledSettings = [Family]
+        Position.X = 520.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 260.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.VertAlign = Leading
+        Text = 'Accordion (+ / -, joined)'
+      end
+      object lblAccResult: TLabel
+        AutoSize = True
+        Position.X = 16.000000000000000000
+        Position.Y = 300.000000000000000000
+        Size.Width = 360.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Accordion: no change'
+      end
+      object accSeparate: TDaisyFmxAccordion
+        Position.X = 16.000000000000000000
+        Position.Y = 44.000000000000000000
+        Size.Width = 480.000000000000000000
+        Size.Height = 226.000000000000000000
+        Size.PlatformDefault = False
+        Items = <
+          item
+            Title = 'How do I create an account?'
+            Content = 
+              'Click the Sign Up button in the top right corner and follow the ' +
+              'on-screen steps.'
+            Expanded = True
+          end
+          item
+            Title = 'I forgot my password'
+            Content = 
+              'Use the Forgot password link on the sign in page to receive a re' +
+              'set email.'
+          end
+          item
+            Title = 'How do I update my profile?'
+            Content = 'Open Settings, choose Profile and edit your details, then save.'
+          end>
+        OnToggle = AccordionToggle
+      end
+      object accJoined: TDaisyFmxAccordion
+        Variant = dvPrimary
+        Position.X = 520.000000000000000000
+        Position.Y = 44.000000000000000000
+        Size.Width = 480.000000000000000000
+        Size.Height = 191.000000000000000000
+        Size.PlatformDefault = False
+        Items = <
+          item
+            Title = 'Joined section one'
+            Content = 'Joined sections share one outline, with a divider between each.'
+            Expanded = True
+          end
+          item
+            Title = 'Joined section two'
+            Content = 'Only one section is open at a time unless AllowMultiple is set.'
+          end
+          item
+            Title = 'Joined section three'
+            Content = 'The + changes to a - while a section is open.'
+          end>
+        Icon = aiPlusMinus
+        Joined = True
+        OnToggle = AccordionToggle
+      end
+    end
+    object tsFab: TDaisyFmxTabSheet
+      Position.X = 1.000000000000000000
+      Position.Y = 41.000000000000000000
+      Size.Width = 1022.000000000000000000
+      Size.Height = 430.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'FAB'
+      object lblFab: TLabel
+        AutoSize = True
+        StyledSettings = [Family]
+        Position.X = 16.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 220.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.VertAlign = Leading
+        Text = 'Floating action buttons'
+      end
+      object lblFabResult: TLabel
+        AutoSize = True
+        Position.X = 16.000000000000000000
+        Position.Y = 400.000000000000000000
+        Size.Width = 260.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'FAB action: none'
+      end
+      object lblArc: TLabel
+        AutoSize = True
+        StyledSettings = [Family]
+        Position.X = 700.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 127.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.VertAlign = Leading
+        Text = 'FAB flower (arc)'
+      end
+      object fabDown: TDaisyFmxFloatingActionButton
+        Variant = dvPrimary
+        Cursor = crHandPoint
+        Position.X = 200.000000000000000000
+        Position.Y = 48.000000000000000000
+        Size.Width = 48.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Text = '+'
+        Items = <
+          item
+            Caption = #55357#56589
+            Description = 'Search'
+          end
+          item
+            Caption = #55357#56596
+            Description = 'Notify'
+          end
+          item
+            Caption = #9881
+            Description = 'Settings'
+          end>
+        Direction = fdDown
+        OnItemClick = FabItemClick
+      end
+      object fabRight: TDaisyFmxFloatingActionButton
+        Variant = dvSecondary
+        SizeKind = dzLG
+        Cursor = crHandPoint
+        Position.X = 16.000000000000000000
+        Position.Y = 48.000000000000000000
+        Size.Width = 56.000000000000000000
+        Size.Height = 56.000000000000000000
+        Size.PlatformDefault = False
+        Text = '+'
+        Items = <
+          item
+            Caption = #10084
+          end
+          item
+            Caption = #11088
+          end
+          item
+            Caption = #55357#56832
+          end>
+        Direction = fdRight
+        OnItemClick = FabItemClick
+      end
+      object fabLeft: TDaisyFmxFloatingActionButton
+        Variant = dvAccent
+        SizeKind = dzLG
+        Cursor = crHandPoint
+        Position.X = 560.000000000000000000
+        Position.Y = 48.000000000000000000
+        Size.Width = 56.000000000000000000
+        Size.Height = 56.000000000000000000
+        Size.PlatformDefault = False
+        Text = '+'
+        Items = <
+          item
+            Caption = #55357#56960
+          end
+          item
+            Caption = #55357#56613
+          end
+          item
+            Caption = #55357#56397
+          end>
+        Direction = fdLeft
+        OnItemClick = FabItemClick
+      end
+      object fabUp: TDaisyFmxFloatingActionButton
+        Variant = dvSuccess
+        SizeKind = dzLG
+        Cursor = crHandPoint
+        Position.X = 700.000000000000000000
+        Position.Y = 330.000000000000000000
+        Size.Width = 56.000000000000000000
+        Size.Height = 56.000000000000000000
+        Size.PlatformDefault = False
+        Text = #55357#56960
+        Items = <
+          item
+            Caption = #10003
+            Description = 'Done'
+          end
+          item
+            Caption = #55357#56596
+            Description = 'Remind me'
+          end
+          item
+            Caption = #10084
+            Description = 'Favourite'
+          end>
+        OnItemClick = FabItemClick
+      end
+      object fabArc: TDaisyFmxFloatingActionButton
+        Variant = dvAccent
+        SizeKind = dzLG
+        Cursor = crHandPoint
+        Position.X = 900.000000000000000000
+        Position.Y = 330.000000000000000000
+        Size.Width = 56.000000000000000000
+        Size.Height = 56.000000000000000000
+        Size.PlatformDefault = False
+        Text = '+'
+        Items = <
+          item
+            Caption = #55357#56589
+            Description = 'Search'
+          end
+          item
+            Caption = #55357#56596
+            Description = 'Notify'
+          end
+          item
+            Caption = #10084
+            Description = 'Like'
+          end
+          item
+            Caption = #9881
+            Description = 'Settings'
+          end>
+        Direction = fdArc
+        OnItemClick = FabItemClick
+      end
+    end
+    object tsLoading: TDaisyFmxTabSheet
+      Position.X = 1.000000000000000000
+      Position.Y = 41.000000000000000000
+      Size.Width = 1022.000000000000000000
+      Size.Height = 430.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Loading'
+      object lblLoading: TLabel
+        AutoSize = True
+        StyledSettings = [Family]
+        Position.X = 16.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 220.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.VertAlign = Leading
+        Text = 'Loading buttons'
+      end
+      object lblAnimation: TLabel
+        AutoSize = True
+        StyledSettings = [Family]
+        Position.X = 16.000000000000000000
+        Position.Y = 168.000000000000000000
+        Size.Width = 200.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.VertAlign = Leading
+        Text = 'Animation buttons'
+      end
+      object lblAnimStatus: TLabel
+        AutoSize = True
+        Position.X = 16.000000000000000000
+        Position.Y = 264.000000000000000000
+        Size.Width = 200.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Animation: idle'
+      end
+      object btnLoadSpinner: TDaisyFmxLoadingButton
+        Variant = dvPrimary
+        Cursor = crHandPoint
+        Position.X = 16.000000000000000000
+        Position.Y = 48.000000000000000000
+        Size.Width = 128.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Spinner'
+        Loading = True
+      end
+      object btnLoadRing: TDaisyFmxLoadingButton
+        Variant = dvSecondary
+        Cursor = crHandPoint
+        Position.X = 156.000000000000000000
+        Position.Y = 48.000000000000000000
+        Size.Width = 128.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Ring'
+        Loading = True
+        LoadingKind = dlRing
+      end
+      object btnLoadDots: TDaisyFmxLoadingButton
+        Variant = dvAccent
+        Cursor = crHandPoint
+        Position.X = 296.000000000000000000
+        Position.Y = 48.000000000000000000
+        Size.Width = 128.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Dots'
+        Loading = True
+        LoadingKind = dlDots
+      end
+      object btnLoadBars: TDaisyFmxLoadingButton
+        Variant = dvNeutral
+        Cursor = crHandPoint
+        Position.X = 436.000000000000000000
+        Position.Y = 48.000000000000000000
+        Size.Width = 128.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Bars'
+        Loading = True
+        LoadingKind = dlBars
+      end
+      object btnLoadBall: TDaisyFmxLoadingButton
+        Variant = dvInfo
+        Cursor = crHandPoint
+        Position.X = 576.000000000000000000
+        Position.Y = 48.000000000000000000
+        Size.Width = 128.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Ball'
+        Loading = True
+        LoadingKind = dlBall
+      end
+      object btnLoadRight: TDaisyFmxLoadingButton
+        Variant = dvSuccess
+        Style = dsOutline
+        Cursor = crHandPoint
+        Position.X = 16.000000000000000000
+        Position.Y = 104.000000000000000000
+        Size.Width = 160.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Indicator right'
+        Loading = True
+        IndicatorPosition = ipRight
+      end
+      object btnLoadReplace: TDaisyFmxLoadingButton
+        Variant = dvWarning
+        Cursor = crHandPoint
+        Position.X = 188.000000000000000000
+        Position.Y = 104.000000000000000000
+        Size.Width = 120.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Replace'
+        Loading = True
+        IndicatorPosition = ipReplace
+      end
+      object btnLoadCaption: TDaisyFmxLoadingButton
+        Variant = dvError
+        Style = dsSoft
+        Cursor = crHandPoint
+        Position.X = 324.000000000000000000
+        Position.Y = 104.000000000000000000
+        Size.Width = 160.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Save'
+        Loading = True
+        LoadingText = 'Saving...'
+      end
+      object btnToggleLoading: TDaisyFmxButton
+        Variant = dvNeutral
+        Cursor = crHandPoint
+        Position.X = 496.000000000000000000
+        Position.Y = 104.000000000000000000
+        Size.Width = 208.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        OnClick = btnToggleLoadingClick
+        Text = 'Toggle loading on all'
+      end
+      object btnAnimDots: TDaisyFmxAnimationButton
+        Variant = dvPrimary
+        Cursor = crHandPoint
+        Position.X = 16.000000000000000000
+        Position.Y = 208.000000000000000000
+        Size.Width = 140.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Run (dots)'
+        LoadingKind = dlDots
+        OnAnimationFinished = AnimationFinished
+      end
+      object btnAnimBars: TDaisyFmxAnimationButton
+        Variant = dvSecondary
+        Cursor = crHandPoint
+        Position.X = 172.000000000000000000
+        Position.Y = 208.000000000000000000
+        Size.Width = 140.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Run (bars)'
+        LoadingKind = dlBars
+        Duration = 3000
+        OnAnimationFinished = AnimationFinished
+      end
+      object btnAnimBall: TDaisyFmxAnimationButton
+        Variant = dvAccent
+        Style = dsOutline
+        Cursor = crHandPoint
+        Position.X = 328.000000000000000000
+        Position.Y = 208.000000000000000000
+        Size.Width = 140.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Run (ball)'
+        LoadingKind = dlBall
+        Duration = 1500
+        OnAnimationFinished = AnimationFinished
+      end
+    end
+    object tsDropdown: TDaisyFmxTabSheet
+      Position.X = 1.000000000000000000
+      Position.Y = 41.000000000000000000
+      Size.Width = 1022.000000000000000000
+      Size.Height = 430.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Dropdown'
+      object lblDropdown: TLabel
+        AutoSize = True
+        StyledSettings = [Family]
+        Position.X = 16.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.VertAlign = Leading
+        Text = 'Dropdown'
+      end
+      object lblDropResult: TLabel
+        AutoSize = True
+        Position.X = 16.000000000000000000
+        Position.Y = 330.000000000000000000
+        Size.Width = 260.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Selected: none'
+      end
+      object ddMenu: TDaisyFmxDropdownMenu
+        Variant = dvPrimary
+        Cursor = crHandPoint
+        Position.X = 16.000000000000000000
+        Position.Y = 160.000000000000000000
+        Size.Width = 120.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'File'
+        Items = <
+          item
+            Caption = 'New'
+            Description = 'Ctrl+N'
+          end
+          item
+            Caption = 'Open...'
+            Description = 'Ctrl+O'
+          end
+          item
+            Caption = '-'
+          end
+          item
+            Caption = 'Save'
+            Description = 'Ctrl+S'
+          end
+          item
+            Caption = 'Save as...'
+            Enabled = False
+          end
+          item
+            Caption = '-'
+          end
+          item
+            Caption = 'Exit'
+          end>
+        OnItemClick = DropdownItemClick
+      end
+      object ddEnd: TDaisyFmxDropdownMenu
+        Variant = dvSecondary
+        Style = dsOutline
+        Cursor = crHandPoint
+        Position.X = 160.000000000000000000
+        Position.Y = 160.000000000000000000
+        Size.Width = 140.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Bottom end'
+        Items = <
+          item
+            Caption = 'Profile'
+          end
+          item
+            Caption = 'Settings'
+          end
+          item
+            Caption = 'Logout'
+          end>
+        Placement = dpBottomEnd
+        OnItemClick = DropdownItemClick
+      end
+      object ddTop: TDaisyFmxDropdownMenu
+        Variant = dvAccent
+        Style = dsSoft
+        Cursor = crHandPoint
+        Position.X = 324.000000000000000000
+        Position.Y = 160.000000000000000000
+        Size.Width = 120.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Top'
+        Items = <
+          item
+            Caption = 'Alpha'
+          end
+          item
+            Caption = 'Beta'
+          end
+          item
+            Caption = 'Gamma'
+          end>
+        Placement = dpTopStart
+        OnItemClick = DropdownItemClick
+      end
+      object ddSide: TDaisyFmxDropdownMenu
+        Variant = dvNeutral
+        Cursor = crHandPoint
+        Position.X = 468.000000000000000000
+        Position.Y = 160.000000000000000000
+        Size.Width = 90.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Right'
+        Items = <
+          item
+            Caption = 'One'
+          end
+          item
+            Caption = 'Two'
+          end>
+        Placement = dpRight
+        OnItemClick = DropdownItemClick
+      end
+    end
+    object tsToast: TDaisyFmxTabSheet
+      Position.X = 1.000000000000000000
+      Position.Y = 41.000000000000000000
+      Size.Width = 1022.000000000000000000
+      Size.Height = 430.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Toast'
+      object lblToast: TLabel
+        AutoSize = True
+        StyledSettings = [Family]
+        Position.X = 16.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 50.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.VertAlign = Leading
+        Text = 'Toast'
+      end
+      object lblToastDuration: TLabel
+        AutoSize = True
+        Position.X = 16.000000000000000000
+        Position.Y = 52.000000000000000000
+        Size.Width = 120.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Disappears after:'
+      end
+      object lblToastHorz: TLabel
+        AutoSize = True
+        Position.X = 16.000000000000000000
+        Position.Y = 132.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Horizontal:'
+      end
+      object lblToastVert: TLabel
+        AutoSize = True
+        Position.X = 16.000000000000000000
+        Position.Y = 212.000000000000000000
+        Size.Width = 60.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Vertical:'
+      end
+      object lblToastHint: TLabel
+        AutoSize = True
+        Position.X = 520.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 340.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Messages appear in the toast area on this side of the tab.'
+      end
+      object selToastDuration: TDaisyFmxSelect
+        Cursor = crHandPoint
+        Hint = ''
+        Position.X = 16.000000000000000000
+        Position.Y = 72.000000000000000000
+        Size.Width = 200.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Items.Strings = (
+          '3 seconds'
+          '4 seconds'
+          '5 seconds'
+          '8 seconds')
+        ItemIndex = 2
+        Placeholder = 'Pick one'
+        OnChange = ToastDurationChange
+      end
+      object selToastHorz: TDaisyFmxSelect
+        Cursor = crHandPoint
+        Hint = ''
+        Position.X = 16.000000000000000000
+        Position.Y = 152.000000000000000000
+        Size.Width = 200.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        Items.Strings = (
+          'Start'
+          'Center'
+          'End')
+        ItemIndex = 2
+        Placeholder = 'Pick one'
+        OnChange = ToastPlacementChange
+      end
+      object selToastVert: TDaisyFmxSelect
+        Cursor = crHandPoint
+        Hint = ''
+        Position.X = 16.000000000000000000
+        Position.Y = 232.000000000000000000
+        Size.Width = 200.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        Items.Strings = (
+          'Top'
+          'Middle'
+          'Bottom')
+        ItemIndex = 2
+        Placeholder = 'Pick one'
+        OnChange = ToastPlacementChange
+      end
+      object btnToastInfo: TDaisyFmxButton
+        Variant = dvInfo
+        Cursor = crHandPoint
+        Position.X = 280.000000000000000000
+        Position.Y = 72.000000000000000000
+        Size.Width = 200.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        OnClick = ToastPostClick
+        Text = 'Post info'
+      end
+      object btnToastSuccess: TDaisyFmxButton
+        Tag = 1
+        Variant = dvSuccess
+        Cursor = crHandPoint
+        Position.X = 280.000000000000000000
+        Position.Y = 128.000000000000000000
+        Size.Width = 200.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        OnClick = ToastPostClick
+        Text = 'Post success'
+      end
+      object btnToastWarning: TDaisyFmxButton
+        Tag = 2
+        Variant = dvWarning
+        Cursor = crHandPoint
+        Position.X = 280.000000000000000000
+        Position.Y = 184.000000000000000000
+        Size.Width = 200.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        OnClick = ToastPostClick
+        Text = 'Post warning'
+      end
+      object btnToastError: TDaisyFmxButton
+        Tag = 3
+        Variant = dvError
+        Cursor = crHandPoint
+        Position.X = 280.000000000000000000
+        Position.Y = 240.000000000000000000
+        Size.Width = 200.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        OnClick = ToastPostClick
+        Text = 'Post error'
+      end
+      object btnToastClear: TDaisyFmxButton
+        Variant = dvNeutral
+        Cursor = crHandPoint
+        Position.X = 280.000000000000000000
+        Position.Y = 296.000000000000000000
+        Size.Width = 200.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        OnClick = ToastClearClick
+        Text = 'Clear all'
+      end
+      object toastDemo: TDaisyFmxToast
+        Align = Client
+        Size.Width = 1022.000000000000000000
+        Size.Height = 430.000000000000000000
+        Size.PlatformDefault = False
+      end
+    end
+    object tsRating: TDaisyFmxTabSheet
+      Position.X = 1.000000000000000000
+      Position.Y = 41.000000000000000000
+      Size.Width = 1022.000000000000000000
+      Size.Height = 430.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Rating'
+      object lblRating: TLabel
+        AutoSize = True
+        StyledSettings = [Family]
+        Position.X = 16.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 120.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.VertAlign = Leading
+        Text = 'Rating'
+      end
+      object lblRatingValue: TLabel
+        Position.X = 16.000000000000000000
+        Position.Y = 288.000000000000000000
+        Size.Width = 200.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Rating: 3 / 5'
+      end
+      object ratDefault: TDaisyFmxRating
+        Cursor = crHandPoint
+        Position.X = 16.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 120.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Value = 3.000000000000000000
+        OnChange = RatingChange
+      end
+      object ratHalf: TDaisyFmxRating
+        Cursor = crHandPoint
+        Position.X = 16.000000000000000000
+        Position.Y = 80.000000000000000000
+        Size.Width = 120.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Value = 2.500000000000000000
+        AllowHalf = True
+      end
+      object ratHeart: TDaisyFmxRating
+        Variant = dvError
+        Cursor = crHandPoint
+        Position.X = 16.000000000000000000
+        Position.Y = 120.000000000000000000
+        Size.Width = 136.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        Value = 4.000000000000000000
+        Shape = rsHeart
+      end
+      object ratReadOnly: TDaisyFmxRating
+        Position.X = 16.000000000000000000
+        Position.Y = 160.000000000000000000
+        Size.Width = 120.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        Value = 4.000000000000000000
+        ReadOnly = True
+      end
+      object ratMulti: TDaisyFmxRating
+        Cursor = crHandPoint
+        Position.X = 16.000000000000000000
+        Position.Y = 200.000000000000000000
+        Size.Width = 120.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 4
+        Value = 3.000000000000000000
+        Shape = rsStar
+        MultiColor = True
+      end
+      object ratClear: TDaisyFmxRating
+        Cursor = crHandPoint
+        Position.X = 16.000000000000000000
+        Position.Y = 240.000000000000000000
+        Size.Width = 120.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 5
+        Value = 2.000000000000000000
+        AllowClear = True
+      end
+      object ratXS: TDaisyFmxRating
+        Variant = dvPrimary
+        SizeKind = dzXS
+        Cursor = crHandPoint
+        Position.X = 340.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 6
+        Value = 3.000000000000000000
+      end
+      object ratSM: TDaisyFmxRating
+        Variant = dvPrimary
+        SizeKind = dzSM
+        Cursor = crHandPoint
+        Position.X = 340.000000000000000000
+        Position.Y = 72.000000000000000000
+        Size.Width = 100.000000000000000000
+        Size.Height = 20.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 7
+        Value = 3.000000000000000000
+      end
+      object ratMD: TDaisyFmxRating
+        Variant = dvPrimary
+        Cursor = crHandPoint
+        Position.X = 340.000000000000000000
+        Position.Y = 108.000000000000000000
+        Size.Width = 120.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 8
+        Value = 3.000000000000000000
+      end
+      object ratLG: TDaisyFmxRating
+        Variant = dvPrimary
+        SizeKind = dzLG
+        Cursor = crHandPoint
+        Position.X = 340.000000000000000000
+        Position.Y = 148.000000000000000000
+        Size.Width = 140.000000000000000000
+        Size.Height = 28.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 9
+        Value = 3.000000000000000000
+      end
+      object ratXL: TDaisyFmxRating
+        Variant = dvPrimary
+        SizeKind = dzXL
+        Cursor = crHandPoint
+        Position.X = 340.000000000000000000
+        Position.Y = 192.000000000000000000
+        Size.Width = 160.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 10
+        Value = 3.000000000000000000
+      end
+      object ratThree: TDaisyFmxRating
+        Cursor = crHandPoint
+        Position.X = 640.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 72.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 11
+        Value = 2.000000000000000000
+        Count = 3
+      end
+      object ratTen: TDaisyFmxRating
+        Variant = dvSecondary
+        Cursor = crHandPoint
+        Position.X = 640.000000000000000000
+        Position.Y = 80.000000000000000000
+        Size.Width = 276.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 12
+        Value = 7.000000000000000000
+        Count = 10
+        Shape = rsHeart
+      end
+    end
+    object tsRange: TDaisyFmxTabSheet
+      Position.X = 1.000000000000000000
+      Position.Y = 41.000000000000000000
+      Size.Width = 1022.000000000000000000
+      Size.Height = 430.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Range'
+      object lblRange: TLabel
+        AutoSize = True
+        StyledSettings = [Family]
+        Position.X = 16.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 120.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.VertAlign = Leading
+        Text = 'Range'
+      end
+      object lblRangeValue: TLabel
+        Position.X = 16.000000000000000000
+        Position.Y = 304.000000000000000000
+        Size.Width = 200.000000000000000000
+        Size.Height = 17.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'Value: 40'
+      end
+      object rngDefault: TDaisyFmxRange
+        Variant = dvNeutral
+        Cursor = crHandPoint
+        Position.X = 16.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 300.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Max = 100.000000000000000000
+        Value = 40.000000000000000000
+        Step = 1.000000000000000000
+        OnChange = RangeChange
+      end
+      object rngPrimary: TDaisyFmxRange
+        Variant = dvPrimary
+        Cursor = crHandPoint
+        Position.X = 16.000000000000000000
+        Position.Y = 72.000000000000000000
+        Size.Width = 300.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        Max = 100.000000000000000000
+        Value = 50.000000000000000000
+        Step = 1.000000000000000000
+      end
+      object rngSecondary: TDaisyFmxRange
+        Variant = dvSecondary
+        Cursor = crHandPoint
+        Position.X = 16.000000000000000000
+        Position.Y = 104.000000000000000000
+        Size.Width = 300.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 2
+        Max = 100.000000000000000000
+        Value = 50.000000000000000000
+        Step = 1.000000000000000000
+      end
+      object rngAccent: TDaisyFmxRange
+        Variant = dvAccent
+        Cursor = crHandPoint
+        Position.X = 16.000000000000000000
+        Position.Y = 136.000000000000000000
+        Size.Width = 300.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 3
+        Max = 100.000000000000000000
+        Value = 50.000000000000000000
+        Step = 1.000000000000000000
+      end
+      object rngInfo: TDaisyFmxRange
+        Variant = dvInfo
+        Cursor = crHandPoint
+        Position.X = 16.000000000000000000
+        Position.Y = 168.000000000000000000
+        Size.Width = 300.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 4
+        Max = 100.000000000000000000
+        Value = 50.000000000000000000
+        Step = 1.000000000000000000
+      end
+      object rngSuccess: TDaisyFmxRange
+        Variant = dvSuccess
+        Cursor = crHandPoint
+        Position.X = 16.000000000000000000
+        Position.Y = 200.000000000000000000
+        Size.Width = 300.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 5
+        Max = 100.000000000000000000
+        Value = 50.000000000000000000
+        Step = 1.000000000000000000
+      end
+      object rngWarning: TDaisyFmxRange
+        Variant = dvWarning
+        Cursor = crHandPoint
+        Position.X = 16.000000000000000000
+        Position.Y = 232.000000000000000000
+        Size.Width = 300.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 6
+        Max = 100.000000000000000000
+        Value = 50.000000000000000000
+        Step = 1.000000000000000000
+      end
+      object rngError: TDaisyFmxRange
+        Variant = dvError
+        Cursor = crHandPoint
+        Position.X = 16.000000000000000000
+        Position.Y = 264.000000000000000000
+        Size.Width = 300.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 7
+        Max = 100.000000000000000000
+        Value = 50.000000000000000000
+        Step = 1.000000000000000000
+      end
+      object rngXS: TDaisyFmxRange
+        Variant = dvPrimary
+        SizeKind = dzXS
+        Cursor = crHandPoint
+        Position.X = 340.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 300.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 8
+        Max = 100.000000000000000000
+        Value = 30.000000000000000000
+        Step = 1.000000000000000000
+      end
+      object rngSM: TDaisyFmxRange
+        Variant = dvPrimary
+        SizeKind = dzSM
+        Cursor = crHandPoint
+        Position.X = 340.000000000000000000
+        Position.Y = 72.000000000000000000
+        Size.Width = 300.000000000000000000
+        Size.Height = 28.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 9
+        Max = 100.000000000000000000
+        Value = 30.000000000000000000
+        Step = 1.000000000000000000
+      end
+      object rngMD: TDaisyFmxRange
+        Variant = dvPrimary
+        Cursor = crHandPoint
+        Position.X = 340.000000000000000000
+        Position.Y = 104.000000000000000000
+        Size.Width = 300.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 10
+        Max = 100.000000000000000000
+        Value = 30.000000000000000000
+        Step = 1.000000000000000000
+      end
+      object rngLG: TDaisyFmxRange
+        Variant = dvPrimary
+        SizeKind = dzLG
+        Cursor = crHandPoint
+        Position.X = 340.000000000000000000
+        Position.Y = 136.000000000000000000
+        Size.Width = 300.000000000000000000
+        Size.Height = 36.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 11
+        Max = 100.000000000000000000
+        Value = 30.000000000000000000
+        Step = 1.000000000000000000
+      end
+      object rngXL: TDaisyFmxRange
+        Variant = dvPrimary
+        SizeKind = dzXL
+        Cursor = crHandPoint
+        Position.X = 340.000000000000000000
+        Position.Y = 172.000000000000000000
+        Size.Width = 300.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 12
+        Max = 100.000000000000000000
+        Value = 30.000000000000000000
+        Step = 1.000000000000000000
+      end
+      object rngSteps: TDaisyFmxRange
+        Variant = dvNeutral
+        Cursor = crHandPoint
+        Position.X = 340.000000000000000000
+        Position.Y = 216.000000000000000000
+        Size.Width = 300.000000000000000000
+        Size.Height = 63.960937500000000000
+        Size.PlatformDefault = False
+        TabOrder = 13
+        Max = 100.000000000000000000
+        Value = 50.000000000000000000
+        Step = 25.000000000000000000
+        TickCount = 5
+        TickLabels.Strings = (
+          '0'
+          '25'
+          '50'
+          '75'
+          '100')
+      end
+      object rngNoFill: TDaisyFmxRange
+        Variant = dvAccent
+        Cursor = crHandPoint
+        Position.X = 340.000000000000000000
+        Position.Y = 289.000000000000000000
+        Size.Width = 300.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 14
+        Max = 100.000000000000000000
+        Value = 70.000000000000000000
+        Step = 1.000000000000000000
+        ShowFill = False
+      end
+      object rngVertical: TDaisyFmxRange
+        Variant = dvSecondary
+        Cursor = crHandPoint
+        Position.X = 680.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 32.000000000000000000
+        Size.Height = 240.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 15
+        Max = 100.000000000000000000
+        Value = 60.000000000000000000
+        Step = 1.000000000000000000
+        Orientation = roVertical
+      end
+      object rngVerticalSteps: TDaisyFmxRange
+        Variant = dvSuccess
+        Cursor = crHandPoint
+        Position.X = 740.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 44.000000000000000000
+        Size.Height = 240.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 16
+        Max = 100.000000000000000000
+        Value = 40.000000000000000000
+        Step = 20.000000000000000000
+        Orientation = roVertical
+        TickCount = 6
+      end
+    end
+    object tsButtons: TDaisyFmxTabSheet
+      Position.X = 1.000000000000000000
+      Position.Y = 41.000000000000000000
+      Size.Width = 1022.000000000000000000
+      Size.Height = 430.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Buttons'
+      object lblSquare: TLabel
+        AutoSize = True
+        StyledSettings = [Family]
+        Position.X = 16.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 120.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.VertAlign = Leading
+        Text = 'Square buttons'
+      end
+      object lblCircle: TLabel
+        AutoSize = True
+        StyledSettings = [Family]
+        Position.X = 16.000000000000000000
+        Position.Y = 120.000000000000000000
+        Size.Width = 120.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 16.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.VertAlign = Leading
+        Text = 'Circle buttons'
+      end
+      object btnSquareXS: TDaisyFmxSquareButton
+        Variant = dvError
+        SizeKind = dzXS
+        Cursor = crHandPoint
+        Position.X = 16.000000000000000000
+        Position.Y = 48.000000000000000000
+        Size.Width = 24.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Text = #10084
+      end
+      object btnSquareSM: TDaisyFmxSquareButton
+        Variant = dvNeutral
+        Style = dsOutline
+        SizeKind = dzSM
+        Cursor = crHandPoint
+        Position.X = 64.000000000000000000
+        Position.Y = 48.000000000000000000
+        Size.Width = 32.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        Text = #55357#56589
+      end
+      object btnSquareMD: TDaisyFmxSquareButton
+        Variant = dvPrimary
+        Cursor = crHandPoint
+        Position.X = 120.000000000000000000
+        Position.Y = 48.000000000000000000
+        Size.Width = 40.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Text = #55357#56596
+      end
+      object btnSquareLG: TDaisyFmxSquareButton
+        Variant = dvSecondary
+        Style = dsSoft
+        SizeKind = dzLG
+        Cursor = crHandPoint
+        Position.X = 184.000000000000000000
+        Position.Y = 48.000000000000000000
+        Size.Width = 48.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Text = #55357#56960
+      end
+      object btnSquareXL: TDaisyFmxSquareButton
+        Variant = dvAccent
+        Style = dsDash
+        SizeKind = dzXL
+        Cursor = crHandPoint
+        Position.X = 256.000000000000000000
+        Position.Y = 48.000000000000000000
+        Size.Width = 56.000000000000000000
+        Size.Height = 56.000000000000000000
+        Size.PlatformDefault = False
+        Text = #9881
+      end
+      object btnSquareGhost: TDaisyFmxSquareButton
+        Style = dsGhost
+        Cursor = crHandPoint
+        Position.X = 336.000000000000000000
+        Position.Y = 48.000000000000000000
+        Size.Width = 40.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Text = #55357#56397
+      end
+      object btnCircleXS: TDaisyFmxCircleButton
+        Variant = dvWarning
+        SizeKind = dzXS
+        Cursor = crHandPoint
+        Position.X = 16.000000000000000000
+        Position.Y = 160.000000000000000000
+        Size.Width = 24.000000000000000000
+        Size.Height = 24.000000000000000000
+        Size.PlatformDefault = False
+        Text = #11088
+      end
+      object btnCircleSM: TDaisyFmxCircleButton
+        Variant = dvNeutral
+        Style = dsOutline
+        SizeKind = dzSM
+        Cursor = crHandPoint
+        Position.X = 64.000000000000000000
+        Position.Y = 160.000000000000000000
+        Size.Width = 32.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        Text = #55357#56832
+      end
+      object btnCircleMD: TDaisyFmxCircleButton
+        Variant = dvError
+        Style = dsSoft
+        Cursor = crHandPoint
+        Position.X = 120.000000000000000000
+        Position.Y = 160.000000000000000000
+        Size.Width = 40.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Text = #55357#56613
+      end
+      object btnCircleLG: TDaisyFmxCircleButton
+        Variant = dvSuccess
+        SizeKind = dzLG
+        Cursor = crHandPoint
+        Position.X = 184.000000000000000000
+        Position.Y = 160.000000000000000000
+        Size.Width = 48.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Text = #10003
+      end
+      object btnCircleXL: TDaisyFmxCircleButton
+        Variant = dvPrimary
+        SizeKind = dzXL
+        Cursor = crHandPoint
+        Position.X = 256.000000000000000000
+        Position.Y = 160.000000000000000000
+        Size.Width = 56.000000000000000000
+        Size.Height = 56.000000000000000000
+        Size.PlatformDefault = False
+        Text = #55357#56960
+      end
+      object btnCircleGhost: TDaisyFmxCircleButton
+        Variant = dvError
+        Style = dsGhost
+        Cursor = crHandPoint
+        Position.X = 336.000000000000000000
+        Position.Y = 160.000000000000000000
+        Size.Width = 40.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        Text = #10084
+      end
+    end
+  end
+  object Styler: TDaisyFmxFormStyler
+    Left = 656
+    Top = 24
+  end
+end

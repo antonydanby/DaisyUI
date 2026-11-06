@@ -1,0 +1,1138 @@
+object Form17: TForm17
+  Left = 0
+  Top = 0
+  Caption = 'DaisyUI FMX demo - chat, countdown, list and stat'
+  ClientHeight = 620
+  ClientWidth = 1260
+  Position = ScreenCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+  object lblTheme: TLabel
+    AutoSize = True
+    StyledSettings = [Family]
+    Position.X = 24.000000000000000000
+    Position.Y = 24.000000000000000000
+    Size.Width = 60.000000000000000000
+    Size.Height = 19.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 14.000000000000000000
+    Text = 'Theme:'
+    TabOrder = 0
+  end
+  object selTheme: TDaisyFmxSelect
+    Cursor = crHandPoint
+    Hint = ''
+    Position.X = 90.000000000000000000
+    Position.Y = 12.000000000000000000
+    Size.Width = 200.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    Items.Strings = (
+      'Light'
+      'Dark'
+      'Cupcake'
+      'Dracula'
+      'Corporate'
+      'Pastel'
+      'Wireframe'
+      'CMYK'
+      'Winter'
+      'Dim'
+      'Nord'
+      'Silk'
+      'Bumblebee'
+      'Emerald'
+      'Halloween'
+      'Garden'
+      'Forest'
+      'Lofi'
+      'Fantasy'
+      'Autumn')
+    ItemIndex = 0
+    Placeholder = 'Pick one'
+    OnChange = ThemeSelectChange
+  end
+  object chkTitleBar: TDaisyFmxCheckBox
+    Cursor = crHandPoint
+    Position.X = 490.000000000000000000
+    Position.Y = 16.000000000000000000
+    Size.Width = 210.000000000000000000
+    Size.Height = 30.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 5
+    Checked = True
+    Text = 'Theme the window title bar'
+    OnChange = chkTitleBarChange
+  end
+  object lblStatus: TLabel
+    AutoSize = True
+    StyledSettings = [Family]
+    Position.X = 730.000000000000000000
+    Position.Y = 24.000000000000000000
+    Size.Width = 0.000000000000000000
+    Size.Height = 56.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 14.000000000000000000
+    TabOrder = 6
+  end
+  object themeCtl: TDaisyFmxThemeController
+    Cursor = crHandPoint
+    Position.X = 1000.000000000000000000
+    Position.Y = 16.000000000000000000
+    Size.Width = 130.000000000000000000
+    Size.Height = 28.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 90
+    Kind = tkCheckBox
+    Text = 'Dark mode'
+    OnChange = ThemeControllerChange
+  end
+  object pcMain: TDaisyFmxPageControl
+    Align = Client
+    Margins.Top = 60.000000000000000000
+    Size.Width = 1260.000000000000000000
+    Size.Height = 560.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 7
+    ActivePageIndex = 0
+    object tsCountdown: TDaisyFmxTabSheet
+      Position.X = 1.000000000000000000
+      Position.Y = 41.000000000000000000
+      Size.Width = 1258.000000000000000000
+      Size.Height = 518.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Text = 'Countdown'
+      object cdPlain: TDaisyFmxCountdown
+        Cursor = crHandPoint
+        Position.X = 24.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 41.000000000000000000
+        Size.Height = 47.882812500000000000
+        Size.PlatformDefault = False
+        TabOrder = 43
+        OnClick = CountdownClick
+        Segments = <
+          item
+            Value = 59
+          end>
+        Active = True
+      end
+      object cdLarge: TDaisyFmxCountdown
+        SizeKind = dzXL
+        Cursor = crHandPoint
+        Position.X = 100.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 67.000000000000000000
+        Size.Height = 79.804687500000000000
+        Size.PlatformDefault = False
+        TabOrder = 44
+        OnClick = CountdownClick
+        Segments = <
+          item
+            Value = 42
+          end>
+        Active = True
+      end
+      object cdClock: TDaisyFmxCountdown
+        Cursor = crHandPoint
+        Position.X = 240.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 147.000000000000000000
+        Size.Height = 47.882812500000000000
+        Size.PlatformDefault = False
+        TabOrder = 45
+        OnClick = CountdownClick
+        Segments = <
+          item
+            Value = 10
+          end
+          item
+            Value = 24
+          end
+          item
+            Value = 59
+          end>
+        Separator = ':'
+        Active = True
+      end
+      object cdLabels: TDaisyFmxCountdown
+        Cursor = crHandPoint
+        Position.X = 440.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 356.000000000000000000
+        Size.Height = 47.882812500000000000
+        Size.PlatformDefault = False
+        TabOrder = 46
+        OnClick = CountdownClick
+        Segments = <
+          item
+            Value = 15
+            Caption = 'days'
+          end
+          item
+            Value = 10
+            Caption = 'hours'
+          end
+          item
+            Value = 24
+            Caption = 'min'
+          end
+          item
+            Value = 59
+            Caption = 'sec'
+          end>
+        LabelPlacement = clAfter
+        Active = True
+      end
+      object cdBelow: TDaisyFmxCountdown
+        Cursor = crHandPoint
+        Position.X = 24.000000000000000000
+        Position.Y = 104.000000000000000000
+        Size.Width = 163.000000000000000000
+        Size.Height = 66.503906250000000000
+        Size.PlatformDefault = False
+        TabOrder = 47
+        OnClick = CountdownClick
+        Segments = <
+          item
+            Value = 10
+            Caption = 'hours'
+          end
+          item
+            Value = 24
+            Caption = 'min'
+          end
+          item
+            Value = 59
+            Caption = 'sec'
+          end>
+        LabelPlacement = clBelow
+        Active = True
+      end
+      object cdBoxed: TDaisyFmxCountdown
+        Cursor = crHandPoint
+        Position.X = 320.000000000000000000
+        Position.Y = 104.000000000000000000
+        Size.Width = 232.000000000000000000
+        Size.Height = 79.843750000000000000
+        Size.PlatformDefault = False
+        TabOrder = 48
+        OnClick = CountdownClick
+        Segments = <
+          item
+            Value = 10
+            Caption = 'hours'
+          end
+          item
+            Value = 24
+            Caption = 'min'
+          end
+          item
+            Value = 59
+            Caption = 'sec'
+          end>
+        LabelPlacement = clBelow
+        Boxed = True
+        Active = True
+      end
+      object cdLive: TDaisyFmxCountdown
+        Variant = dvPrimary
+        Cursor = crHandPoint
+        Position.X = 620.000000000000000000
+        Position.Y = 104.000000000000000000
+        Size.Width = 148.000000000000000000
+        Size.Height = 79.843750000000000000
+        Size.PlatformDefault = False
+        TabOrder = 49
+        OnClick = CountdownClick
+        Segments = <
+          item
+            Caption = 'min'
+          end
+          item
+            Value = 30
+            Caption = 'sec'
+          end>
+        LabelPlacement = clBelow
+        Boxed = True
+        Active = True
+        OnFinished = CountdownFinished
+      end
+      object cdMinutes: TDaisyFmxCountdown
+        Variant = dvAccent
+        Cursor = crHandPoint
+        Position.X = 24.000000000000000000
+        Position.Y = 220.000000000000000000
+        Size.Width = 148.000000000000000000
+        Size.Height = 79.843750000000000000
+        Size.PlatformDefault = False
+        TabOrder = 50
+        OnClick = CountdownClick
+        Segments = <
+          item
+            Value = 10
+            Caption = 'hours'
+          end
+          item
+            Value = 24
+            Caption = 'min'
+          end
+          item
+            Value = 59
+            Caption = 'sec'
+          end>
+        LabelPlacement = clBelow
+        Boxed = True
+        Active = True
+        ShowSeconds = False
+      end
+    end
+    object tsList: TDaisyFmxTabSheet
+      Position.X = 1.000000000000000000
+      Position.Y = 41.000000000000000000
+      Size.Width = 1258.000000000000000000
+      Size.Height = 518.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      Text = 'List'
+      object lstSecond: TDaisyFmxList
+        Position.X = 24.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 380.000000000000000000
+        Size.Height = 256.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 51
+        Items = <
+          item
+            Title = 'Dio Lupa'
+            Subtitle = 'Remaining Reason'
+            Icon.Emoji = #55356#57269
+            Action.SVG.Strings = (
+              
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path' +
+                ' d="M8 5v14l11-7z"/></svg>')
+            Action2.SVG.Strings = (
+              
+                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill' +
+                '="none" stroke="currentColor">'
+              
+                '<path d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.12' +
+                '6-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.76' +
+                '5 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>'
+              '</svg>')
+          end
+          item
+            Title = 'Ellie Beilish'
+            Subtitle = 'Bears of a fever'
+            Icon.Emoji = #55356#57272
+            Action.SVG.Strings = (
+              
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path' +
+                ' d="M8 5v14l11-7z"/></svg>')
+            Action2.SVG.Strings = (
+              
+                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill' +
+                '="none" stroke="currentColor">'
+              
+                '<path d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.12' +
+                '6-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.76' +
+                '5 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>'
+              '</svg>')
+          end
+          item
+            Title = 'Sabrino Gardener'
+            Subtitle = 'Cappuccino'
+            Icon.Emoji = #55357#56960
+            Action.SVG.Strings = (
+              
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path' +
+                ' d="M8 5v14l11-7z"/></svg>')
+            Action2.SVG.Strings = (
+              
+                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill' +
+                '="none" stroke="currentColor">'
+              
+                '<path d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.12' +
+                '6-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.76' +
+                '5 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>'
+              '</svg>')
+          end>
+        Header = 'Most played songs this week'
+        OnItemClick = ListItemClick
+      end
+      object lstThird: TDaisyFmxList
+        Position.X = 424.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 380.000000000000000000
+        Size.Height = 256.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 52
+        Items = <
+          item
+            Title = 'Margherita Pizza'
+            Subtitle = 'Order #1042'
+            Description = 'Out for delivery, arriving in 10 minutes.'
+            Icon.Emoji = #55356#57173
+            Action.SVG.Strings = (
+              
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path' +
+                ' d="M9 5l7 7-7 7"/></svg>')
+          end
+          item
+            Title = 'Launch kit'
+            Subtitle = 'Order #1043'
+            Description = 'Packed and waiting for a courier.'
+            Icon.Emoji = #55357#56960
+            Action.SVG.Strings = (
+              
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path' +
+                ' d="M9 5l7 7-7 7"/></svg>')
+          end
+          item
+            Title = 'Party supplies'
+            Subtitle = 'Order #1044'
+            Description = 'Delivered yesterday.'
+            Icon.Emoji = #55356#57225
+            Action.SVG.Strings = (
+              
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path' +
+                ' d="M9 5l7 7-7 7"/></svg>')
+          end>
+        Header = 'Third column grows'
+        Layout = llThirdGrows
+        OnItemClick = ListItemClick
+      end
+      object lstWrap: TDaisyFmxList
+        Position.X = 824.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 380.000000000000000000
+        Size.Height = 368.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 53
+        Items = <
+          item
+            Title = 'Fix login bug'
+            Subtitle = 'High priority'
+            Description = 
+              'Users on older browsers cannot sign in after the latest release.' +
+              ' Reproduce, patch and add a regression test.'
+            Icon.Emoji = #55357#56613
+            Action.SVG.Strings = (
+              
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path' +
+                ' d="M9 5l7 7-7 7"/></svg>')
+          end
+          item
+            Title = 'Automate reports'
+            Subtitle = 'Medium priority'
+            Description = 'Replace the weekly manual export with a scheduled bot run.'
+            Icon.Emoji = #55358#56598
+            Action.SVG.Strings = (
+              
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path' +
+                ' d="M9 5l7 7-7 7"/></svg>')
+          end
+          item
+            Title = 'Fix Main Form'
+            Subtitle = 'Cosmetic Nightmare'
+            Description = 
+              'Replace the horrible looking UI that is the main form with somet' +
+              'hing that won'#39't get us all canned'
+            Icon.Emoji = #55357#56613
+          end>
+        Header = 'Third column wraps'
+        Layout = llThirdWraps
+        OnItemClick = ListItemClick
+      end
+    end
+    object tsStat: TDaisyFmxTabSheet
+      Position.X = 1.000000000000000000
+      Position.Y = 41.000000000000000000
+      Size.Width = 1258.000000000000000000
+      Size.Height = 518.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      Text = 'Stat'
+      object statBasic: TDaisyFmxStat
+        Position.X = 24.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 461.000000000000000000
+        Size.Height = 104.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 55
+        Items = <
+          item
+            Title = 'Total Page Views'
+            Value = '89,400'
+            Description = '21% more than last month'
+          end
+          item
+            Title = 'Downloads'
+            Value = '31K'
+            Description = 'Jan 1st - Feb 1st'
+          end
+          item
+            Title = 'New Users'
+            Value = '4,200'
+            Description = '+400 (22%)'
+          end>
+        OnActionClick = StatActionClick
+      end
+      object statIcons: TDaisyFmxStat
+        Position.X = 24.000000000000000000
+        Position.Y = 142.000000000000000000
+        Size.Width = 682.000000000000000000
+        Size.Height = 104.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 56
+        Items = <
+          item
+            Title = 'Likes'
+            Value = '25.6K'
+            Description = '21% more than last month'
+            Icon.SVG.Strings = (
+              
+                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill' +
+                '="none" stroke="currentColor">'
+              
+                '<path d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.12' +
+                '6-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.76' +
+                '5 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>'
+              '</svg>')
+            FigureVariant = dvPrimary
+          end
+          item
+            Title = 'Page Views'
+            Value = '2.6M'
+            Description = '21% more than last month'
+            Icon.Emoji = #55357#56520
+            FigureVariant = dvSecondary
+          end
+          item
+            Title = 'Tasks done'
+            Value = '86%'
+            Description = '31 tasks remaining'
+            Icon.Emoji = #9889
+          end>
+      end
+      object statCentered: TDaisyFmxStat
+        Position.X = 24.000000000000000000
+        Position.Y = 272.000000000000000000
+        Size.Width = 408.000000000000000000
+        Size.Height = 104.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 57
+        Items = <
+          item
+            Title = 'Downloads'
+            Value = '31K'
+            Description = 'Jan 1st - Feb 1st'
+          end
+          item
+            Title = 'New Users'
+            Value = '4,200'
+            Description = '+400 (22%)'
+          end
+          item
+            Title = 'New Registers'
+            Value = '1,200'
+            Description = '-90 (14%)'
+          end>
+        Centered = True
+      end
+      object statVertical: TDaisyFmxStat
+        Position.X = 730.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 140.000000000000000000
+        Size.Height = 312.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 58
+        Items = <
+          item
+            Title = 'Downloads'
+            Value = '31K'
+            Description = 'Jan 1st - Feb 1st'
+          end
+          item
+            Title = 'New Users'
+            Value = '4,200'
+            Description = '+400 (22%)'
+          end
+          item
+            Title = 'New Registers'
+            Value = '1,200'
+            Description = '-90 (14%)'
+          end>
+        Direction = sdVertical
+      end
+      object statCustom: TDaisyFmxStat
+        Position.X = 460.000000000000000000
+        Position.Y = 272.000000000000000000
+        Size.Width = 328.000000000000000000
+        Size.Height = 136.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 59
+        Items = <
+          item
+            Title = 'Account balance'
+            Value = '$89,400'
+            Variant = dvPrimary
+            ActionCaption = 'Add funds'
+            ActionVariant = dvSuccess
+          end
+          item
+            Title = 'Current balance'
+            Value = '$89,400'
+            Variant = dvNeutral
+            ActionCaption = 'Withdraw'
+            ActionVariant = dvError
+          end>
+        OnActionClick = StatActionClick
+      end
+    end
+    object tsChat: TDaisyFmxTabSheet
+      Position.X = 1.000000000000000000
+      Position.Y = 41.000000000000000000
+      Size.Width = 1258.000000000000000000
+      Size.Height = 518.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = 'Chat'
+      object chatStart: TDaisyFmxChatBubble
+        Position.X = 24.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 380.000000000000000000
+        Size.Height = 76.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 8
+        Text = 'You were the Chosen One!'
+        Header = 'Obi-Wan Kenobi'
+        HeaderTime = '12:45'
+        Footer = 'Delivered'
+        AvatarText = #55357#56832
+      end
+      object chatEnd: TDaisyFmxChatBubble
+        Position.X = 24.000000000000000000
+        Position.Y = 96.000000000000000000
+        Size.Width = 380.000000000000000000
+        Size.Height = 76.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 9
+        Text = 'I hate you!'
+        Placement = cpEnd
+        Header = 'Anakin'
+        HeaderTime = '12:46'
+        Footer = 'Seen at 12:46'
+        AvatarText = #55357#56845
+      end
+      object chatSvg: TDaisyFmxChatBubble
+        Position.X = 24.000000000000000000
+        Position.Y = 184.000000000000000000
+        Size.Width = 380.000000000000000000
+        Size.Height = 76.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 10
+        Text = 'SVG avatars work too.'
+        Header = 'Heart'
+        Footer = 'Sent'
+        SVG.Strings = (
+          
+            '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill' +
+            '="none" stroke="currentColor">'
+          
+            '<path d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.12' +
+            '6-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.76' +
+            '5 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/>'
+          '</svg>')
+      end
+      object chatEmoji: TDaisyFmxChatBubble
+        Position.X = 24.000000000000000000
+        Position.Y = 272.000000000000000000
+        Size.Width = 380.000000000000000000
+        Size.Height = 44.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 11
+        Text = 'Colour emoji: '#55356#57225' '#55357#56960' '#55357#56613' '#55356#57269
+        AvatarText = #55357#56395
+      end
+      object chatPrimary: TDaisyFmxChatBubble
+        Variant = dvPrimary
+        Position.X = 424.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 380.000000000000000000
+        Size.Height = 44.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 12
+        Text = 'Primary'
+        AvatarText = #55357#56832
+      end
+      object chatSecondary: TDaisyFmxChatBubble
+        Variant = dvSecondary
+        Position.X = 424.000000000000000000
+        Position.Y = 60.000000000000000000
+        Size.Width = 380.000000000000000000
+        Size.Height = 44.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 13
+        Text = 'Secondary'
+        Placement = cpEnd
+        AvatarText = #55357#56846
+      end
+      object chatAccent: TDaisyFmxChatBubble
+        Variant = dvAccent
+        Position.X = 424.000000000000000000
+        Position.Y = 112.000000000000000000
+        Size.Width = 380.000000000000000000
+        Size.Height = 44.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 14
+        Text = 'Accent'
+        AvatarText = #55356#57272
+      end
+      object chatInfo: TDaisyFmxChatBubble
+        Variant = dvInfo
+        Position.X = 424.000000000000000000
+        Position.Y = 164.000000000000000000
+        Size.Width = 380.000000000000000000
+        Size.Height = 44.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 15
+        Text = 'Info'
+        Placement = cpEnd
+        AvatarText = #55357#56420
+      end
+      object chatSuccess: TDaisyFmxChatBubble
+        Variant = dvSuccess
+        Position.X = 424.000000000000000000
+        Position.Y = 216.000000000000000000
+        Size.Width = 380.000000000000000000
+        Size.Height = 44.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 16
+        Text = 'Success'
+        AvatarText = #55356#57173
+      end
+      object chatWarning: TDaisyFmxChatBubble
+        Variant = dvWarning
+        Position.X = 424.000000000000000000
+        Position.Y = 268.000000000000000000
+        Size.Width = 380.000000000000000000
+        Size.Height = 44.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 17
+        Text = 'Warning'
+        Placement = cpEnd
+        AvatarText = #55357#56613
+      end
+      object chatError: TDaisyFmxChatBubble
+        Variant = dvError
+        Position.X = 424.000000000000000000
+        Position.Y = 320.000000000000000000
+        Size.Width = 380.000000000000000000
+        Size.Height = 44.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 18
+        Text = 'Error'
+        AvatarText = #55358#56598
+      end
+      object chatNoAvatar: TDaisyFmxChatBubble
+        Position.X = 824.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 380.000000000000000000
+        Size.Height = 76.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 19
+        Text = 'A bubble without an avatar.'
+        Header = 'Anonymous'
+        HeaderTime = 'now'
+        Footer = 'Delivered'
+        ShowAvatar = False
+      end
+      object chatNoAvatarEnd: TDaisyFmxChatBubble
+        Variant = dvNeutral
+        Position.X = 824.000000000000000000
+        Position.Y = 96.000000000000000000
+        Size.Width = 380.000000000000000000
+        Size.Height = 76.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 20
+        Text = 'And one to the end.'
+        Placement = cpEnd
+        Header = 'Me'
+        Footer = 'Seen'
+        ShowAvatar = False
+      end
+      object edtChatText: TDaisyFmxTextInput
+        SizeKind = dzSM
+        Cursor = crIBeam
+        Position.X = 843.000000000000000000
+        Position.Y = 284.000000000000000000
+        Size.Width = 361.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 40
+        OnChange = ChatEditChange
+      end
+      object edtChatHeader: TDaisyFmxTextInput
+        SizeKind = dzSM
+        Cursor = crIBeam
+        Position.X = 843.000000000000000000
+        Position.Y = 324.000000000000000000
+        Size.Width = 361.000000000000000000
+        Size.Height = 32.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 39
+        OnChange = ChatEditChange
+      end
+      object lblChatEdit: TDaisyFmxLabel
+        HitTest = False
+        Position.X = 843.000000000000000000
+        Position.Y = 260.000000000000000000
+        Size.Width = 127.000000000000000000
+        Size.Height = 19.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 41
+        Text = 'Edit the first bubble:'
+      end
+    end
+    object tsProgress: TDaisyFmxTabSheet
+      Position.X = 1.000000000000000000
+      Position.Y = 41.000000000000000000
+      Size.Width = 1258.000000000000000000
+      Size.Height = 518.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+      Text = 'Progress'
+      object lblProgVariants: TDaisyFmxLabel
+        HitTest = False
+        Position.X = 24.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 140.000000000000000000
+        Size.Height = 19.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        Text = 'Progress variants'
+      end
+      object prgDefault: TDaisyFmxProgress
+        Position.X = 24.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 8.000000000000000000
+        Size.PlatformDefault = False
+        Value = 40.000000000000000000
+      end
+      object prgPrimary: TDaisyFmxProgress
+        Variant = dvPrimary
+        Position.X = 24.000000000000000000
+        Position.Y = 64.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 8.000000000000000000
+        Size.PlatformDefault = False
+        Value = 50.000000000000000000
+      end
+      object prgSecondary: TDaisyFmxProgress
+        Variant = dvSecondary
+        Position.X = 24.000000000000000000
+        Position.Y = 88.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 8.000000000000000000
+        Size.PlatformDefault = False
+        Value = 60.000000000000000000
+      end
+      object prgAccent: TDaisyFmxProgress
+        Variant = dvAccent
+        Position.X = 24.000000000000000000
+        Position.Y = 112.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 8.000000000000000000
+        Size.PlatformDefault = False
+        Value = 70.000000000000000000
+      end
+      object prgInfo: TDaisyFmxProgress
+        Variant = dvInfo
+        Position.X = 24.000000000000000000
+        Position.Y = 136.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 8.000000000000000000
+        Size.PlatformDefault = False
+        Value = 30.000000000000000000
+      end
+      object prgSuccess: TDaisyFmxProgress
+        Variant = dvSuccess
+        Position.X = 24.000000000000000000
+        Position.Y = 160.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 8.000000000000000000
+        Size.PlatformDefault = False
+        Value = 80.000000000000000000
+      end
+      object prgWarning: TDaisyFmxProgress
+        Variant = dvWarning
+        Position.X = 24.000000000000000000
+        Position.Y = 184.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 8.000000000000000000
+        Size.PlatformDefault = False
+        Value = 90.000000000000000000
+      end
+      object prgError: TDaisyFmxProgress
+        Variant = dvError
+        Position.X = 24.000000000000000000
+        Position.Y = 208.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 8.000000000000000000
+        Size.PlatformDefault = False
+        Value = 20.000000000000000000
+      end
+      object lblProgSizes: TDaisyFmxLabel
+        HitTest = False
+        Position.X = 400.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 120.000000000000000000
+        Size.Height = 19.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 9
+        Text = 'Progress sizes'
+      end
+      object prgXS: TDaisyFmxProgress
+        SizeKind = dzXS
+        Variant = dvPrimary
+        Position.X = 400.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 300.000000000000000000
+        Size.Height = 2.000000000000000000
+        Size.PlatformDefault = False
+        Value = 60.000000000000000000
+      end
+      object prgSM: TDaisyFmxProgress
+        SizeKind = dzSM
+        Variant = dvPrimary
+        Position.X = 400.000000000000000000
+        Position.Y = 64.000000000000000000
+        Size.Width = 300.000000000000000000
+        Size.Height = 4.000000000000000000
+        Size.PlatformDefault = False
+        Value = 60.000000000000000000
+      end
+      object prgMD: TDaisyFmxProgress
+        Variant = dvPrimary
+        Position.X = 400.000000000000000000
+        Position.Y = 88.000000000000000000
+        Size.Width = 300.000000000000000000
+        Size.Height = 8.000000000000000000
+        Size.PlatformDefault = False
+        Value = 60.000000000000000000
+      end
+      object prgLG: TDaisyFmxProgress
+        SizeKind = dzLG
+        Variant = dvPrimary
+        Position.X = 400.000000000000000000
+        Position.Y = 112.000000000000000000
+        Size.Width = 300.000000000000000000
+        Size.Height = 12.000000000000000000
+        Size.PlatformDefault = False
+        Value = 60.000000000000000000
+      end
+      object prgXL: TDaisyFmxProgress
+        SizeKind = dzXL
+        Variant = dvPrimary
+        Position.X = 400.000000000000000000
+        Position.Y = 136.000000000000000000
+        Size.Width = 300.000000000000000000
+        Size.Height = 16.000000000000000000
+        Size.PlatformDefault = False
+        Value = 60.000000000000000000
+      end
+      object lblProgLive: TDaisyFmxLabel
+        HitTest = False
+        Position.X = 24.000000000000000000
+        Position.Y = 244.000000000000000000
+        Size.Width = 260.000000000000000000
+        Size.Height = 19.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 15
+        Text = 'Indeterminate and value driven'
+      end
+      object prgIndeterminate: TDaisyFmxProgress
+        Variant = dvAccent
+        Indeterminate = True
+        Position.X = 24.000000000000000000
+        Position.Y = 280.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 8.000000000000000000
+        Size.PlatformDefault = False
+      end
+      object prgLive: TDaisyFmxProgress
+        SizeKind = dzLG
+        Variant = dvSuccess
+        Position.X = 24.000000000000000000
+        Position.Y = 312.000000000000000000
+        Size.Width = 320.000000000000000000
+        Size.Height = 12.000000000000000000
+        Size.PlatformDefault = False
+        Value = 25.000000000000000000
+      end
+      object btnProgAdd: TDaisyFmxButton
+        Variant = dvPrimary
+        Cursor = crHandPoint
+        Position.X = 24.000000000000000000
+        Position.Y = 344.000000000000000000
+        Size.Width = 100.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        OnClick = ProgressAddClick
+        Text = 'Add 10'
+      end
+      object btnProgReset: TDaisyFmxButton
+        Variant = dvNeutral
+        Cursor = crHandPoint
+        Position.X = 136.000000000000000000
+        Position.Y = 344.000000000000000000
+        Size.Width = 100.000000000000000000
+        Size.Height = 40.000000000000000000
+        Size.PlatformDefault = False
+        OnClick = ProgressResetClick
+        Text = 'Reset'
+      end
+      object lblRadial: TDaisyFmxLabel
+        HitTest = False
+        Position.X = 780.000000000000000000
+        Position.Y = 8.000000000000000000
+        Size.Width = 140.000000000000000000
+        Size.Height = 19.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 20
+        Text = 'Radial progress'
+      end
+      object radDefault: TDaisyFmxRadialProgress
+        Position.X = 780.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 80.000000000000000000
+        Size.PlatformDefault = False
+        Value = 70.000000000000000000
+      end
+      object radPrimary: TDaisyFmxRadialProgress
+        Variant = dvPrimary
+        Position.X = 880.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 80.000000000000000000
+        Size.PlatformDefault = False
+        Value = 50.000000000000000000
+      end
+      object radSecondary: TDaisyFmxRadialProgress
+        Variant = dvSecondary
+        Position.X = 980.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 80.000000000000000000
+        Size.PlatformDefault = False
+        Value = 85.000000000000000000
+      end
+      object radAccent: TDaisyFmxRadialProgress
+        Variant = dvAccent
+        Position.X = 1080.000000000000000000
+        Position.Y = 40.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 80.000000000000000000
+        Size.PlatformDefault = False
+        Value = 25.000000000000000000
+      end
+      object radInfo: TDaisyFmxRadialProgress
+        Variant = dvInfo
+        Position.X = 780.000000000000000000
+        Position.Y = 140.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 80.000000000000000000
+        Size.PlatformDefault = False
+        Value = 60.000000000000000000
+      end
+      object radSuccess: TDaisyFmxRadialProgress
+        Variant = dvSuccess
+        Position.X = 880.000000000000000000
+        Position.Y = 140.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 80.000000000000000000
+        Size.PlatformDefault = False
+        Value = 100.000000000000000000
+      end
+      object radWarning: TDaisyFmxRadialProgress
+        Variant = dvWarning
+        Position.X = 980.000000000000000000
+        Position.Y = 140.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 80.000000000000000000
+        Size.PlatformDefault = False
+        Value = 40.000000000000000000
+      end
+      object radError: TDaisyFmxRadialProgress
+        Variant = dvError
+        Position.X = 1080.000000000000000000
+        Position.Y = 140.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 80.000000000000000000
+        Size.PlatformDefault = False
+        Value = 15.000000000000000000
+      end
+      object lblRadialCustom: TDaisyFmxLabel
+        HitTest = False
+        Position.X = 780.000000000000000000
+        Position.Y = 244.000000000000000000
+        Size.Width = 220.000000000000000000
+        Size.Height = 19.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 29
+        Text = 'Filled, thickness and text'
+      end
+      object radFilled: TDaisyFmxRadialProgress
+        Variant = dvPrimary
+        Filled = True
+        Position.X = 780.000000000000000000
+        Position.Y = 280.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 80.000000000000000000
+        Size.PlatformDefault = False
+        Value = 65.000000000000000000
+      end
+      object radThick: TDaisyFmxRadialProgress
+        Variant = dvSuccess
+        Thickness = 3.000000000000000000
+        Position.X = 880.000000000000000000
+        Position.Y = 280.000000000000000000
+        Size.Width = 80.000000000000000000
+        Size.Height = 80.000000000000000000
+        Size.PlatformDefault = False
+        Value = 75.000000000000000000
+      end
+      object radText: TDaisyFmxRadialProgress
+        Variant = dvAccent
+        Thickness = 12.000000000000000000
+        DisplayText = '3 of 4'
+        Position.X = 980.000000000000000000
+        Position.Y = 280.000000000000000000
+        Size.Width = 100.000000000000000000
+        Size.Height = 100.000000000000000000
+        Size.PlatformDefault = False
+        Value = 75.000000000000000000
+      end
+      object radLive: TDaisyFmxRadialProgress
+        Variant = dvSuccess
+        Thickness = 10.000000000000000000
+        Position.X = 1100.000000000000000000
+        Position.Y = 280.000000000000000000
+        Size.Width = 100.000000000000000000
+        Size.Height = 100.000000000000000000
+        Size.PlatformDefault = False
+        Value = 25.000000000000000000
+      end
+    end
+  end
+  object Styler: TDaisyFmxFormStyler
+  end
+end

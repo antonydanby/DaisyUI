@@ -1,0 +1,80 @@
+package DaisyFMXpkg;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS ON}
+{$RANGECHECKS ON}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  fmx,
+  DaisyCommonpkg;
+
+contains
+  Daisy.FMX.Card in 'Source\FMX\Daisy.FMX.Card.pas',
+  Daisy.FMX.Reg in 'Source\FMX\Daisy.FMX.Reg.pas',
+  Daisy.FMX.Alert in 'Source\FMX\Daisy.FMX.Alert.pas',
+  Daisy.FMX.Button in 'Source\FMX\Daisy.FMX.Button.pas',
+  Daisy.FMX.Control in 'Source\FMX\Daisy.FMX.Control.pas',
+  Daisy.FMX.IconButton in 'Source\FMX\Daisy.FMX.IconButton.pas',
+  Daisy.FMX.LoadingButton in 'Source\FMX\Daisy.FMX.LoadingButton.pas',
+  Daisy.FMX.Dropdown in 'Source\FMX\Daisy.FMX.Dropdown.pas',
+  Daisy.FMX.Fab in 'Source\FMX\Daisy.FMX.Fab.pas',
+  Daisy.FMX.Accordion in 'Source\FMX\Daisy.FMX.Accordion.pas',
+  Daisy.FMX.Badge in 'Source\FMX\Daisy.FMX.Badge.pas',
+  Daisy.FMX.Chat in 'Source\FMX\Daisy.FMX.Chat.pas',
+  Daisy.FMX.Countdown in 'Source\FMX\Daisy.FMX.Countdown.pas',
+  Daisy.FMX.List in 'Source\FMX\Daisy.FMX.List.pas',
+  Daisy.FMX.Stat in 'Source\FMX\Daisy.FMX.Stat.pas',
+  Daisy.FMX.Panel in 'Source\FMX\Daisy.FMX.Panel.pas',
+  Daisy.FMX.Labels in 'Source\FMX\Daisy.FMX.Labels.pas',
+  Daisy.FMX.SVGImage in 'Source\FMX\Daisy.FMX.SVGImage.pas',
+  Daisy.FMX.Status in 'Source\FMX\Daisy.FMX.Status.pas',
+  Daisy.FMX.Table in 'Source\FMX\Daisy.FMX.Table.pas',
+  Daisy.FMX.Select in 'Source\FMX\Daisy.FMX.Select.pas',
+  Daisy.FMX.FormStyler in 'Source\FMX\Daisy.FMX.FormStyler.pas',
+  Daisy.FMX.Toggle in 'Source\FMX\Daisy.FMX.Toggle.pas',
+  Daisy.FMX.TextInput in 'Source\FMX\Daisy.FMX.TextInput.pas',
+  Daisy.FMX.TextArea in 'Source\FMX\Daisy.FMX.TextArea.pas',
+  Daisy.FMX.MenuPopup in 'Source\FMX\Daisy.FMX.MenuPopup.pas',
+  Daisy.FMX.Menu in 'Source\FMX\Daisy.FMX.Menu.pas',
+  Daisy.FMX.MainMenu in 'Source\FMX\Daisy.FMX.MainMenu.pas',
+  Daisy.FMX.PopupMenu in 'Source\FMX\Daisy.FMX.PopupMenu.pas',
+  Daisy.FMX.CheckBox in 'Source\FMX\Daisy.FMX.CheckBox.pas',
+  Daisy.FMX.PageControl in 'Source\FMX\Daisy.FMX.PageControl.pas',
+  Daisy.FMX.Progress in 'Source\FMX\Daisy.FMX.Progress.pas',
+  Daisy.FMX.RadialProgress in 'Source\FMX\Daisy.FMX.RadialProgress.pas',
+  Daisy.FMX.Toast in 'Source\FMX\Daisy.FMX.Toast.pas',
+  Daisy.FMX.Calendar in 'Source\FMX\Daisy.FMX.Calendar.pas',
+  Daisy.FMX.DatePicker in 'Source\FMX\Daisy.FMX.DatePicker.pas',
+  Daisy.FMX.Indicator in 'Source\FMX\Daisy.FMX.Indicator.pas',
+  Daisy.FMX.FieldSet in 'Source\FMX\Daisy.FMX.FieldSet.pas',
+  Daisy.FMX.Range in 'Source\FMX\Daisy.FMX.Range.pas',
+  Daisy.FMX.Rating in 'Source\FMX\Daisy.FMX.Rating.pas',
+  Daisy.FMX.Swap in 'Source\FMX\Daisy.FMX.Swap.pas',
+  Daisy.FMX.Stack in 'Source\FMX\Daisy.FMX.Stack.pas',
+  Daisy.FMX.ThemeController in 'Source\FMX\Daisy.FMX.ThemeController.pas';
+
+end.

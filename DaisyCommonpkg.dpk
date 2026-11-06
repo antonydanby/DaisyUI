@@ -1,0 +1,51 @@
+package DaisyCommonpkg;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS ON}
+{$RANGECHECKS ON}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl;
+
+contains
+  Daisy.Theme in 'Source\Common\Daisy.Theme.pas',
+  Daisy.Items in 'Source\Common\Daisy.Items.pas',
+  Daisy.Animation in 'Source\Common\Daisy.Animation.pas',
+  Daisy.SVG in 'Source\Common\Daisy.SVG.pas',
+  Daisy.Widgets in 'Source\Common\Daisy.Widgets.pas',
+  Daisy.Tables in 'Source\Common\Daisy.Tables.pas',
+  Daisy.TextEdit in 'Source\Common\Daisy.TextEdit.pas',
+  Daisy.Menus in 'Source\Common\Daisy.Menus.pas',
+  Daisy.Toasts in 'Source\Common\Daisy.Toasts.pas',
+  Daisy.Calendars in 'Source\Common\Daisy.Calendars.pas',
+  Daisy.Rating in 'Source\Common\Daisy.Rating.pas',
+  Daisy.Range in 'Source\Common\Daisy.Range.pas',
+  Daisy.Indicators in 'Source\Common\Daisy.Indicators.pas',
+  Daisy.Swap in 'Source\Common\Daisy.Swap.pas',
+  Daisy.Stack in 'Source\Common\Daisy.Stack.pas',
+  Daisy.ThemeController in 'Source\Common\Daisy.ThemeController.pas';
+
+end.

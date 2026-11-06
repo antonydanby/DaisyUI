@@ -1,0 +1,204 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{85AEDE34-2651-4D80-98F8-7729BBAEF641}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="DaisyCommonpkg.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="DaisyVCLpkg.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="DaisyFMXpkg.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Demos\Basic-01\Basic01FMXDemo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Demos\Basic-01\Basic01VCLDemo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Demos\Basic-02\Basic02VCLDemo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Demos\Basic-02\Basic02FMXDemo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Demos\Basic-03\Basic03VCLDemo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Demos\Basic-03\Basic03FMXDemo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Demos\Basic-04\Basic04VCLDemo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Demos\Basic-04\Basic04FMXDemo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Demos\Basic-05\Basic05VCLDemo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Demos\Basic-05\Basic05FMXDemo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Demos\Edits-01\Edits01VCLDemo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Demos\Edits-01\Edits01FMXDemo.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="DaisyCommonpkg">
+        <MSBuild Projects="DaisyCommonpkg.dproj"/>
+    </Target>
+    <Target Name="DaisyCommonpkg:Clean">
+        <MSBuild Projects="DaisyCommonpkg.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DaisyCommonpkg:Make">
+        <MSBuild Projects="DaisyCommonpkg.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="DaisyVCLpkg">
+        <MSBuild Projects="DaisyVCLpkg.dproj"/>
+    </Target>
+    <Target Name="DaisyVCLpkg:Clean">
+        <MSBuild Projects="DaisyVCLpkg.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DaisyVCLpkg:Make">
+        <MSBuild Projects="DaisyVCLpkg.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="DaisyFMXpkg">
+        <MSBuild Projects="DaisyFMXpkg.dproj"/>
+    </Target>
+    <Target Name="DaisyFMXpkg:Clean">
+        <MSBuild Projects="DaisyFMXpkg.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DaisyFMXpkg:Make">
+        <MSBuild Projects="DaisyFMXpkg.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Basic01FMXDemo">
+        <MSBuild Projects="Demos\Basic-01\Basic01FMXDemo.dproj"/>
+    </Target>
+    <Target Name="Basic01FMXDemo:Clean">
+        <MSBuild Projects="Demos\Basic-01\Basic01FMXDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Basic01FMXDemo:Make">
+        <MSBuild Projects="Demos\Basic-01\Basic01FMXDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Basic01VCLDemo">
+        <MSBuild Projects="Demos\Basic-01\Basic01VCLDemo.dproj"/>
+    </Target>
+    <Target Name="Basic01VCLDemo:Clean">
+        <MSBuild Projects="Demos\Basic-01\Basic01VCLDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Basic01VCLDemo:Make">
+        <MSBuild Projects="Demos\Basic-01\Basic01VCLDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Basic02VCLDemo">
+        <MSBuild Projects="Demos\Basic-02\Basic02VCLDemo.dproj"/>
+    </Target>
+    <Target Name="Basic02VCLDemo:Clean">
+        <MSBuild Projects="Demos\Basic-02\Basic02VCLDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Basic02VCLDemo:Make">
+        <MSBuild Projects="Demos\Basic-02\Basic02VCLDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Basic02FMXDemo">
+        <MSBuild Projects="Demos\Basic-02\Basic02FMXDemo.dproj"/>
+    </Target>
+    <Target Name="Basic02FMXDemo:Clean">
+        <MSBuild Projects="Demos\Basic-02\Basic02FMXDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Basic02FMXDemo:Make">
+        <MSBuild Projects="Demos\Basic-02\Basic02FMXDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Basic03VCLDemo">
+        <MSBuild Projects="Demos\Basic-03\Basic03VCLDemo.dproj"/>
+    </Target>
+    <Target Name="Basic03VCLDemo:Clean">
+        <MSBuild Projects="Demos\Basic-03\Basic03VCLDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Basic03VCLDemo:Make">
+        <MSBuild Projects="Demos\Basic-03\Basic03VCLDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Basic03FMXDemo">
+        <MSBuild Projects="Demos\Basic-03\Basic03FMXDemo.dproj"/>
+    </Target>
+    <Target Name="Basic03FMXDemo:Clean">
+        <MSBuild Projects="Demos\Basic-03\Basic03FMXDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Basic03FMXDemo:Make">
+        <MSBuild Projects="Demos\Basic-03\Basic03FMXDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Basic04VCLDemo">
+        <MSBuild Projects="Demos\Basic-04\Basic04VCLDemo.dproj"/>
+    </Target>
+    <Target Name="Basic04VCLDemo:Clean">
+        <MSBuild Projects="Demos\Basic-04\Basic04VCLDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Basic04VCLDemo:Make">
+        <MSBuild Projects="Demos\Basic-04\Basic04VCLDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Basic04FMXDemo">
+        <MSBuild Projects="Demos\Basic-04\Basic04FMXDemo.dproj"/>
+    </Target>
+    <Target Name="Basic04FMXDemo:Clean">
+        <MSBuild Projects="Demos\Basic-04\Basic04FMXDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Basic04FMXDemo:Make">
+        <MSBuild Projects="Demos\Basic-04\Basic04FMXDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Basic05VCLDemo">
+        <MSBuild Projects="Demos\Basic-05\Basic05VCLDemo.dproj"/>
+    </Target>
+    <Target Name="Basic05VCLDemo:Clean">
+        <MSBuild Projects="Demos\Basic-05\Basic05VCLDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Basic05VCLDemo:Make">
+        <MSBuild Projects="Demos\Basic-05\Basic05VCLDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Basic05FMXDemo">
+        <MSBuild Projects="Demos\Basic-05\Basic05FMXDemo.dproj"/>
+    </Target>
+    <Target Name="Basic05FMXDemo:Clean">
+        <MSBuild Projects="Demos\Basic-05\Basic05FMXDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Basic05FMXDemo:Make">
+        <MSBuild Projects="Demos\Basic-05\Basic05FMXDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Edits01VCLDemo">
+        <MSBuild Projects="Demos\Edits-01\Edits01VCLDemo.dproj"/>
+    </Target>
+    <Target Name="Edits01VCLDemo:Clean">
+        <MSBuild Projects="Demos\Edits-01\Edits01VCLDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Edits01VCLDemo:Make">
+        <MSBuild Projects="Demos\Edits-01\Edits01VCLDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Edits01FMXDemo">
+        <MSBuild Projects="Demos\Edits-01\Edits01FMXDemo.dproj"/>
+    </Target>
+    <Target Name="Edits01FMXDemo:Clean">
+        <MSBuild Projects="Demos\Edits-01\Edits01FMXDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Edits01FMXDemo:Make">
+        <MSBuild Projects="Demos\Edits-01\Edits01FMXDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="DaisyCommonpkg;DaisyVCLpkg;DaisyFMXpkg;Basic01FMXDemo;Basic01VCLDemo;Basic02VCLDemo;Basic02FMXDemo;Basic03VCLDemo;Basic03FMXDemo;Basic04VCLDemo;Basic04FMXDemo;Basic05VCLDemo;Basic05FMXDemo;Edits01VCLDemo;Edits01FMXDemo"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="DaisyCommonpkg:Clean;DaisyVCLpkg:Clean;DaisyFMXpkg:Clean;Basic01FMXDemo:Clean;Basic01VCLDemo:Clean;Basic02VCLDemo:Clean;Basic02FMXDemo:Clean;Basic03VCLDemo:Clean;Basic03FMXDemo:Clean;Basic04VCLDemo:Clean;Basic04FMXDemo:Clean;Basic05VCLDemo:Clean;Basic05FMXDemo:Clean;Edits01VCLDemo:Clean;Edits01FMXDemo:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="DaisyCommonpkg:Make;DaisyVCLpkg:Make;DaisyFMXpkg:Make;Basic01FMXDemo:Make;Basic01VCLDemo:Make;Basic02VCLDemo:Make;Basic02FMXDemo:Make;Basic03VCLDemo:Make;Basic03FMXDemo:Make;Basic04VCLDemo:Make;Basic04FMXDemo:Make;Basic05VCLDemo:Make;Basic05FMXDemo:Make;Edits01VCLDemo:Make;Edits01FMXDemo:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

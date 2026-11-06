@@ -1,0 +1,80 @@
+package DaisyVCLpkg;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS ON}
+{$RANGECHECKS ON}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  vcl,
+  DaisyCommonpkg;
+
+contains
+  Daisy.VCL.Reg in 'Source\VCL\Daisy.VCL.Reg.pas',
+  Daisy.VCL.Control in 'Source\VCL\Daisy.VCL.Control.pas',
+  Daisy.VCL.Alert in 'Source\VCL\Daisy.VCL.Alert.pas',
+  Daisy.VCL.Card in 'Source\VCL\Daisy.VCL.Card.pas',
+  Daisy.VCL.Button in 'Source\VCL\Daisy.VCL.Button.pas',
+  Daisy.VCL.IconButton in 'Source\VCL\Daisy.VCL.IconButton.pas',
+  Daisy.VCL.LoadingButton in 'Source\VCL\Daisy.VCL.LoadingButton.pas',
+  Daisy.VCL.Dropdown in 'Source\VCL\Daisy.VCL.Dropdown.pas',
+  Daisy.VCL.Fab in 'Source\VCL\Daisy.VCL.Fab.pas',
+  Daisy.VCL.Accordion in 'Source\VCL\Daisy.VCL.Accordion.pas',
+  Daisy.VCL.Badge in 'Source\VCL\Daisy.VCL.Badge.pas',
+  Daisy.VCL.Chat in 'Source\VCL\Daisy.VCL.Chat.pas',
+  Daisy.VCL.Countdown in 'Source\VCL\Daisy.VCL.Countdown.pas',
+  Daisy.VCL.List in 'Source\VCL\Daisy.VCL.List.pas',
+  Daisy.VCL.Stat in 'Source\VCL\Daisy.VCL.Stat.pas',
+  Daisy.VCL.Panel in 'Source\VCL\Daisy.VCL.Panel.pas',
+  Daisy.VCL.Labels in 'Source\VCL\Daisy.VCL.Labels.pas',
+  Daisy.VCL.SVGImage in 'Source\VCL\Daisy.VCL.SVGImage.pas',
+  Daisy.VCL.Status in 'Source\VCL\Daisy.VCL.Status.pas',
+  Daisy.VCL.Table in 'Source\VCL\Daisy.VCL.Table.pas',
+  Daisy.VCL.Select in 'Source\VCL\Daisy.VCL.Select.pas',
+  Daisy.VCL.FormStyler in 'Source\VCL\Daisy.VCL.FormStyler.pas',
+  Daisy.VCL.Toggle in 'Source\VCL\Daisy.VCL.Toggle.pas',
+  Daisy.VCL.TextInput in 'Source\VCL\Daisy.VCL.TextInput.pas',
+  Daisy.VCL.TextArea in 'Source\VCL\Daisy.VCL.TextArea.pas',
+  Daisy.VCL.MenuPopup in 'Source\VCL\Daisy.VCL.MenuPopup.pas',
+  Daisy.VCL.Menu in 'Source\VCL\Daisy.VCL.Menu.pas',
+  Daisy.VCL.MainMenu in 'Source\VCL\Daisy.VCL.MainMenu.pas',
+  Daisy.VCL.PopupMenu in 'Source\VCL\Daisy.VCL.PopupMenu.pas',
+  Daisy.VCL.CheckBox in 'Source\VCL\Daisy.VCL.CheckBox.pas',
+  Daisy.VCL.PageControl in 'Source\VCL\Daisy.VCL.PageControl.pas',
+  Daisy.VCL.Progress in 'Source\VCL\Daisy.VCL.Progress.pas',
+  Daisy.VCL.RadialProgress in 'Source\VCL\Daisy.VCL.RadialProgress.pas',
+  Daisy.VCL.Toast in 'Source\VCL\Daisy.VCL.Toast.pas',
+  Daisy.VCL.Calendar in 'Source\VCL\Daisy.VCL.Calendar.pas',
+  Daisy.VCL.DatePicker in 'Source\VCL\Daisy.VCL.DatePicker.pas',
+  Daisy.VCL.Indicator in 'Source\VCL\Daisy.VCL.Indicator.pas',
+  Daisy.VCL.FieldSet in 'Source\VCL\Daisy.VCL.FieldSet.pas',
+  Daisy.VCL.Range in 'Source\VCL\Daisy.VCL.Range.pas',
+  Daisy.VCL.Rating in 'Source\VCL\Daisy.VCL.Rating.pas',
+  Daisy.VCL.Swap in 'Source\VCL\Daisy.VCL.Swap.pas',
+  Daisy.VCL.Stack in 'Source\VCL\Daisy.VCL.Stack.pas',
+  Daisy.VCL.ThemeController in 'Source\VCL\Daisy.VCL.ThemeController.pas';
+
+end.
