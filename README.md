@@ -85,7 +85,6 @@ Listed alphabetically. See [Manual.md](Manual.md) for full detail.
 | `Source\Common` | Framework independent logic: themes, colours, items, calendars, ranges, SVG and more |
 | `Source\VCL` | VCL components and `Daisy.VCL.Reg.pas` registration |
 | `Source\FMX` | FMX components and `Daisy.FMX.Reg.pas` registration |
-| `Source\Peak` | Peak SVG support |
 | `Icons` | Component palette icons (shared by VCL and FMX) |
 | `Demos` | Demo applications |
 | `DaisyCommonpkg`, `DaisyVCLpkg`, `DaisyFMXpkg` | Runtime/design-time packages |
