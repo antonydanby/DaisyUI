@@ -56,7 +56,8 @@ object FormEdits: TFormEdits
     Left = 0
     Top = 0
     Width = 1284
-    Height = 44
+    Height = 38
+    SizeKind = dzSM
     Align = alTop
     TabOrder = 3
     Items = <
@@ -156,13 +157,14 @@ object FormEdits: TFormEdits
   end
   object pnlTop: TPanel
     Left = 0
-    Top = 44
+    Top = 38
     Width = 1284
     Height = 60
     Align = alTop
     BevelOuter = bvNone
     ShowCaption = False
     TabOrder = 0
+    ExplicitTop = 44
     object lblTheme: TLabel
       Left = 24
       Top = 22
@@ -217,34 +219,39 @@ object FormEdits: TFormEdits
         'Lofi'
         'Fantasy'
         'Autumn')
-      ItemIndex = 0
+      ItemIndex = 4
       Placeholder = 'Pick one'
       OnChange = ThemeSelectChange
     end
     object themeCtl: TDaisyThemeController
       Left = 1000
       Top = 4
-      Width = 130
-      Height = 52
-      TabOrder = 3
+      Width = 94
+      Height = 58
+      Cursor = crHandPoint
+      TabOrder = 2
+      TabStop = True
       Kind = tkRadio
+      Caption = ''
       OnChange = ThemeControllerChange
     end
   end
   object pcMain: TDaisyPageControl
     Left = 0
-    Top = 104
+    Top = 98
     Width = 1284
-    Height = 496
+    Height = 502
     Align = alClient
     TabOrder = 2
     TabStop = True
     ActivePageIndex = 1
+    ExplicitTop = 104
+    ExplicitHeight = 496
     object tsMenuMore: TDaisyTabSheet
       Left = 1
       Top = 41
       Width = 1282
-      Height = 454
+      Height = 460
       TabOrder = 5
       Caption = 'Menu badges'
       object mnBadge: TDaisyMenu
@@ -331,77 +338,11 @@ object FormEdits: TFormEdits
         OnItemClick = MenuItemClick
       end
     end
-    object tsSelect: TDaisyTabSheet
-      Left = 1
-      Top = 41
-      Width = 1282
-      Height = 454
-      TabOrder = 3
-      Caption = 'Select'
-      object selMany: TDaisySelect
-        Left = 24
-        Top = 12
-        Width = 260
-        Height = 40
-        Hint = ''
-        TabOrder = 0
-        TabStop = True
-        Items.Strings = (
-          'Argentina'
-          'Australia'
-          'Austria'
-          'Belgium'
-          'Brazil'
-          'Canada'
-          'Chile'
-          'China'
-          'Denmark'
-          'Egypt'
-          'Finland'
-          'France'
-          'Germany'
-          'Greece'
-          'India'
-          'Ireland'
-          'Italy'
-          'Japan'
-          'Kenya'
-          'Mexico'
-          'Norway'
-          'Peru'
-          'Poland'
-          'Spain')
-        Placeholder = 'Pick a country (scrolls)'
-      end
-      object selScroll: TDaisySelect
-        Left = 324
-        Top = 12
-        Width = 260
-        Height = 40
-        Hint = ''
-        Variant = dvPrimary
-        TabOrder = 1
-        TabStop = True
-        Items.Strings = (
-          'One'
-          'Two'
-          'Three'
-          'Four'
-          'Five'
-          'Six'
-          'Seven'
-          'Eight'
-          'Nine'
-          'Ten')
-        Placeholder = 'Only 4 rows show'
-        DropDownRows = 4
-      end
-    end
     object tsArea: TDaisyTabSheet
       Left = 1
       Top = 41
       Width = 1282
-      Height = 454
+      Height = 460
       TabOrder = 2
       Caption = 'Text area'
       object taBasic: TDaisyTextArea
@@ -445,7 +386,7 @@ object FormEdits: TFormEdits
       Left = 1
       Top = 41
       Width = 1282
-      Height = 454
+      Height = 460
       TabOrder = 4
       Caption = 'Menu'
       object mnVertical: TDaisyMenu
@@ -644,7 +585,7 @@ object FormEdits: TFormEdits
       Left = 1
       Top = 41
       Width = 1282
-      Height = 454
+      Height = 460
       TabOrder = 1
       Caption = 'Text input'
       object tiBasic: TDaisyTextInput
@@ -916,7 +857,7 @@ object FormEdits: TFormEdits
       Left = 1
       Top = 41
       Width = 1282
-      Height = 454
+      Height = 460
       TabOrder = 6
       Caption = 'Calendar'
       object lblCalSingle: TDaisyLabel
@@ -1033,7 +974,7 @@ object FormEdits: TFormEdits
       object lblCalPicker: TDaisyLabel
         Left = 1040
         Top = 240
-        Width = 74
+        Width = 71
         Height = 19
         TabOrder = 10
         Caption = 'Date picker'
@@ -1043,15 +984,17 @@ object FormEdits: TFormEdits
         Top = 264
         Width = 200
         Height = 40
+        Cursor = crIBeam
         TabOrder = 11
         TabStop = True
+        Text = ''
         Placeholder = 'Pick a date'
         OnDateChange = DatePickerChange
       end
       object lblPlacement: TDaisyLabel
         Left = 1040
         Top = 328
-        Width = 118
+        Width = 112
         Height = 19
         TabOrder = 12
         Caption = 'Popup placement:'
@@ -1078,7 +1021,7 @@ object FormEdits: TFormEdits
       Left = 1
       Top = 41
       Width = 1282
-      Height = 454
+      Height = 460
       TabOrder = 0
       Caption = 'Toggle'
       object tgBasic: TDaisyToggle
@@ -1300,8 +1243,75 @@ object FormEdits: TFormEdits
         Caption = ''
       end
     end
+    object tsSelect: TDaisyTabSheet
+      Left = 1
+      Top = 41
+      Width = 1282
+      Height = 460
+      TabOrder = 3
+      Caption = 'Select'
+      object selMany: TDaisySelect
+        Left = 24
+        Top = 12
+        Width = 260
+        Height = 40
+        Hint = ''
+        TabOrder = 0
+        TabStop = True
+        Items.Strings = (
+          'Argentina'
+          'Australia'
+          'Austria'
+          'Belgium'
+          'Brazil'
+          'Canada'
+          'Chile'
+          'China'
+          'Denmark'
+          'Egypt'
+          'Finland'
+          'France'
+          'Germany'
+          'Greece'
+          'India'
+          'Ireland'
+          'Italy'
+          'Japan'
+          'Kenya'
+          'Mexico'
+          'Norway'
+          'Peru'
+          'Poland'
+          'Spain')
+        Placeholder = 'Pick a country (scrolls)'
+      end
+      object selScroll: TDaisySelect
+        Left = 324
+        Top = 12
+        Width = 260
+        Height = 40
+        Hint = ''
+        Variant = dvPrimary
+        TabOrder = 1
+        TabStop = True
+        Items.Strings = (
+          'One'
+          'Two'
+          'Three'
+          'Four'
+          'Five'
+          'Six'
+          'Seven'
+          'Eight'
+          'Nine'
+          'Ten')
+        Placeholder = 'Only 4 rows show'
+        DropDownRows = 4
+      end
+    end
   end
   object Styler: TDaisyFormStyler
+    Theme = dtCorporate
     Left = 1200
     Top = 60
   end

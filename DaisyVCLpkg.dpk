@@ -25,6 +25,7 @@ package DaisyVCLpkg;
 {$IMAGEBASE $400000}
 {$DEFINE DEBUG}
 {$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'DaisyUI - VCL components'}
 {$IMPLICITBUILD ON}
 
 requires
