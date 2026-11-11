@@ -4,10 +4,10 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Daisy.Theme, Daisy.Widgets, Daisy.VCL.Control,
+  Vcl.Controls, Vcl.ActnList, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Daisy.Theme, Daisy.Widgets, Daisy.VCL.Control,
   Daisy.VCL.Panel, Daisy.VCL.Labels, Daisy.VCL.SVGImage, Daisy.VCL.Status, Daisy.VCL.Select,
   Daisy.VCL.Table, Daisy.VCL.FormStyler, Daisy.VCL.PageControl, Daisy.VCL.CheckBox,
-  Daisy.VCL.ThemeController;
+  Daisy.VCL.ThemeController, System.Actions;
 
 type
   TForm18 = class(TForm)
@@ -17,6 +17,8 @@ type
     lblStatusColors: TLabel;
     lblStatusMore: TLabel;
     chkTitleBar: TDaisyCheckBox;
+    alMain: TActionList;
+    actTitleBar: TAction;
     selTheme: TDaisySelect;
     themeCtl: TDaisyThemeController;
     Styler: TDaisyFormStyler;

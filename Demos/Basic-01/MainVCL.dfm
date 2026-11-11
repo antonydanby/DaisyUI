@@ -82,87 +82,6 @@ object Form10: TForm10
     TabOrder = 1
     TabStop = True
     ActivePageIndex = 0
-    object tsStyles: TDaisyTabSheet
-      Left = 1
-      Top = 41
-      Width = 966
-      Height = 470
-      TabOrder = 1
-      Caption = 'Styles'
-      object lblStyles: TLabel
-        Left = 16
-        Top = 8
-        Width = 99
-        Height = 21
-        Caption = 'Button styles'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Segoe UI'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object btnOutline: TDaisyButton
-        Left = 16
-        Top = 40
-        Width = 96
-        Height = 40
-        Cursor = crHandPoint
-        Variant = dvPrimary
-        Style = dsOutline
-        TabOrder = 0
-        TabStop = True
-        Caption = 'Outline'
-      end
-      object btnDash: TDaisyButton
-        Left = 120
-        Top = 40
-        Width = 96
-        Height = 40
-        Cursor = crHandPoint
-        Variant = dvPrimary
-        Style = dsDash
-        TabOrder = 1
-        TabStop = True
-        Caption = 'Dash'
-      end
-      object btnSoft: TDaisyButton
-        Left = 224
-        Top = 40
-        Width = 96
-        Height = 40
-        Cursor = crHandPoint
-        Variant = dvPrimary
-        Style = dsSoft
-        TabOrder = 2
-        TabStop = True
-        Caption = 'Soft'
-      end
-      object btnGhost: TDaisyButton
-        Left = 328
-        Top = 40
-        Width = 96
-        Height = 40
-        Cursor = crHandPoint
-        Variant = dvPrimary
-        Style = dsGhost
-        TabOrder = 3
-        TabStop = True
-        Caption = 'Ghost'
-      end
-      object btnDisabled: TDaisyButton
-        Left = 432
-        Top = 40
-        Width = 96
-        Height = 40
-        Cursor = crHandPoint
-        Variant = dvPrimary
-        Enabled = False
-        TabOrder = 4
-        TabStop = True
-        Caption = 'Disabled'
-      end
-    end
     object tsSizes: TDaisyTabSheet
       Left = 1
       Top = 41
@@ -286,8 +205,8 @@ object Form10: TForm10
           Anchors = [akRight, akBottom]
           TabOrder = 0
           TabStop = True
-          OnClick = CardActionClick
-          Caption = 'Buy Now'
+          Action = actBuyNow
+          Caption = 'Button'
         end
       end
       object cardPrimary: TDaisyCard
@@ -312,8 +231,8 @@ object Form10: TForm10
           Anchors = [akRight, akBottom]
           TabOrder = 0
           TabStop = True
-          OnClick = CardActionClick
-          Caption = 'Buy Now'
+          Action = actBuyNow
+          Caption = 'Button'
         end
       end
       object cardBordered: TDaisyCard
@@ -339,8 +258,8 @@ object Form10: TForm10
           Anchors = [akRight, akBottom]
           TabOrder = 0
           TabStop = True
-          OnClick = CardActionClick
-          Caption = 'Buy Now'
+          Action = actBuyNow
+          Caption = 'Button'
         end
       end
     end
@@ -470,6 +389,7 @@ object Form10: TForm10
         Height = 88
         TabOrder = 1
         ItemKind = ikStatus
+        ItemText = '99'
         ItemVariant = dvSuccess
         object pnlStatus: TDaisyPanel
           Left = 0
@@ -550,6 +470,7 @@ object Form10: TForm10
         Height = 72
         TabOrder = 5
         ItemKind = ikStatus
+        ItemText = '99'
         ItemVariant = dvPrimary
         HorizontalPlacement = ihStart
         object pnlP1: TDaisyPanel
@@ -570,6 +491,7 @@ object Form10: TForm10
         Height = 72
         TabOrder = 6
         ItemKind = ikStatus
+        ItemText = '99'
         HorizontalPlacement = ihCenter
         object pnlP2: TDaisyPanel
           Left = 4
@@ -589,6 +511,7 @@ object Form10: TForm10
         Height = 72
         TabOrder = 7
         ItemKind = ikStatus
+        ItemText = '99'
         ItemVariant = dvAccent
         VerticalPlacement = ivMiddle
         object pnlP3: TDaisyPanel
@@ -609,6 +532,7 @@ object Form10: TForm10
         Height = 72
         TabOrder = 8
         ItemKind = ikStatus
+        ItemText = '99'
         ItemVariant = dvWarning
         HorizontalPlacement = ihStart
         VerticalPlacement = ivBottom
@@ -630,6 +554,7 @@ object Form10: TForm10
         Height = 72
         TabOrder = 9
         ItemKind = ikStatus
+        ItemText = '99'
         ItemVariant = dvInfo
         HorizontalPlacement = ihCenter
         VerticalPlacement = ivBottom
@@ -651,6 +576,7 @@ object Form10: TForm10
         Height = 72
         TabOrder = 10
         ItemKind = ikStatus
+        ItemText = '99'
         ItemVariant = dvError
         VerticalPlacement = ivBottom
         object pnlP6: TDaisyPanel
@@ -1378,6 +1304,95 @@ object Form10: TForm10
         TabStop = True
         Caption = 'Error'
       end
+    end
+    object tsStyles: TDaisyTabSheet
+      Left = 1
+      Top = 41
+      Width = 966
+      Height = 470
+      TabOrder = 1
+      Caption = 'Styles'
+      object lblStyles: TLabel
+        Left = 16
+        Top = 8
+        Width = 99
+        Height = 21
+        Caption = 'Button styles'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object btnOutline: TDaisyButton
+        Left = 16
+        Top = 40
+        Width = 96
+        Height = 40
+        Cursor = crHandPoint
+        Variant = dvPrimary
+        Style = dsOutline
+        TabOrder = 0
+        TabStop = True
+        Caption = 'Outline'
+      end
+      object btnDash: TDaisyButton
+        Left = 120
+        Top = 40
+        Width = 96
+        Height = 40
+        Cursor = crHandPoint
+        Variant = dvPrimary
+        Style = dsDash
+        TabOrder = 1
+        TabStop = True
+        Caption = 'Dash'
+      end
+      object btnSoft: TDaisyButton
+        Left = 224
+        Top = 40
+        Width = 96
+        Height = 40
+        Cursor = crHandPoint
+        Variant = dvPrimary
+        Style = dsSoft
+        TabOrder = 2
+        TabStop = True
+        Caption = 'Soft'
+      end
+      object btnGhost: TDaisyButton
+        Left = 328
+        Top = 40
+        Width = 96
+        Height = 40
+        Cursor = crHandPoint
+        Variant = dvPrimary
+        Style = dsGhost
+        TabOrder = 3
+        TabStop = True
+        Caption = 'Ghost'
+      end
+      object btnDisabled: TDaisyButton
+        Left = 432
+        Top = 40
+        Width = 96
+        Height = 40
+        Cursor = crHandPoint
+        Variant = dvPrimary
+        Enabled = False
+        TabOrder = 4
+        TabStop = True
+        Caption = 'Disabled'
+      end
+    end
+  end
+  object alMain: TActionList
+    Left = 560
+    Top = 22
+    object actBuyNow: TAction
+      Caption = 'Buy Now'
+      OnExecute = CardActionClick
     end
   end
   object Styler: TDaisyFormStyler

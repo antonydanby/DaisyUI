@@ -12,7 +12,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, Winapi.GDIPAPI, Winapi.GDIPOBJ,
   System.SysUtils, System.Classes, System.Types, System.UITypes, System.Math,
-  System.Diagnostics, Vcl.Controls, Daisy.Theme, Daisy.Widgets, Daisy.Animation, Daisy.SVG,
+  System.Diagnostics, Vcl.Controls, Vcl.ActnList, Daisy.Theme, Daisy.Widgets, Daisy.Animation, Daisy.SVG,
   Daisy.Swap, Daisy.VCL.Control;
 
 type
@@ -50,6 +50,7 @@ type
     function DefaultContentPadding: Integer; override;
     function DefaultStyleColors(AState: TDaisyState): TDaisyColors; override;
     procedure Loaded; override;
+    procedure ActionChange(Sender: TObject; CheckDefaults: Boolean); override;
     procedure KeyDown(var Key: Word; Shift: TShiftState); override;
     procedure DrawContent(const AColors: TDaisyColors; const ARect: TRect); override;
   public
@@ -57,6 +58,7 @@ type
     destructor Destroy; override;
     procedure Click; override;
   published
+    property Action;
     // True shows the "on" visual
     property Active: Boolean read FActive write SetActive default False;
     // Shows the indeterminate visual; the next click makes the swap active
@@ -188,7 +190,16 @@ begin
     FActive := Value;
     FIndeterminate := False;
     Changed;
+    if (Action is TCustomAction) and (TCustomAction(Action).Checked <> FActive) then
+      TCustomAction(Action).Checked := FActive;
   end;
+end;
+
+procedure TDaisySwap.ActionChange(Sender: TObject; CheckDefaults: Boolean);
+begin
+  inherited ActionChange(Sender, CheckDefaults);
+  if (Sender is TCustomAction) and ((not CheckDefaults) or (not FActive)) then
+    SetActive(TCustomAction(Sender).Checked);
 end;
 
 procedure TDaisySwap.SetIndeterminate(const Value: Boolean);

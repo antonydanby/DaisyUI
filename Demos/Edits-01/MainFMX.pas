@@ -4,7 +4,7 @@ interface
 
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, FMX.Types,
-  FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls, FMX.Layouts,
+  FMX.Controls, FMX.ActnList, System.Actions, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls, FMX.Layouts,
   FMX.Controls.Presentation, Daisy.Theme, Daisy.Widgets, Daisy.Menus, Daisy.TextEdit,
   Daisy.FMX.Control, Daisy.FMX.FormStyler, Daisy.FMX.Panel, Daisy.FMX.Labels, Daisy.FMX.Select,
   Daisy.FMX.Toggle, Daisy.FMX.TextInput, Daisy.FMX.TextArea, Daisy.FMX.MenuPopup, Daisy.FMX.Menu,
@@ -21,6 +21,12 @@ type
     lblTheme: TLabel;
     lblStatusLine: TLabel;
     chkTitleBar: TDaisyFmxCheckBox;
+    alMain: TActionList;
+    actTitleBar: TAction;
+    actPrimaryToggle: TAction;
+    actSuccessToggle: TAction;
+    actNew: TAction;
+    actAutoSave: TAction;
     selTheme: TDaisyFmxSelect;
     themeCtl: TDaisyFmxThemeController;
     pcMain: TDaisyFmxPageControl;
@@ -107,6 +113,8 @@ type
     procedure ThemeControllerChange(Sender: TObject);
     procedure chkTitleBarChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure ToggleActionExecute(Sender: TObject);
+    procedure MenuActionExecute(Sender: TObject);
     procedure MenuItemClick(Sender: TObject; AItem: TDaisyMenuItem);
   end;
 
@@ -171,6 +179,17 @@ end;
 procedure TFormEdits.DatePlacementChange(Sender: TObject);
 begin
   dpCalendar.PopupPlacement := TDaisyPopupPlacement(selPlacement.ItemIndex);
+end;
+
+procedure TFormEdits.ToggleActionExecute(Sender: TObject);
+begin
+  lblStatusLine.Text := Format('%s: %s', [(Sender as TAction).Name,
+    BoolToStr((Sender as TAction).Checked, True)]);
+end;
+
+procedure TFormEdits.MenuActionExecute(Sender: TObject);
+begin
+  lblStatusLine.Text := Format('Action %s executed', [(Sender as TAction).Name]);
 end;
 
 procedure TFormEdits.MenuItemClick(Sender: TObject; AItem: TDaisyMenuItem);

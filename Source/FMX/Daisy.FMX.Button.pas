@@ -4,7 +4,7 @@ interface
 
 uses
   System.SysUtils, System.Classes, System.Types, System.UITypes, System.Math,
-  FMX.Types, FMX.Controls, FMX.Forms, Daisy.Theme, Daisy.SVG, Daisy.FMX.Control;
+  System.Actions, FMX.ActnList, FMX.Types, FMX.Controls, FMX.Forms, Daisy.Theme, Daisy.SVG, Daisy.FMX.Control;
 
 type
   TDaisyFmxButton = class(TDaisyControl)
@@ -35,11 +35,13 @@ type
     procedure KeyDown(var Key: Word; var KeyChar: WideChar; Shift: TShiftState); override;
     procedure KeyUp(var Key: Word; var KeyChar: WideChar; Shift: TShiftState); override;
     procedure DoExit; override;
+    procedure ActionChange(Sender: TBasicAction; CheckDefaults: Boolean); override;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     procedure Click; override;
   published
+    property Action;
     property Text: string read FText write SetText;
     // Paste SVG markup or load an .svg file; the icon is drawn next to the text
     property SVG: TStrings read FSVG write SetSVG;
@@ -88,6 +90,14 @@ begin
     FText := Value;
     Repaint;
   end;
+end;
+
+procedure TDaisyFmxButton.ActionChange(Sender: TBasicAction; CheckDefaults: Boolean);
+begin
+  inherited ActionChange(Sender, CheckDefaults);
+  if Sender is TCustomAction then
+    if (not CheckDefaults) or (FText = '') or (FText = 'Button') then
+      SetText(TCustomAction(Sender).Text);
 end;
 
 function TDaisyFmxButton.IsInteractive: Boolean;

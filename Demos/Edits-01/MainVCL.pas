@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Daisy.Theme, Daisy.Widgets, Daisy.Menus,
+  Vcl.Controls, Vcl.ActnList, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Daisy.Theme, Daisy.Widgets, Daisy.Menus,
   Daisy.TextEdit, Daisy.VCL.Control, Daisy.VCL.FormStyler, Daisy.VCL.Panel, Daisy.VCL.Labels,
   Daisy.VCL.Select, Daisy.VCL.Toggle, Daisy.VCL.TextInput, Daisy.VCL.TextArea, Daisy.VCL.MenuPopup,
   Daisy.VCL.Menu, Daisy.VCL.MainMenu, Daisy.VCL.PopupMenu, Daisy.VCL.CheckBox,
@@ -17,6 +17,12 @@ type
     lblTheme: TLabel;
     lblStatusLine: TLabel;
     chkTitleBar: TDaisyCheckBox;
+    alMain: TActionList;
+    actTitleBar: TAction;
+    actPrimaryToggle: TAction;
+    actSuccessToggle: TAction;
+    actNew: TAction;
+    actAutoSave: TAction;
     pcMain: TDaisyPageControl;
     tsToggle: TDaisyTabSheet;
     tsInput: TDaisyTabSheet;
@@ -106,6 +112,8 @@ type
     procedure ThemeControllerChange(Sender: TObject);
     procedure chkTitleBarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure ToggleActionExecute(Sender: TObject);
+    procedure MenuActionExecute(Sender: TObject);
     procedure MenuItemClick(Sender: TObject; AItem: TDaisyMenuItem);
   end;
 
@@ -170,6 +178,17 @@ end;
 procedure TFormEdits.DatePlacementChange(Sender: TObject);
 begin
   dpCalendar.PopupPlacement := TDaisyPopupPlacement(selPlacement.ItemIndex);
+end;
+
+procedure TFormEdits.ToggleActionExecute(Sender: TObject);
+begin
+  lblStatusLine.Caption := Format('%s: %s', [(Sender as TAction).Name,
+    BoolToStr((Sender as TAction).Checked, True)]);
+end;
+
+procedure TFormEdits.MenuActionExecute(Sender: TObject);
+begin
+  lblStatusLine.Caption := Format('Action %s executed', [(Sender as TAction).Name]);
 end;
 
 procedure TFormEdits.MenuItemClick(Sender: TObject; AItem: TDaisyMenuItem);

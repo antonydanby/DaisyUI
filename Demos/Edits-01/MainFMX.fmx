@@ -69,6 +69,7 @@ object FormEdits: TFormEdits
                 ' d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21h-10a2 2 0 0 1 -2 -' +
                 '2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2"/></svg>')
             ShortCut = 'Ctrl+N'
+            Action = actNew
             Items = <>
           end
           item
@@ -119,7 +120,7 @@ object FormEdits: TFormEdits
           item
             Caption = 'Auto save'
             Checked = True
-            AutoCheck = True
+            Action = actAutoSave
             Items = <>
           end>
       end
@@ -187,8 +188,8 @@ object FormEdits: TFormEdits
       Size.Height = 30.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 3
+      Action = actTitleBar
       Checked = True
-      Text = 'Theme the title bar'
       OnChange = chkTitleBarChange
     end
     object selTheme: TDaisyFmxSelect
@@ -1231,6 +1232,7 @@ object FormEdits: TFormEdits
         Size.Height = 30.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 11
+        Action = actPrimaryToggle
         Checked = True
       end
       object tgSecondary: TDaisyFmxToggle
@@ -1275,6 +1277,7 @@ object FormEdits: TFormEdits
         Size.Height = 30.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 15
+        Action = actSuccessToggle
         Checked = True
       end
       object tgWarning: TDaisyFmxToggle
@@ -1299,6 +1302,37 @@ object FormEdits: TFormEdits
         TabOrder = 17
         Checked = True
       end
+    end
+  end
+  object alMain: TActionList
+    Left = 1200
+    Top = 8
+    object actTitleBar: TAction
+      AutoCheck = True
+      Text = 'Theme the title bar'
+      Checked = True
+    end
+    object actPrimaryToggle: TAction
+      AutoCheck = True
+      Text = 'Primary toggle'
+      Checked = True
+      OnExecute = ToggleActionExecute
+    end
+    object actSuccessToggle: TAction
+      AutoCheck = True
+      Text = 'Success toggle'
+      Checked = True
+      OnExecute = ToggleActionExecute
+    end
+    object actNew: TAction
+      Text = 'New'
+      OnExecute = MenuActionExecute
+    end
+    object actAutoSave: TAction
+      AutoCheck = True
+      Text = 'Auto save'
+      Checked = True
+      OnExecute = MenuActionExecute
     end
   end
   object Styler: TDaisyFmxFormStyler

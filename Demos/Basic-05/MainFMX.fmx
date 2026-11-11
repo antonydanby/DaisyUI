@@ -42,9 +42,18 @@ object Form19: TForm19
     Size.Height = 30.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 43
+    Action = actTitleBar
     Checked = True
-    Text = 'Theme the title bar'
     OnChange = chkTitleBarChange
+  end
+  object alMain: TActionList
+    Left = 480
+    Top = 20
+    object actTitleBar: TAction
+      AutoCheck = True
+      Text = 'Theme the title bar'
+      Checked = True
+    end
   end
   object selTheme: TDaisyFmxSelect
     Cursor = crHandPoint

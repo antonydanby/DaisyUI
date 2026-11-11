@@ -4,7 +4,7 @@ interface
 
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
-  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls, FMX.Controls.Presentation,
+  FMX.Types,   FMX.Controls, FMX.ActnList, System.Actions, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls, FMX.Controls.Presentation,
   Daisy.Theme, Daisy.FMX.Control, Daisy.FMX.Button, Daisy.FMX.Badge, Daisy.FMX.IconButton, Daisy.FMX.Select, Daisy.FMX.FormStyler,
   Daisy.FMX.PageControl, Daisy.FMX.CheckBox,
   Daisy.FMX.ThemeController;
@@ -101,6 +101,10 @@ type
     themeCtl: TDaisyFmxThemeController;
     Styler: TDaisyFmxFormStyler;
     chkTitleBar: TDaisyFmxCheckBox;
+    alMain: TActionList;
+    actTitleBar: TAction;
+    actInbox: TAction;
+    actNotify: TAction;
     pcMain: TDaisyFmxPageControl;
     tsBadges: TDaisyFmxTabSheet;
     tsStyles: TDaisyFmxTabSheet;
@@ -112,6 +116,8 @@ type
     procedure chkTitleBarChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure BadgeButtonClick(Sender: TObject);
+    procedure InboxExecute(Sender: TObject);
+    procedure NotifyExecute(Sender: TObject);
   end;
 
 var
@@ -147,6 +153,16 @@ var
 begin
   LButton := Sender as TDaisyFmxBadgeButton;
   lblStatus.Text := Format('%s clicked (badge: %s)', [LButton.Text, LButton.BadgeText]);
+end;
+
+procedure TForm15.InboxExecute(Sender: TObject);
+begin
+  lblStatus.Text := Format('%s clicked (badge: %s)', [actInbox.Text, btnInbox.BadgeText]);
+end;
+
+procedure TForm15.NotifyExecute(Sender: TObject);
+begin
+  lblStatus.Text := Format('%s clicked (badge: %s)', [actNotify.Text, btnNotify.BadgeText]);
 end;
 
 end.

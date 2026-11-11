@@ -66,9 +66,26 @@ object Form15: TForm15
     Size.Height = 24.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 95
-    Text = 'Theme the window title bar'
+    Action = actTitleBar
     Checked = True
     OnChange = chkTitleBarChange
+  end
+  object alMain: TActionList
+    Left = 590
+    Top = 20
+    object actTitleBar: TAction
+      AutoCheck = True
+      Text = 'Theme the window title bar'
+      Checked = True
+    end
+    object actInbox: TAction
+      Text = 'Inbox'
+      OnExecute = InboxExecute
+    end
+    object actNotify: TAction
+      Text = 'Notifications'
+      OnExecute = NotifyExecute
+    end
   end
   object themeCtl: TDaisyFmxThemeController
     Cursor = crHandPoint
@@ -816,8 +833,7 @@ object Form15: TForm15
         Size.Height = 40.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
-        OnClick = BadgeButtonClick
-        Text = 'Inbox'
+        Action = actInbox
         BadgeText = '+99'
       end
       object btnInboxSecondary: TDaisyFmxBadgeButton
@@ -842,8 +858,7 @@ object Form15: TForm15
         Size.PlatformDefault = False
         Variant = dvPrimary
         TabOrder = 2
-        OnClick = BadgeButtonClick
-        Text = 'Notifications'
+        Action = actNotify
         BadgeText = '12'
         BadgeVariant = dvAccent
       end

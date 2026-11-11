@@ -4,7 +4,7 @@ interface
 
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, FMX.Types,
-  FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls, FMX.Layouts,
+  FMX.Controls, FMX.ActnList, System.Actions, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls, FMX.Layouts,
   FMX.Controls.Presentation, Daisy.Theme, Daisy.Widgets, Daisy.Tables, Daisy.FMX.Control,
   Daisy.FMX.Panel, Daisy.FMX.Labels, Daisy.FMX.SVGImage, Daisy.FMX.Status, Daisy.FMX.Select,
   Daisy.FMX.Table, Daisy.FMX.FormStyler, Daisy.FMX.CheckBox, Daisy.FMX.PageControl,
@@ -18,6 +18,8 @@ type
     lblStatusColors: TLabel;
     lblStatusMore: TLabel;
     chkTitleBar: TDaisyFmxCheckBox;
+    alMain: TActionList;
+    actTitleBar: TAction;
     selTheme: TDaisyFmxSelect;
     themeCtl: TDaisyFmxThemeController;
     Styler: TDaisyFmxFormStyler;

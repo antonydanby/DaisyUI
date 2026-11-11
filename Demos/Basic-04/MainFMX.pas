@@ -4,7 +4,7 @@ interface
 
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, FMX.Types,
-  FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls, FMX.Edit, FMX.Layouts, FMX.Controls.Presentation,
+  FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls, FMX.Edit, FMX.Layouts, FMX.Controls.Presentation, FMX.ActnList, System.Actions,
   Daisy.Theme, Daisy.Widgets, Daisy.FMX.Control, Daisy.FMX.Button, Daisy.FMX.Chat,
   Daisy.FMX.Countdown, Daisy.FMX.List, Daisy.FMX.Stat, Daisy.FMX.Select, Daisy.FMX.FormStyler,
   Daisy.FMX.CheckBox, Daisy.FMX.PageControl, Daisy.FMX.TextInput,
@@ -19,6 +19,10 @@ type
     themeCtl: TDaisyFmxThemeController;
     Styler: TDaisyFmxFormStyler;
     chkTitleBar: TDaisyFmxCheckBox;
+    alMain: TActionList;
+    actTitleBar: TAction;
+    actProgAdd: TAction;
+    actProgReset: TAction;
     pcMain: TDaisyFmxPageControl;
     tsChat: TDaisyFmxTabSheet;
     tsCountdown: TDaisyFmxTabSheet;
@@ -93,6 +97,7 @@ type
     radLive: TDaisyFmxRadialProgress;
     procedure ProgressAddClick(Sender: TObject);
     procedure ProgressResetClick(Sender: TObject);
+    procedure actProgResetUpdate(Sender: TObject);
     procedure ThemeSelectChange(Sender: TObject);
     procedure ThemeControllerChange(Sender: TObject);
     procedure chkTitleBarChange(Sender: TObject);
@@ -180,6 +185,11 @@ procedure TForm17.ProgressResetClick(Sender: TObject);
 begin
   prgLive.Value := prgLive.Min;
   radLive.Value := prgLive.Min;
+end;
+
+procedure TForm17.actProgResetUpdate(Sender: TObject);
+begin
+  actProgReset.Enabled := prgLive.Value > prgLive.Min;
 end;
 
 procedure TForm17.ChatEditChange(Sender: TObject);

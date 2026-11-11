@@ -4,11 +4,11 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.StrUtils, System.Variants, System.Classes,
-  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,
+  Vcl.Graphics, Vcl.Controls, Vcl.ActnList, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,
   Daisy.Theme, Daisy.VCL.Control, Daisy.VCL.Button, Daisy.VCL.Panel, Daisy.VCL.Card, Daisy.VCL.Alert,
   Daisy.VCL.Select, Daisy.VCL.FormStyler, Daisy.VCL.PageControl, Daisy.VCL.CheckBox,
   Daisy.VCL.TextInput, Daisy.VCL.Indicator, Daisy.VCL.FieldSet,
-  Daisy.VCL.Swap, Daisy.VCL.Stack, Daisy.VCL.ThemeController;
+  Daisy.VCL.Swap, Daisy.VCL.Stack, Daisy.VCL.ThemeController, System.Actions;
 
 type
   TForm10 = class(TForm)
@@ -147,6 +147,8 @@ type
     stkNeutralEndB: TDaisyCard;
     stkNeutralEndA: TDaisyCard;
     themeCtl: TDaisyThemeController;
+    alMain: TActionList;
+    actBuyNow: TAction;
     procedure SwapChange(Sender: TObject);
     procedure ThemeControllerChange(Sender: TObject);
     procedure IndicatorItemClick(Sender: TObject);

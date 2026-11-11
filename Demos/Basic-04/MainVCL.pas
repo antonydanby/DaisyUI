@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Daisy.Theme, Daisy.Widgets, Daisy.VCL.Control,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ActnList, Daisy.Theme, Daisy.Widgets, Daisy.VCL.Control,
   Daisy.VCL.Button, Daisy.VCL.Chat, Daisy.VCL.Countdown, Daisy.VCL.List, Daisy.VCL.Stat, Daisy.VCL.Select, Daisy.VCL.FormStyler,
   Daisy.VCL.CheckBox, Daisy.VCL.PageControl, Daisy.VCL.Labels,
   Daisy.VCL.TextInput, Daisy.VCL.Progress, Daisy.VCL.RadialProgress,
@@ -18,6 +18,10 @@ type
     themeCtl: TDaisyThemeController;
     Styler: TDaisyFormStyler;
     chkTitleBar: TDaisyCheckBox;
+    alMain: TActionList;
+    actTitleBar: TAction;
+    actProgAdd: TAction;
+    actProgReset: TAction;
     pcMain: TDaisyPageControl;
     tsChat: TDaisyTabSheet;
     tsCountdown: TDaisyTabSheet;
@@ -92,6 +96,7 @@ type
     radLive: TDaisyRadialProgress;
     procedure ProgressAddClick(Sender: TObject);
     procedure ProgressResetClick(Sender: TObject);
+    procedure actProgResetUpdate(Sender: TObject);
     procedure ThemeSelectChange(Sender: TObject);
     procedure ThemeControllerChange(Sender: TObject);
     procedure chkTitleBarClick(Sender: TObject);
@@ -127,7 +132,12 @@ end;
 
 procedure TForm16.chkTitleBarClick(Sender: TObject);
 begin
-  Styler.ThemedTitleBar := chkTitleBar.Checked;
+  Styler.ThemedTitleBar := actTitleBar.Checked;
+end;
+
+procedure TForm16.actProgResetUpdate(Sender: TObject);
+begin
+  actProgReset.Enabled := prgLive.Value > prgLive.Min;
 end;
 
 procedure TForm16.ListItemClick(Sender: TObject; AIndex, AAction: Integer);

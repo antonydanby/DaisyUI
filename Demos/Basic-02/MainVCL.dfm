@@ -64,7 +64,7 @@ object Form12: TForm12
     Cursor = crHandPoint
     TabOrder = 1
     TabStop = True
-    OnClick = chkTitleBarClick
+    Action = actTitleBar
     Checked = True
     Caption = 'Theme the window title bar'
   end
@@ -89,173 +89,6 @@ object Form12: TForm12
     TabOrder = 2
     TabStop = True
     ActivePageIndex = 0
-    object tsFab: TDaisyTabSheet
-      Left = 1
-      Top = 41
-      Width = 1106
-      Height = 406
-      TabOrder = 3
-      Caption = 'FAB'
-      object lblFab: TLabel
-        Left = 16
-        Top = 8
-        Width = 178
-        Height = 21
-        Caption = 'Floating action buttons'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Segoe UI'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object lblFabResult: TLabel
-        Left = 16
-        Top = 340
-        Width = 89
-        Height = 15
-        Caption = 'FAB action: none'
-      end
-      object lblArc: TLabel
-        Left = 940
-        Top = 8
-        Width = 120
-        Height = 21
-        Caption = 'FAB flower (arc)'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Segoe UI'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object fabDown: TDaisyFloatingActionButton
-        Left = 188
-        Top = 48
-        Width = 48
-        Height = 48
-        Variant = dvPrimary
-        TabOrder = 0
-        TabStop = True
-        Caption = '+'
-        Items = <
-          item
-            Caption = #55357#56589
-            Description = 'Search'
-          end
-          item
-            Caption = #55357#56596
-            Description = 'Notify'
-          end
-          item
-            Caption = #9881
-            Description = 'Settings'
-          end>
-        Direction = fdDown
-        OnItemClick = FabItemClick
-      end
-      object fabRight: TDaisyFloatingActionButton
-        Left = 16
-        Top = 48
-        Width = 56
-        Height = 56
-        Variant = dvSecondary
-        SizeKind = dzLG
-        TabOrder = 1
-        TabStop = True
-        Caption = '+'
-        Items = <
-          item
-            Caption = #10084
-          end
-          item
-            Caption = #11088
-          end
-          item
-            Caption = #55357#56832
-          end>
-        Direction = fdRight
-        OnItemClick = FabItemClick
-      end
-      object fabLeft: TDaisyFloatingActionButton
-        Left = 560
-        Top = 48
-        Width = 56
-        Height = 56
-        Variant = dvAccent
-        SizeKind = dzLG
-        TabOrder = 2
-        TabStop = True
-        Caption = '+'
-        Items = <
-          item
-            Caption = #55357#56960
-          end
-          item
-            Caption = #55357#56613
-          end
-          item
-            Caption = #55357#56397
-          end>
-        Direction = fdLeft
-        OnItemClick = FabItemClick
-      end
-      object fabUp: TDaisyFloatingActionButton
-        Left = 760
-        Top = 300
-        Width = 56
-        Height = 56
-        Variant = dvSuccess
-        SizeKind = dzLG
-        TabOrder = 3
-        TabStop = True
-        Caption = #55357#56960
-        Items = <
-          item
-            Caption = #10003
-            Description = 'Done'
-          end
-          item
-            Caption = #55357#56596
-            Description = 'Remind me'
-          end
-          item
-            Caption = #10084
-            Description = 'Favourite'
-          end>
-        OnItemClick = FabItemClick
-      end
-      object fabArc: TDaisyFloatingActionButton
-        Left = 980
-        Top = 300
-        Width = 56
-        Height = 56
-        Variant = dvAccent
-        SizeKind = dzLG
-        TabOrder = 4
-        TabStop = True
-        Caption = '+'
-        Items = <
-          item
-            Caption = #55357#56589
-            Description = 'Search'
-          end
-          item
-            Caption = #55357#56596
-            Description = 'Notify'
-          end
-          item
-            Caption = #10084
-            Description = 'Like'
-          end
-          item
-            Caption = #9881
-            Description = 'Settings'
-          end>
-        Direction = fdArc
-        OnItemClick = FabItemClick
-      end
-    end
     object tsToast: TDaisyTabSheet
       Left = 1
       Top = 41
@@ -413,7 +246,7 @@ object Form12: TForm12
         Variant = dvNeutral
         TabOrder = 8
         TabStop = True
-        OnClick = ToastClearClick
+        Action = actToastClear
         Caption = 'Clear all'
       end
       object toastDemo: TDaisyToast
@@ -673,7 +506,7 @@ object Form12: TForm12
         Variant = dvNeutral
         TabOrder = 8
         TabStop = True
-        OnClick = btnToggleLoadingClick
+        Action = actToggleLoading
         Caption = 'Toggle loading on all'
       end
       object btnAnimDots: TDaisyAnimationButton
@@ -1475,6 +1308,190 @@ object Form12: TForm12
         TabStop = True
         Caption = #10084
       end
+    end
+    object tsFab: TDaisyTabSheet
+      Left = 1
+      Top = 41
+      Width = 1106
+      Height = 406
+      TabOrder = 3
+      Caption = 'FAB'
+      object lblFab: TLabel
+        Left = 16
+        Top = 8
+        Width = 178
+        Height = 21
+        Caption = 'Floating action buttons'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object lblFabResult: TLabel
+        Left = 16
+        Top = 340
+        Width = 89
+        Height = 15
+        Caption = 'FAB action: none'
+      end
+      object lblArc: TLabel
+        Left = 940
+        Top = 8
+        Width = 120
+        Height = 21
+        Caption = 'FAB flower (arc)'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object fabDown: TDaisyFloatingActionButton
+        Left = 188
+        Top = 48
+        Width = 48
+        Height = 48
+        Variant = dvPrimary
+        TabOrder = 0
+        TabStop = True
+        Caption = '+'
+        Items = <
+          item
+            Caption = #55357#56589
+            Description = 'Search'
+          end
+          item
+            Caption = #55357#56596
+            Description = 'Notify'
+          end
+          item
+            Caption = #9881
+            Description = 'Settings'
+          end>
+        Direction = fdDown
+        OnItemClick = FabItemClick
+      end
+      object fabRight: TDaisyFloatingActionButton
+        Left = 16
+        Top = 48
+        Width = 56
+        Height = 56
+        Variant = dvSecondary
+        SizeKind = dzLG
+        TabOrder = 1
+        TabStop = True
+        Caption = '+'
+        Items = <
+          item
+            Caption = #10084
+          end
+          item
+            Caption = #11088
+          end
+          item
+            Caption = #55357#56832
+          end>
+        Direction = fdRight
+        OnItemClick = FabItemClick
+      end
+      object fabLeft: TDaisyFloatingActionButton
+        Left = 560
+        Top = 48
+        Width = 56
+        Height = 56
+        Variant = dvAccent
+        SizeKind = dzLG
+        TabOrder = 2
+        TabStop = True
+        Caption = '+'
+        Items = <
+          item
+            Caption = #55357#56960
+          end
+          item
+            Caption = #55357#56613
+          end
+          item
+            Caption = #55357#56397
+          end>
+        Direction = fdLeft
+        OnItemClick = FabItemClick
+      end
+      object fabUp: TDaisyFloatingActionButton
+        Left = 760
+        Top = 300
+        Width = 56
+        Height = 56
+        Variant = dvSuccess
+        SizeKind = dzLG
+        TabOrder = 3
+        TabStop = True
+        Caption = #55357#56960
+        Items = <
+          item
+            Caption = #10003
+            Description = 'Done'
+          end
+          item
+            Caption = #55357#56596
+            Description = 'Remind me'
+          end
+          item
+            Caption = #10084
+            Description = 'Favourite'
+          end>
+        OnItemClick = FabItemClick
+      end
+      object fabArc: TDaisyFloatingActionButton
+        Left = 980
+        Top = 300
+        Width = 56
+        Height = 56
+        Variant = dvAccent
+        SizeKind = dzLG
+        TabOrder = 4
+        TabStop = True
+        Caption = '+'
+        Items = <
+          item
+            Caption = #55357#56589
+            Description = 'Search'
+          end
+          item
+            Caption = #55357#56596
+            Description = 'Notify'
+          end
+          item
+            Caption = #10084
+            Description = 'Like'
+          end
+          item
+            Caption = #9881
+            Description = 'Settings'
+          end>
+        Direction = fdArc
+        OnItemClick = FabItemClick
+      end
+    end
+  end
+  object alMain: TActionList
+    Left = 510
+    Top = 20
+    object actTitleBar: TAction
+      Caption = 'Theme the window title bar'
+      Checked = True
+      OnExecute = chkTitleBarClick
+    end
+    object actToastClear: TAction
+      Caption = 'Clear all'
+      OnExecute = ToastClearClick
+    end
+    object actToggleLoading: TAction
+      Caption = 'Toggle loading on all'
+      OnExecute = btnToggleLoadingClick
     end
   end
   object Styler: TDaisyFormStyler

@@ -73,6 +73,7 @@ object FormEdits: TFormEdits
                 ' d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21h-10a2 2 0 0 1 -2 -' +
                 '2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2"/></svg>')
             ShortCut = 'Ctrl+N'
+            Action = actNew
             Items = <>
           end
           item
@@ -123,7 +124,7 @@ object FormEdits: TFormEdits
           item
             Caption = 'Auto save'
             Checked = True
-            AutoCheck = True
+            Action = actAutoSave
             Items = <>
           end>
       end
@@ -186,9 +187,7 @@ object FormEdits: TFormEdits
       Cursor = crHandPoint
       TabOrder = 1
       TabStop = True
-      OnClick = chkTitleBarClick
-      Checked = True
-      Caption = 'Theme the title bar'
+      Action = actTitleBar
     end
     object selTheme: TDaisySelect
       Left = 80
@@ -1167,6 +1166,7 @@ object FormEdits: TFormEdits
         Variant = dvPrimary
         TabOrder = 11
         TabStop = True
+        Action = actPrimaryToggle
         Checked = True
         Caption = ''
       end
@@ -1215,6 +1215,7 @@ object FormEdits: TFormEdits
         Variant = dvSuccess
         TabOrder = 15
         TabStop = True
+        Action = actSuccessToggle
         Checked = True
         Caption = ''
       end
@@ -1308,6 +1309,39 @@ object FormEdits: TFormEdits
         Placeholder = 'Only 4 rows show'
         DropDownRows = 4
       end
+    end
+  end
+  object alMain: TActionList
+    Left = 1200
+    Top = 8
+    object actTitleBar: TAction
+      AutoCheck = False
+      Caption = 'Theme the title bar'
+      Checked = True
+      OnExecute = chkTitleBarClick
+    end
+    object actPrimaryToggle: TAction
+      AutoCheck = False
+      Caption = 'Primary toggle'
+      Checked = True
+      OnExecute = ToggleActionExecute
+    end
+    object actSuccessToggle: TAction
+      AutoCheck = False
+      Caption = 'Success toggle'
+      Checked = True
+      OnExecute = ToggleActionExecute
+    end
+    object actNew: TAction
+      Caption = 'New'
+      ShortCut = 16462
+      OnExecute = MenuActionExecute
+    end
+    object actAutoSave: TAction
+      AutoCheck = True
+      Caption = 'Auto save'
+      Checked = True
+      OnExecute = MenuActionExecute
     end
   end
   object Styler: TDaisyFormStyler

@@ -11,7 +11,7 @@ interface
 
 uses
   System.SysUtils, System.Classes, System.Types, System.UITypes, System.Math,
-  System.Diagnostics, FMX.Types, FMX.Controls, FMX.Graphics, Daisy.Theme, Daisy.Widgets,
+  System.Diagnostics, System.Actions, FMX.ActnList, FMX.Types, FMX.Controls, FMX.Graphics, Daisy.Theme, Daisy.Widgets,
   Daisy.Animation, Daisy.SVG, Daisy.Swap, Daisy.FMX.Control;
 
 type
@@ -49,6 +49,7 @@ type
     function DefaultContentPadding: Integer; override;
     function DefaultStyleColors(AState: TDaisyState): TDaisyColors; override;
     procedure Loaded; override;
+    procedure ActionChange(Sender: TBasicAction; CheckDefaults: Boolean); override;
     procedure KeyDown(var Key: Word; var KeyChar: WideChar; Shift: TShiftState); override;
     procedure DrawContent(const AColors: TDaisyColors; const ARect: TRectF); override;
   public
@@ -56,6 +57,7 @@ type
     destructor Destroy; override;
     procedure Click; override;
   published
+    property Action;
     // True shows the "on" visual
     property Active: Boolean read FActive write SetActive default False;
     // Shows the indeterminate visual; the next click makes the swap active
@@ -188,7 +190,16 @@ begin
     FActive := AValue;
     FIndeterminate := False;
     Changed;
+    if ActionClient and (Action is TCustomAction) then
+      TCustomAction(Action).Checked := FActive;
   end;
+end;
+
+procedure TDaisyFmxSwap.ActionChange(Sender: TBasicAction; CheckDefaults: Boolean);
+begin
+  inherited ActionChange(Sender, CheckDefaults);
+  if (Sender is TCustomAction) and ((not CheckDefaults) or (not FActive)) then
+    SetActive(TCustomAction(Sender).Checked);
 end;
 
 procedure TDaisyFmxSwap.SetIndeterminate(const AValue: Boolean);

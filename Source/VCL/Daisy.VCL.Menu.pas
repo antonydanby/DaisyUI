@@ -70,6 +70,7 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
+    procedure InitiateAction; override;
     procedure CloseUp;
   published
     property Items: TDaisyMenuItems read FItems write SetItems;
@@ -109,6 +110,15 @@ begin
   FRows.Free;
   FItems.Free;
   inherited Destroy;
+end;
+
+procedure TDaisyMenu.InitiateAction;
+var
+  I: Integer;
+begin
+  inherited InitiateAction;
+  for I := 0 to FItems.Count - 1 do
+    FItems[I].UpdateActions;
 end;
 
 function TDaisyMenu.DefaultCornerRadius: Integer;

@@ -42,6 +42,7 @@ type
     destructor Destroy; override;
     procedure Click; override;
   published
+    property Action;
     property Caption: string read GetCaption write SetCaption;
     // Paste SVG markup or load an .svg file; the icon is drawn next to the caption
     property SVG: TStrings read FSVG write SetSVG;

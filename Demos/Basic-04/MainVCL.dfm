@@ -59,6 +59,25 @@ object Form16: TForm16
     Placeholder = 'Pick one'
     OnChange = ThemeSelectChange
   end
+  object alMain: TActionList
+    Left = 1180
+    Top = 16
+    object actTitleBar: TAction
+      AutoCheck = False
+      Caption = 'Theme the window title bar'
+      Checked = True
+      OnExecute = chkTitleBarClick
+    end
+    object actProgAdd: TAction
+      Caption = 'Add 10'
+      OnExecute = ProgressAddClick
+    end
+    object actProgReset: TAction
+      Caption = 'Reset'
+      OnExecute = ProgressResetClick
+      OnUpdate = actProgResetUpdate
+    end
+  end
   object chkTitleBar: TDaisyCheckBox
     Left = 460
     Top = 16
@@ -67,9 +86,8 @@ object Form16: TForm16
     Cursor = crHandPoint
     TabOrder = 1
     TabStop = True
-    OnClick = chkTitleBarClick
+    Action = actTitleBar
     Checked = True
-    Caption = 'Theme the window title bar'
   end
   object themeCtl: TDaisyThemeController
     Left = 1000
@@ -919,8 +937,7 @@ object Form16: TForm16
         Variant = dvPrimary
         TabOrder = 18
         TabStop = True
-        OnClick = ProgressAddClick
-        Caption = 'Add 10'
+        Action = actProgAdd
       end
       object btnProgReset: TDaisyButton
         Left = 136
@@ -931,8 +948,7 @@ object Form16: TForm16
         Variant = dvNeutral
         TabOrder = 19
         TabStop = True
-        OnClick = ProgressResetClick
-        Caption = 'Reset'
+        Action = actProgReset
       end
       object lblRadial: TDaisyLabel
         Left = 780

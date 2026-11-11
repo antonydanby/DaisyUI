@@ -47,6 +47,7 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
+    procedure InitiateAction; override;
     // X and Y are screen coordinates
     procedure Popup(X, Y: Integer);
     procedure PopupAtCursor;
@@ -77,6 +78,15 @@ begin
   FTarget := nil;
   FItems.Free;
   inherited Destroy;
+end;
+
+procedure TDaisyPopupMenu.InitiateAction;
+var
+  I: Integer;
+begin
+  inherited InitiateAction;
+  for I := 0 to FItems.Count - 1 do
+    FItems[I].UpdateActions;
 end;
 
 procedure TDaisyPopupMenu.Loaded;

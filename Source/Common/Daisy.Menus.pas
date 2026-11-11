@@ -9,10 +9,35 @@ unit Daisy.Menus;
 interface
 
 uses
-  System.SysUtils, System.Classes, System.Generics.Collections,
+  System.SysUtils, System.Classes, System.Rtti, System.Generics.Collections,
   Daisy.Theme, Daisy.Widgets;
 
 type
+  TDaisyMenuItem = class;
+
+  // Watches an assigned action so a destroyed action clears the item's reference
+  TDaisyMenuActionNotifier = class(TComponent)
+  strict private
+    FItem: TDaisyMenuItem;
+  protected
+    procedure Notification(AComponent: TComponent; Operation: TOperation); override;
+  public
+    constructor Create(AItem: TDaisyMenuItem); reintroduce;
+  end;
+
+  // Copies Caption/Text, Enabled, Checked, Visible and ShortCut from the
+  // action into the item. Reads them through RTTI so that it works with both
+  // the VCL and FMX action classes.
+  TDaisyMenuItemActionLink = class(TBasicActionLink)
+  strict private
+    FItem: TDaisyMenuItem;
+  protected
+    procedure AssignClient(AClient: TObject); override;
+    procedure Change; override;
+  public
+    procedure Sync;
+  end;
+
   // Icons in menus are limited to these sizes (pixels)
   TDaisyMenuIconSize = (mis16, mis24, mis32);
 
@@ -36,6 +61,10 @@ type
     FTag: NativeInt;
     FItems: TDaisyMenuItems;
     FOnClick: TNotifyEvent;
+    FAction: TBasicAction;
+    FActionLink: TDaisyMenuItemActionLink;
+    FActionNotifier: TDaisyMenuActionNotifier;
+    procedure SetAction(const Value: TBasicAction);
     procedure SetCaption(const Value: string);
     procedure SetIcon(const Value: TDaisyIconSource);
     procedure SetShortCut(const Value: string);
@@ -58,7 +87,12 @@ type
     function HasChildren: Boolean;
     // Runs OnClick (and flips Checked when AutoCheck is set)
     procedure Click;
+    // Lets the action's OnUpdate refresh this item and its children
+    procedure UpdateActions;
   published
+    // Standard action: supplies Caption, Enabled, Checked, Visible and
+    // ShortCut and runs the action's OnExecute when the item is clicked
+    property Action: TBasicAction read FAction write SetAction;
     // A caption of '-' is a separator
     property Caption: string read FCaption write SetCaption;
     property Icon: TDaisyIconSource read FIcon write SetIcon;
@@ -191,6 +225,9 @@ end;
 
 destructor TDaisyMenuItem.Destroy;
 begin
+  FreeAndNil(FActionLink);
+  FAction := nil;
+  FActionNotifier.Free;
   FItems.Free;
   FIcon.Free;
   inherited Destroy;
@@ -217,6 +254,7 @@ begin
     FTag := LSource.FTag;
     FItems.Assign(LSource.FItems);
     FOnClick := LSource.FOnClick;
+    SetAction(LSource.FAction);
     Changed(False);
   end
   else
@@ -246,6 +284,37 @@ begin
     SetChecked(not FChecked);
   if Assigned(FOnClick) then
     FOnClick(Self);
+  if Assigned(FActionLink) then
+    FActionLink.Execute(nil);
+end;
+
+procedure TDaisyMenuItem.SetAction(const Value: TBasicAction);
+begin
+  if Value = FAction then
+    Exit;
+  if Assigned(FActionLink) then
+    FreeAndNil(FActionLink);
+  FAction := Value;
+  if Assigned(Value) then
+  begin
+    if FActionNotifier = nil then
+      FActionNotifier := TDaisyMenuActionNotifier.Create(Self);
+    Value.FreeNotification(FActionNotifier);
+    FActionLink := TDaisyMenuItemActionLink.Create(Self);
+    FActionLink.Action := Value;
+    FActionLink.Sync;
+  end;
+  Changed(False);
+end;
+
+procedure TDaisyMenuItem.UpdateActions;
+var
+  I: Integer;
+begin
+  if Assigned(FActionLink) then
+    FActionLink.Update;
+  for I := 0 to FItems.Count - 1 do
+    FItems[I].UpdateActions;
 end;
 
 procedure TDaisyMenuItem.IconChanged(Sender: TObject);
@@ -342,6 +411,95 @@ end;
 procedure TDaisyMenuItem.SetItems(const Value: TDaisyMenuItems);
 begin
   FItems.Assign(Value);
+end;
+
+{ TDaisyMenuActionNotifier }
+
+constructor TDaisyMenuActionNotifier.Create(AItem: TDaisyMenuItem);
+begin
+  inherited Create(nil);
+  FItem := AItem;
+end;
+
+procedure TDaisyMenuActionNotifier.Notification(AComponent: TComponent; Operation: TOperation);
+begin
+  inherited;
+  if (Operation = opRemove) and Assigned(FItem) and (AComponent = FItem.Action) then
+    FItem.Action := nil;
+end;
+
+{ TDaisyMenuItemActionLink }
+
+procedure TDaisyMenuItemActionLink.AssignClient(AClient: TObject);
+begin
+  FItem := AClient as TDaisyMenuItem;
+end;
+
+procedure TDaisyMenuItemActionLink.Change;
+begin
+  inherited;
+  Sync;
+end;
+
+function ShortCutText(AShortCut: Integer): string;
+var
+  LKey: Integer;
+begin
+  Result := '';
+  if AShortCut and $2000 <> 0 then
+    Result := Result + 'Ctrl+';
+  if AShortCut and $4000 <> 0 then
+    Result := Result + 'Alt+';
+  if AShortCut and $1000 <> 0 then
+    Result := Result + 'Shift+';
+  LKey := AShortCut and $0FFF;
+  case LKey of
+    $30..$39, $41..$5A: Result := Result + Char(LKey);
+    $70..$87: Result := Result + 'F' + IntToStr(LKey - $6F);
+    $2E: Result := Result + 'Del';
+    $2D: Result := Result + 'Ins';
+    $20: Result := Result + 'Space';
+    $0D: Result := Result + 'Enter';
+    $1B: Result := Result + 'Esc';
+  else
+    Result := '';
+  end;
+end;
+
+procedure TDaisyMenuItemActionLink.Sync;
+var
+  LCtx: TRttiContext;
+  LType: TRttiType;
+  LProp: TRttiProperty;
+  LValue: TValue;
+
+  function Find(const AName: string): Boolean;
+  begin
+    LProp := LType.GetProperty(AName);
+    Result := Assigned(LProp) and LProp.IsReadable;
+    if Result then
+      LValue := LProp.GetValue(Action);
+  end;
+
+begin
+  if (FItem = nil) or (Action = nil) then
+    Exit;
+  LCtx := TRttiContext.Create;
+  try
+    LType := LCtx.GetType(Action.ClassType);
+    if Find('Caption') or Find('Text') then
+      FItem.Caption := LValue.AsString;
+    if Find('Enabled') then
+      FItem.Enabled := LValue.AsBoolean;
+    if Find('Checked') then
+      FItem.Checked := LValue.AsBoolean;
+    if Find('Visible') then
+      FItem.Visible := LValue.AsBoolean;
+    if Find('ShortCut') and (LValue.AsInteger <> 0) then
+      FItem.ShortCut := ShortCutText(LValue.AsInteger);
+  finally
+    LCtx.Free;
+  end;
 end;
 
 { TDaisyMenuItems }

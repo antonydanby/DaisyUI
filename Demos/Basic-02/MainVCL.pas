@@ -4,11 +4,11 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, System.StrUtils, Daisy.Items, Daisy.VCL.Button,
+  Vcl.Controls, Vcl.ActnList, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, System.StrUtils, Daisy.Items, Daisy.VCL.Button,
   Daisy.VCL.IconButton, Daisy.VCL.LoadingButton, Daisy.VCL.Dropdown, Daisy.VCL.Fab,
   Daisy.VCL.Control, Daisy.VCL.Accordion, Daisy.VCL.Select, Daisy.VCL.FormStyler, Daisy.Theme,
   Daisy.VCL.PageControl, Daisy.VCL.CheckBox, Daisy.Toasts, Daisy.VCL.Toast, Daisy.VCL.Range,
-  Daisy.VCL.Rating, Daisy.VCL.ThemeController;
+  Daisy.VCL.Rating, Daisy.VCL.ThemeController, System.Actions;
 
 type
   TForm12 = class(TForm)
@@ -65,6 +65,10 @@ type
     themeCtl: TDaisyThemeController;
     Styler: TDaisyFormStyler;
     chkTitleBar: TDaisyCheckBox;
+    alMain: TActionList;
+    actTitleBar: TAction;
+    actToastClear: TAction;
+    actToggleLoading: TAction;
     pcMain: TDaisyPageControl;
     tsButtons: TDaisyTabSheet;
     tsLoading: TDaisyTabSheet;

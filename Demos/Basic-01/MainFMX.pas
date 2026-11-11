@@ -4,7 +4,7 @@ interface
 
 uses
   System.SysUtils, System.StrUtils, System.Types, System.UITypes, System.Classes, System.Variants,
-  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
+  FMX.Types, FMX.Controls, FMX.ActnList, System.Actions, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
   FMX.Layouts, FMX.Objects,
   Daisy.Theme, Daisy.FMX.Control, Daisy.FMX.Button, Daisy.FMX.Panel, Daisy.FMX.Card, Daisy.FMX.Alert,
   Daisy.FMX.Select, Daisy.FMX.FormStyler, Daisy.FMX.PageControl, Daisy.FMX.CheckBox,
@@ -149,6 +149,8 @@ type
     stkNeutralEndB: TDaisyFmxCard;
     stkNeutralEndA: TDaisyFmxCard;
     themeCtl: TDaisyFmxThemeController;
+    alMain: TActionList;
+    actBuyNow: TAction;
     procedure SwapChange(Sender: TObject);
     procedure ThemeControllerChange(Sender: TObject);
     procedure IndicatorItemClick(Sender: TObject);

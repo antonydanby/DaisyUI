@@ -61,9 +61,25 @@ object Form14: TForm14
     Height = 24
     Cursor = crHandPoint
     TabOrder = 1
-    OnClick = chkTitleBarClick
-    Caption = 'Theme the window title bar'
-    Checked = True
+    Action = actTitleBar
+  end
+  object alMain: TActionList
+    Left = 570
+    Top = 20
+    object actTitleBar: TAction
+      AutoCheck = False
+      Caption = 'Theme the window title bar'
+      Checked = True
+      OnExecute = chkTitleBarClick
+    end
+    object actInbox: TAction
+      Caption = 'Inbox'
+      OnExecute = InboxExecute
+    end
+    object actNotify: TAction
+      Caption = 'Notifications'
+      OnExecute = NotifyExecute
+    end
   end
   object themeCtl: TDaisyThemeController
     Left = 600
@@ -804,8 +820,7 @@ object Form14: TForm14
         Cursor = crHandPoint
         TabOrder = 0
         TabStop = True
-        OnClick = BadgeButtonClick
-        Caption = 'Inbox'
+        Action = actInbox
         BadgeText = '+99'
       end
       object btnInboxSecondary: TDaisyBadgeButton
@@ -830,8 +845,7 @@ object Form14: TForm14
         Variant = dvPrimary
         TabOrder = 2
         TabStop = True
-        OnClick = BadgeButtonClick
-        Caption = 'Notifications'
+        Action = actNotify
         BadgeText = '12'
         BadgeVariant = dvAccent
       end

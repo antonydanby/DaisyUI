@@ -64,9 +64,26 @@ object Form13: TForm13
     Size.Height = 30.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 2
+    Action = actTitleBar
     Checked = True
-    Text = 'Theme the window title bar'
     OnChange = chkTitleBarChange
+  end
+  object alMain: TActionList
+    Left = 560
+    Top = 20
+    object actTitleBar: TAction
+      AutoCheck = True
+      Text = 'Theme the window title bar'
+      Checked = True
+    end
+    object actToastClear: TAction
+      Text = 'Clear all'
+      OnExecute = ToastClearClick
+    end
+    object actToggleLoading: TAction
+      Text = 'Toggle loading on all'
+      OnExecute = btnToggleLoadingClick
+    end
   end
   object themeCtl: TDaisyFmxThemeController
     Cursor = crHandPoint
@@ -499,7 +516,7 @@ object Form13: TForm13
         Size.Width = 208.000000000000000000
         Size.Height = 40.000000000000000000
         Size.PlatformDefault = False
-        OnClick = btnToggleLoadingClick
+        Action = actToggleLoading
         Text = 'Toggle loading on all'
       end
       object btnAnimDots: TDaisyFmxAnimationButton
@@ -837,7 +854,7 @@ object Form13: TForm13
         Size.Width = 200.000000000000000000
         Size.Height = 40.000000000000000000
         Size.PlatformDefault = False
-        OnClick = ToastClearClick
+        Action = actToastClear
         Text = 'Clear all'
       end
       object toastDemo: TDaisyFmxToast

@@ -10,7 +10,7 @@ interface
 
 uses
   System.SysUtils, System.Classes, System.Types, System.UITypes, System.Math,
-  FMX.Types, FMX.Controls, FMX.Graphics, Daisy.Theme, Daisy.Widgets, Daisy.FMX.Control;
+  System.Actions, FMX.ActnList, FMX.Types, FMX.Controls, FMX.Graphics, Daisy.Theme, Daisy.Widgets, Daisy.FMX.Control;
 
 type
   TDaisyFmxCheckBox = class(TDaisyControl)
@@ -36,6 +36,7 @@ type
     function DefaultStyleColors(AState: TDaisyState): TDaisyColors; override;
     procedure SizeChanged; override;
     procedure Loaded; override;
+    procedure ActionChange(Sender: TBasicAction; CheckDefaults: Boolean); override;
     procedure KeyDown(var Key: Word; var KeyChar: WideChar; Shift: TShiftState); override;
     procedure DrawContent(const AColors: TDaisyColors; const ARect: TRectF); override;
   public
@@ -43,6 +44,7 @@ type
     procedure Click; override;
     procedure Toggle;
   published
+    property Action;
     property Checked: Boolean read FChecked write SetChecked default False;
     // Shows a dash; the next click makes the box checked
     property Indeterminate: Boolean read FIndeterminate write SetIndeterminate default False;
@@ -114,6 +116,20 @@ begin
     FChecked := Value;
     FIndeterminate := False;
     Changed;
+    if ActionClient and (Action is TCustomAction) then
+      TCustomAction(Action).Checked := FChecked;
+  end;
+end;
+
+procedure TDaisyFmxCheckBox.ActionChange(Sender: TBasicAction; CheckDefaults: Boolean);
+begin
+  inherited ActionChange(Sender, CheckDefaults);
+  if Sender is TCustomAction then
+  begin
+    if (not CheckDefaults) or (FText = '') then
+      SetText(TCustomAction(Sender).Text);
+    if (not CheckDefaults) or (not FChecked) then
+      SetChecked(TCustomAction(Sender).Checked);
   end;
 end;
 

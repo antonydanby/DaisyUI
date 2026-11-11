@@ -22,6 +22,14 @@ object Form11: TForm11
     Text = 'Theme'
     TabOrder = 0
   end
+  object alMain: TActionList
+    Left = 560
+    Top = 22
+    object actBuyNow: TAction
+      Text = 'Buy Now'
+      OnExecute = CardActionClick
+    end
+  end
   object themeCtl: TDaisyFmxThemeController
     Cursor = crHandPoint
     Position.X = 400.000000000000000000
@@ -274,8 +282,7 @@ object Form11: TForm11
           Size.Width = 96.000000000000000000
           Size.Height = 40.000000000000000000
           Size.PlatformDefault = False
-          OnClick = CardActionClick
-          Text = 'Buy Now'
+          Action = actBuyNow
         end
       end
       object cardPrimary: TDaisyFmxCard
@@ -297,8 +304,7 @@ object Form11: TForm11
           Size.Width = 96.000000000000000000
           Size.Height = 40.000000000000000000
           Size.PlatformDefault = False
-          OnClick = CardActionClick
-          Text = 'Buy Now'
+          Action = actBuyNow
         end
       end
       object cardBordered: TDaisyFmxCard
@@ -321,8 +327,7 @@ object Form11: TForm11
           Size.Width = 96.000000000000000000
           Size.Height = 40.000000000000000000
           Size.PlatformDefault = False
-          OnClick = CardActionClick
-          Text = 'Buy Now'
+          Action = actBuyNow
         end
       end
     end

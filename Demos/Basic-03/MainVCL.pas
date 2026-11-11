@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Daisy.Theme, Daisy.VCL.Control,
+  Vcl.Controls, Vcl.ActnList, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Daisy.Theme, Daisy.VCL.Control,
   Daisy.VCL.Button, Daisy.VCL.Badge, Daisy.VCL.IconButton, Daisy.VCL.Select, Daisy.VCL.FormStyler, Daisy.VCL.PageControl, Daisy.VCL.CheckBox,
   Daisy.VCL.ThemeController;
 
@@ -100,6 +100,10 @@ type
     themeCtl: TDaisyThemeController;
     Styler: TDaisyFormStyler;
     chkTitleBar: TDaisyCheckBox;
+    alMain: TActionList;
+    actTitleBar: TAction;
+    actInbox: TAction;
+    actNotify: TAction;
     pcMain: TDaisyPageControl;
     tsBadges: TDaisyTabSheet;
     tsStyles: TDaisyTabSheet;
@@ -111,6 +115,8 @@ type
     procedure chkTitleBarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure BadgeButtonClick(Sender: TObject);
+    procedure InboxExecute(Sender: TObject);
+    procedure NotifyExecute(Sender: TObject);
   end;
 
 var
@@ -146,6 +152,16 @@ var
 begin
   LButton := Sender as TDaisyBadgeButton;
   lblStatus.Caption := Format('%s clicked (badge: %s)', [LButton.Caption, LButton.BadgeText]);
+end;
+
+procedure TForm14.InboxExecute(Sender: TObject);
+begin
+  lblStatus.Caption := Format('%s clicked (badge: %s)', [actInbox.Caption, btnInbox.BadgeText]);
+end;
+
+procedure TForm14.NotifyExecute(Sender: TObject);
+begin
+  lblStatus.Caption := Format('%s clicked (badge: %s)', [actNotify.Caption, btnNotify.BadgeText]);
 end;
 
 end.

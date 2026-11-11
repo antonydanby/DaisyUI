@@ -12,7 +12,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, Winapi.GDIPAPI, Winapi.GDIPOBJ,
   System.SysUtils, System.Classes, System.Types, System.UITypes, System.Math,
-  System.Diagnostics, Vcl.Controls, Daisy.Theme, Daisy.Widgets, Daisy.Animation,
+  System.Diagnostics, Vcl.Controls, Vcl.ActnList, Daisy.Theme, Daisy.Widgets, Daisy.Animation,
   Daisy.VCL.Control;
 
 type
@@ -54,6 +54,7 @@ type
     function DefaultStyleColors(AState: TDaisyState): TDaisyColors; override;
     procedure SizeChanged; override;
     procedure Loaded; override;
+    procedure ActionChange(Sender: TObject; CheckDefaults: Boolean); override;
     procedure KeyDown(var Key: Word; Shift: TShiftState); override;
     procedure DrawContent(const AColors: TDaisyColors; const ARect: TRect); override;
   public
@@ -62,6 +63,7 @@ type
     procedure Click; override;
     procedure Toggle;
   published
+    property Action;
     property Checked: Boolean read FChecked write SetChecked default False;
     // Knob in the middle; the next click makes it checked
     property Indeterminate: Boolean read FIndeterminate write SetIndeterminate default False;
@@ -216,7 +218,16 @@ begin
     FChecked := Value;
     FIndeterminate := False;
     Changed;
+    if (Action is TCustomAction) and (TCustomAction(Action).Checked <> FChecked) then
+      TCustomAction(Action).Checked := FChecked;
   end;
+end;
+
+procedure TDaisyToggle.ActionChange(Sender: TObject; CheckDefaults: Boolean);
+begin
+  inherited ActionChange(Sender, CheckDefaults);
+  if (Sender is TCustomAction) and ((not CheckDefaults) or (not FChecked)) then
+    SetChecked(TCustomAction(Sender).Checked);
 end;
 
 procedure TDaisyToggle.SetIndeterminate(const Value: Boolean);

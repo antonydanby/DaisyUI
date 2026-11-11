@@ -56,6 +56,24 @@ object Form17: TForm17
     Placeholder = 'Pick one'
     OnChange = ThemeSelectChange
   end
+  object alMain: TActionList
+    Left = 1100
+    Top = 16
+    object actTitleBar: TAction
+      AutoCheck = True
+      Text = 'Theme the window title bar'
+      Checked = True
+    end
+    object actProgAdd: TAction
+      Text = 'Add 10'
+      OnExecute = ProgressAddClick
+    end
+    object actProgReset: TAction
+      Text = 'Reset'
+      OnExecute = ProgressResetClick
+      OnUpdate = actProgResetUpdate
+    end
+  end
   object chkTitleBar: TDaisyFmxCheckBox
     Cursor = crHandPoint
     Position.X = 490.000000000000000000
@@ -64,8 +82,8 @@ object Form17: TForm17
     Size.Height = 30.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 5
+    Action = actTitleBar
     Checked = True
-    Text = 'Theme the window title bar'
     OnChange = chkTitleBarChange
   end
   object lblStatus: TLabel
@@ -985,8 +1003,7 @@ object Form17: TForm17
         Size.Width = 100.000000000000000000
         Size.Height = 40.000000000000000000
         Size.PlatformDefault = False
-        OnClick = ProgressAddClick
-        Text = 'Add 10'
+        Action = actProgAdd
       end
       object btnProgReset: TDaisyFmxButton
         Variant = dvNeutral
@@ -996,8 +1013,7 @@ object Form17: TForm17
         Size.Width = 100.000000000000000000
         Size.Height = 40.000000000000000000
         Size.PlatformDefault = False
-        OnClick = ProgressResetClick
-        Text = 'Reset'
+        Action = actProgReset
       end
       object lblRadial: TDaisyFmxLabel
         HitTest = False
