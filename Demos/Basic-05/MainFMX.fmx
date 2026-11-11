@@ -103,9 +103,12 @@ object Form19: TForm19
   end
   object pcMain: TDaisyFmxPageControl
     Align = Client
-    Margins.Top = 60.000000000000000000
-    Size.Width = 1280.000000000000000000
-    Size.Height = 700.000000000000000000
+    Margins.Left = 16.000000000000000000
+    Margins.Top = 64.000000000000000000
+    Margins.Right = 16.000000000000000000
+    Margins.Bottom = 16.000000000000000000
+    Size.Width = 1248.000000000000000000
+    Size.Height = 680.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 3
     ActivePageIndex = 0

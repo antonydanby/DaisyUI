@@ -89,10 +89,10 @@ object Form18: TForm18
     OnChange = ThemeControllerChange
   end
   object pcMain: TDaisyPageControl
-    Left = 0
-    Top = 56
-    Width = 1280
-    Height = 650
+    Left = 16
+    Top = 64
+    Width = 1248
+    Height = 626
     Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 2
     TabStop = True

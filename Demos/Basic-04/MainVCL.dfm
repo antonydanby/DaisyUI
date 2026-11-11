@@ -100,16 +100,11 @@ object Form16: TForm16
     OnChange = ThemeControllerChange
   end
   object pcMain: TDaisyPageControl
-    AlignWithMargins = True
-    Left = 0
-    Top = 56
-    Width = 1260
-    Height = 544
-    Margins.Left = 0
-    Margins.Top = 56
-    Margins.Right = 0
-    Margins.Bottom = 0
-    Align = alClient
+    Left = 16
+    Top = 64
+    Width = 1228
+    Height = 520
+    Anchors = [akLeft, akTop, akRight, akBottom]
     TabOrder = 2
     TabStop = True
     ActivePageIndex = 0

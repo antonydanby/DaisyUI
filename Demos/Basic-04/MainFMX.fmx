@@ -111,9 +111,12 @@ object Form17: TForm17
   end
   object pcMain: TDaisyFmxPageControl
     Align = Client
-    Margins.Top = 60.000000000000000000
-    Size.Width = 1260.000000000000000000
-    Size.Height = 560.000000000000000000
+    Margins.Left = 16.000000000000000000
+    Margins.Top = 64.000000000000000000
+    Margins.Right = 16.000000000000000000
+    Margins.Bottom = 16.000000000000000000
+    Size.Width = 1228.000000000000000000
+    Size.Height = 540.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 7
     ActivePageIndex = 0
@@ -1118,7 +1121,7 @@ object Form17: TForm17
       end
       object radThick: TDaisyFmxRadialProgress
         Variant = dvSuccess
-        Thickness = 3.000000000000000000
+        Thickness = 3
         Position.X = 880.000000000000000000
         Position.Y = 280.000000000000000000
         Size.Width = 80.000000000000000000
@@ -1128,7 +1131,7 @@ object Form17: TForm17
       end
       object radText: TDaisyFmxRadialProgress
         Variant = dvAccent
-        Thickness = 12.000000000000000000
+        Thickness = 12
         DisplayText = '3 of 4'
         Position.X = 980.000000000000000000
         Position.Y = 280.000000000000000000
@@ -1139,7 +1142,7 @@ object Form17: TForm17
       end
       object radLive: TDaisyFmxRadialProgress
         Variant = dvSuccess
-        Thickness = 10.000000000000000000
+        Thickness = 10
         Position.X = 1100.000000000000000000
         Position.Y = 280.000000000000000000
         Size.Width = 100.000000000000000000

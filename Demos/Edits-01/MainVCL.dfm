@@ -65,6 +65,7 @@ object FormEdits: TFormEdits
         Caption = 'File'
         Items = <
           item
+            Action = actNew
             Caption = 'New'
             Icon.SVG.Strings = (
               
@@ -72,8 +73,7 @@ object FormEdits: TFormEdits
                 'e-width="2" stroke-linecap="round" stroke-linejoin="round"><path' +
                 ' d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21h-10a2 2 0 0 1 -2 -' +
                 '2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2"/></svg>')
-            ShortCut = 'Ctrl+N'
-            Action = actNew
+            ShortCut = 'Alt+N'
             Items = <>
           end
           item
@@ -122,9 +122,9 @@ object FormEdits: TFormEdits
             Items = <>
           end
           item
+            Action = actAutoSave
             Caption = 'Auto save'
             Checked = True
-            Action = actAutoSave
             Items = <>
           end>
       end
@@ -165,7 +165,6 @@ object FormEdits: TFormEdits
     BevelOuter = bvNone
     ShowCaption = False
     TabOrder = 0
-    ExplicitTop = 44
     object lblTheme: TLabel
       Left = 24
       Top = 22
@@ -188,6 +187,8 @@ object FormEdits: TFormEdits
       TabOrder = 1
       TabStop = True
       Action = actTitleBar
+      Checked = True
+      Caption = 'Theme the title bar'
     end
     object selTheme: TDaisySelect
       Left = 80
@@ -243,144 +244,7 @@ object FormEdits: TFormEdits
     Align = alClient
     TabOrder = 2
     TabStop = True
-    ActivePageIndex = 1
-    ExplicitTop = 104
-    ExplicitHeight = 496
-    object tsMenuMore: TDaisyTabSheet
-      Left = 1
-      Top = 41
-      Width = 1282
-      Height = 460
-      TabOrder = 5
-      Caption = 'Menu badges'
-      object mnBadge: TDaisyMenu
-        Left = 24
-        Top = 12
-        Width = 159
-        Height = 128
-        TabOrder = 0
-        Items = <
-          item
-            Caption = 'Inbox'
-            Icon.SVG.Strings = (
-              
-                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strok' +
-                'e-width="2" stroke-linecap="round" stroke-linejoin="round"><rect' +
-                ' x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6l9 ' +
-                '-6"/></svg>')
-            Badge = '99+'
-            Items = <>
-          end
-          item
-            Caption = 'Updates'
-            Icon.SVG.Strings = (
-              
-                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strok' +
-                'e-width="2" stroke-linecap="round" stroke-linejoin="round"><path' +
-                ' d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 ' +
-                '0 0 2 -3v-3a7 7 0 0 1 4 -6"/><path d="M9 17v1a3 3 0 0 0 6 0v-1"/' +
-                '></svg>')
-            Badge = 'NEW'
-            Items = <>
-          end
-          item
-            Caption = 'Stats'
-            Icon.SVG.Strings = (
-              
-                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strok' +
-                'e-width="2" stroke-linecap="round" stroke-linejoin="round"><path' +
-                ' d="M3 12h4l3 8l4 -16l3 8h4"/></svg>')
-            Badge = 'new'
-            Items = <>
-          end>
-        OnItemClick = MenuItemClick
-      end
-      object mnCollapsible: TDaisyMenu
-        Left = 284
-        Top = 12
-        Width = 128
-        Height = 318
-        TabOrder = 1
-        Items = <
-          item
-            Caption = 'Item 1'
-            Items = <>
-          end
-          item
-            Caption = 'Parent'
-            Items = <
-              item
-                Caption = 'Submenu 1'
-                Items = <>
-              end
-              item
-                Caption = 'Submenu 2'
-                Items = <>
-              end
-              item
-                Caption = 'Parent 2'
-                Items = <
-                  item
-                    Caption = 'Deep 1'
-                    Items = <>
-                  end
-                  item
-                    Caption = 'Deep 2'
-                    Items = <>
-                  end>
-              end>
-          end
-          item
-            Caption = 'Item 3'
-            Items = <>
-          end>
-        OnItemClick = MenuItemClick
-      end
-    end
-    object tsArea: TDaisyTabSheet
-      Left = 1
-      Top = 41
-      Width = 1282
-      Height = 460
-      TabOrder = 2
-      Caption = 'Text area'
-      object taBasic: TDaisyTextArea
-        Left = 24
-        Top = 12
-        Width = 380
-        Height = 112
-        Cursor = crIBeam
-        TabOrder = 0
-        TabStop = True
-        Text = ''
-        Placeholder = 'Bio'
-      end
-      object taLong: TDaisyTextArea
-        Left = 424
-        Top = 12
-        Width = 380
-        Height = 112
-        Cursor = crIBeam
-        Variant = dvPrimary
-        TabOrder = 1
-        TabStop = True
-        Text = 
-          'Line 1 - scroll me'#13#10'Line 2'#13#10'Line 3'#13#10'Line 4'#13#10'Line 5'#13#10'Line 6'#13#10'Line' +
-          ' 7'#13#10'Line 8 '#55357#56832#13#10'Line 9'#13#10'Line 10'
-      end
-      object taGhost: TDaisyTextArea
-        Left = 824
-        Top = 12
-        Width = 380
-        Height = 112
-        Cursor = crIBeam
-        Style = dsGhost
-        TabOrder = 2
-        TabStop = True
-        Text = ''
-        Placeholder = 'Ghost text area'
-      end
-    end
+    ActivePageIndex = 0
     object tsMenu: TDaisyTabSheet
       Left = 1
       Top = 41
@@ -1160,7 +1024,7 @@ object FormEdits: TFormEdits
       object tgPrimary: TDaisyToggle
         Left = 110
         Top = 104
-        Width = 50
+        Width = 150
         Height = 30
         Cursor = crHandPoint
         Variant = dvPrimary
@@ -1168,7 +1032,7 @@ object FormEdits: TFormEdits
         TabStop = True
         Action = actPrimaryToggle
         Checked = True
-        Caption = ''
+        Caption = 'Primary toggle'
       end
       object tgSecondary: TDaisyToggle
         Left = 196
@@ -1209,7 +1073,7 @@ object FormEdits: TFormEdits
       object tgSuccess: TDaisyToggle
         Left = 454
         Top = 104
-        Width = 50
+        Width = 149
         Height = 30
         Cursor = crHandPoint
         Variant = dvSuccess
@@ -1217,7 +1081,7 @@ object FormEdits: TFormEdits
         TabStop = True
         Action = actSuccessToggle
         Checked = True
-        Caption = ''
+        Caption = 'Success toggle'
       end
       object tgWarning: TDaisyToggle
         Left = 540
@@ -1310,24 +1174,156 @@ object FormEdits: TFormEdits
         DropDownRows = 4
       end
     end
+    object tsArea: TDaisyTabSheet
+      Left = 1
+      Top = 41
+      Width = 1282
+      Height = 460
+      TabOrder = 2
+      Caption = 'Text area'
+      object taBasic: TDaisyTextArea
+        Left = 24
+        Top = 12
+        Width = 380
+        Height = 112
+        Cursor = crIBeam
+        TabOrder = 0
+        TabStop = True
+        Text = ''
+        Placeholder = 'Bio'
+      end
+      object taLong: TDaisyTextArea
+        Left = 424
+        Top = 12
+        Width = 380
+        Height = 112
+        Cursor = crIBeam
+        Variant = dvPrimary
+        TabOrder = 1
+        TabStop = True
+        Text = 
+          'Line 1 - scroll me'#13#10'Line 2'#13#10'Line 3'#13#10'Line 4'#13#10'Line 5'#13#10'Line 6'#13#10'Line' +
+          ' 7'#13#10'Line 8 '#55357#56832#13#10'Line 9'#13#10'Line 10'
+      end
+      object taGhost: TDaisyTextArea
+        Left = 824
+        Top = 12
+        Width = 380
+        Height = 112
+        Cursor = crIBeam
+        Style = dsGhost
+        TabOrder = 2
+        TabStop = True
+        Text = ''
+        Placeholder = 'Ghost text area'
+      end
+    end
+    object tsMenuMore: TDaisyTabSheet
+      Left = 1
+      Top = 41
+      Width = 1282
+      Height = 460
+      TabOrder = 5
+      Caption = 'Menu badges'
+      object mnBadge: TDaisyMenu
+        Left = 24
+        Top = 12
+        Width = 159
+        Height = 128
+        TabOrder = 0
+        Items = <
+          item
+            Caption = 'Inbox'
+            Icon.SVG.Strings = (
+              
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strok' +
+                'e-width="2" stroke-linecap="round" stroke-linejoin="round"><rect' +
+                ' x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6l9 ' +
+                '-6"/></svg>')
+            Badge = '99+'
+            Items = <>
+          end
+          item
+            Caption = 'Updates'
+            Icon.SVG.Strings = (
+              
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strok' +
+                'e-width="2" stroke-linecap="round" stroke-linejoin="round"><path' +
+                ' d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 ' +
+                '0 0 2 -3v-3a7 7 0 0 1 4 -6"/><path d="M9 17v1a3 3 0 0 0 6 0v-1"/' +
+                '></svg>')
+            Badge = 'NEW'
+            Items = <>
+          end
+          item
+            Caption = 'Stats'
+            Icon.SVG.Strings = (
+              
+                '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strok' +
+                'e-width="2" stroke-linecap="round" stroke-linejoin="round"><path' +
+                ' d="M3 12h4l3 8l4 -16l3 8h4"/></svg>')
+            Badge = 'new'
+            Items = <>
+          end>
+        OnItemClick = MenuItemClick
+      end
+      object mnCollapsible: TDaisyMenu
+        Left = 284
+        Top = 12
+        Width = 128
+        Height = 318
+        TabOrder = 1
+        Items = <
+          item
+            Caption = 'Item 1'
+            Items = <>
+          end
+          item
+            Caption = 'Parent'
+            Items = <
+              item
+                Caption = 'Submenu 1'
+                Items = <>
+              end
+              item
+                Caption = 'Submenu 2'
+                Items = <>
+              end
+              item
+                Caption = 'Parent 2'
+                Items = <
+                  item
+                    Caption = 'Deep 1'
+                    Items = <>
+                  end
+                  item
+                    Caption = 'Deep 2'
+                    Items = <>
+                  end>
+              end>
+          end
+          item
+            Caption = 'Item 3'
+            Items = <>
+          end>
+        OnItemClick = MenuItemClick
+      end
+    end
   end
   object alMain: TActionList
     Left = 1200
     Top = 8
     object actTitleBar: TAction
-      AutoCheck = False
       Caption = 'Theme the title bar'
       Checked = True
       OnExecute = chkTitleBarClick
     end
     object actPrimaryToggle: TAction
-      AutoCheck = False
       Caption = 'Primary toggle'
       Checked = True
       OnExecute = ToggleActionExecute
     end
     object actSuccessToggle: TAction
-      AutoCheck = False
       Caption = 'Success toggle'
       Checked = True
       OnExecute = ToggleActionExecute

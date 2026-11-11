@@ -9,7 +9,7 @@ uses
   Daisy.VCL.Select, Daisy.VCL.Toggle, Daisy.VCL.TextInput, Daisy.VCL.TextArea, Daisy.VCL.MenuPopup,
   Daisy.VCL.Menu, Daisy.VCL.MainMenu, Daisy.VCL.PopupMenu, Daisy.VCL.CheckBox,
   Daisy.VCL.PageControl, Daisy.VCL.Button, Daisy.Calendars, Daisy.VCL.Calendar, Daisy.VCL.DatePicker,
-  Daisy.VCL.ThemeController;
+  Daisy.VCL.ThemeController, System.Actions;
 
 type
   TFormEdits = class(TForm)
