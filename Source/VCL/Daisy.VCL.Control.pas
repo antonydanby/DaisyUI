@@ -121,6 +121,8 @@ type
     // When True, form title bars (Windows 11+) follow the current Daisy theme
     class property ThemedTitleBar: Boolean read FThemedTitleBar write SetThemedTitleBar;
     property Theme: TDaisyTheme read GetTheme;
+    // The text colour this control resolves for itself (used by child labels)
+    function ResolvedTextColor: TAlphaColor;
   published
     property ThemeKind: TDaisyThemeKind read FThemeKind write SetThemeKind default dtInherit;
     property Variant: TDaisyVariant read FVariant write SetVariant default dvDefault;
@@ -415,6 +417,11 @@ end;
 function TDaisyControl.ResolveColors: TDaisyColors;
 begin
   Result := DefaultStyleColors(GetState);
+end;
+
+function TDaisyControl.ResolvedTextColor: TAlphaColor;
+begin
+  Result := ResolveColors.Text;
 end;
 
 function TDaisyControl.ScaleValue(AValue: Integer): Integer;

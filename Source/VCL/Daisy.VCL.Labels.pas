@@ -10,7 +10,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.Classes, System.Types, System.UITypes,
-  System.Math, Vcl.Controls, Vcl.Graphics, Daisy.Theme, Daisy.Widgets, Daisy.VCL.Control;
+  System.Math, Vcl.Controls, Vcl.Graphics, Daisy.Theme, Daisy.Widgets, Daisy.VCL.Control,
+  Daisy.VCL.Panel;
 
 type
   TDaisyLabel = class(TDaisyControl)
@@ -133,7 +134,9 @@ end;
 
 function TDaisyLabel.TextColor: TAlphaColor;
 begin
-  if Variant = dvDefault then
+  if (Variant = dvDefault) and (Parent is TDaisyPanel) then
+    Result := TDaisyPanel(Parent).ResolvedTextColor
+  else if Variant = dvDefault then
     Result := Theme.BaseContent
   else
     Result := DaisyVariantPalette(Theme, Variant).Fill;

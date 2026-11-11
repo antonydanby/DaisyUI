@@ -9,7 +9,8 @@ interface
 
 uses
   System.SysUtils, System.Classes, System.Types, System.UITypes, System.Math,
-  FMX.Types, FMX.Controls, FMX.Graphics, Daisy.Theme, Daisy.Widgets, Daisy.FMX.Control;
+  FMX.Types, FMX.Controls, FMX.Graphics, Daisy.Theme, Daisy.Widgets, Daisy.FMX.Control,
+  Daisy.FMX.Panel;
 
 type
   TDaisyFmxLabel = class(TDaisyControl)
@@ -146,7 +147,9 @@ end;
 
 function TDaisyFmxLabel.TextColor: TAlphaColor;
 begin
-  if Variant = dvDefault then
+  if (Variant = dvDefault) and (Parent is TDaisyFmxPanel) then
+    Result := TDaisyFmxPanel(Parent).ResolvedTextColor
+  else if Variant = dvDefault then
     Result := Theme.BaseContent
   else
     Result := DaisyVariantPalette(Theme, Variant).Fill;

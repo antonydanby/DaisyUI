@@ -94,25 +94,25 @@ Every tab of each VCL demo application, captured with the **Corporate** theme on
 ## Basic-05
 
 ### Utilities
-![Utilities](Screenshots/Basic-05-VCL-Tab01.png)
+![Utilities](Screenshots/Basic-05-VCL-Tab07.png)
 
 ### SVG
-![SVG](Screenshots/Basic-05-VCL-Tab02.png)
+![SVG](Screenshots/Basic-05-VCL-Tab01.png)
 
 ### Status
-![Status](Screenshots/Basic-05-VCL-Tab03.png)
+![Status](Screenshots/Basic-05-VCL-Tab02.png)
 
 ### Select
-![Select](Screenshots/Basic-05-VCL-Tab04.png)
+![Select](Screenshots/Basic-05-VCL-Tab03.png)
 
 ### Tables
-![Tables](Screenshots/Basic-05-VCL-Tab05.png)
+![Tables](Screenshots/Basic-05-VCL-Tab04.png)
 
 ### Table features
-![Table features](Screenshots/Basic-05-VCL-Tab06.png)
+![Table features](Screenshots/Basic-05-VCL-Tab05.png)
 
 ### Table sizes
-![Table sizes](Screenshots/Basic-05-VCL-Tab07.png)
+![Table sizes](Screenshots/Basic-05-VCL-Tab06.png)
 
 ## Edits-01
 
@@ -136,3 +136,37 @@ Every tab of each VCL demo application, captured with the **Corporate** theme on
 
 ### Select
 ![Select](Screenshots/Edits-01-VCL-Tab07.png)
+
+## Dark Theme
+
+Selected tabs from the demos using the Dim theme.
+
+### Basic-01 - Styles
+![Styles (Dim)](Screenshots/Basic-01-VCL-Dark-Tab01.png)
+
+### Basic-01 - Cards
+![Cards (Dim)](Screenshots/Basic-01-VCL-Dark-Tab03.png)
+
+### Basic-02 - FAB
+![FAB (Dim)](Screenshots/Basic-02-VCL-Dark-Tab01.png)
+
+### Basic-02 - Accordion
+![Accordion (Dim)](Screenshots/Basic-02-VCL-Dark-Tab03.png)
+
+### Basic-03 - Badges
+![Badges (Dim)](Screenshots/Basic-03-VCL-Dark-Tab01.png)
+
+### Basic-03 - Badge buttons
+![Badge buttons (Dim)](Screenshots/Basic-03-VCL-Dark-Tab04.png)
+
+### Basic-04 - Countdown
+![Countdown (Dim)](Screenshots/Basic-04-VCL-Dark-Tab01.png)
+
+### Basic-04 - Stat
+![Stat (Dim)](Screenshots/Basic-04-VCL-Dark-Tab03.png)
+
+### Basic-05 - Utilities
+![Utilities (Dim)](Screenshots/Basic-05-VCL-Dark-Tab07.png)
+
+### Basic-05 - Status
+![Status (Dim)](Screenshots/Basic-05-VCL-Dark-Tab02.png)
