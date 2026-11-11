@@ -138,7 +138,7 @@ begin
   if Variant = dvDefault then
   begin
     Result.Background := LTheme.Base100;
-    Result.Border := LTheme.Base300;
+    Result.Border := LTheme.BorderColor;
     Result.Text := LTheme.BaseContent;
   end;
 end;

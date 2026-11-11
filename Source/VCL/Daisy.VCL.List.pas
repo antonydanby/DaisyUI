@@ -170,7 +170,7 @@ begin
   Result := Default(TDaisyColors);
   Result.Background := Theme.Base100;
   Result.Text := Theme.BaseContent;
-  Result.Border := Theme.Base300;
+  Result.Border := Theme.BorderColor;
 end;
 
 procedure TDaisyList.SizeChanged;

@@ -607,7 +607,7 @@ begin
   try
     FillRoundRect(LGraphics, LBody, Theme.RadiusField,
       DaisyWithAlpha(DaisyMix(Theme.Base200, Theme.BaseContent, IfThen(Hot, 0.06, 0.0)), LFade));
-    StrokeRoundRect(LGraphics, LBody, Theme.RadiusField, DaisyWithAlpha(Theme.Base300, LFade),
+    StrokeRoundRect(LGraphics, LBody, Theme.RadiusField, DaisyWithAlpha(Theme.BorderColor, LFade),
       System.Math.Max(1, ScaleValue(Theme.BorderWidth)), False);
   finally
     LGraphics.Free;

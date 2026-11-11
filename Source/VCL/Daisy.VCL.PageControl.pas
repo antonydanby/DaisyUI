@@ -1,4 +1,4 @@
-unit Daisy.VCL.PageControl;
+﻿unit Daisy.VCL.PageControl;
 
 {
   TDaisyPageControl / TDaisyTabSheet - the DaisyUI "tabs" with tab content.
@@ -870,7 +870,7 @@ begin
   LGraphics := NewGraphics;
   try
     FillRoundRect(LGraphics, LBox, LRadius, DaisyWithAlpha(Theme.Base100, LFade));
-    StrokeRoundRect(LGraphics, LBox, LRadius, DaisyWithAlpha(Theme.Base300, LFade), LBorder, False);
+    StrokeRoundRect(LGraphics, LBox, LRadius, DaisyWithAlpha(Theme.BorderColor, LFade), LBorder, False);
 
     if FTabStyle = dtsBox then
       FillRoundRect(LGraphics, TRectF.Create(FStripRect), LFieldRadius + ScaleValue(4),
@@ -902,7 +902,7 @@ begin
             FillRoundRect(LGraphics, TRectF.Create(LTab), LFieldRadius, DaisyWithAlpha(LActiveFill, LFade));
             if (Variant = dvDefault) and not LCustom then
               StrokeRoundRect(LGraphics, TRectF.Create(LTab), LFieldRadius,
-                DaisyWithAlpha(Theme.Base300, LFade), LBorder, False);
+                DaisyWithAlpha(Theme.BorderColor, LFade), LBorder, False);
           end;
         dtsBorder:
           begin
@@ -946,7 +946,7 @@ begin
               else
                 LActiveFill := Theme.Base100;
               LBrush := TGPSolidBrush.Create(DaisyWithAlpha(LActiveFill, LFade));
-              LPen := TGPPen.Create(DaisyWithAlpha(Theme.Base300, LFade), LBorder);
+              LPen := TGPPen.Create(DaisyWithAlpha(Theme.BorderColor, LFade), LBorder);
               try
                 LGraphics.FillPath(LBrush, LPath);
                 LGraphics.DrawPath(LPen, LPath);

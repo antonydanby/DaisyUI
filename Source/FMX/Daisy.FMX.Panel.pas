@@ -60,7 +60,7 @@ begin
         Result.Background := LTheme.Base100;
         Result.Text := LTheme.BaseContent;
         if Variant = dvDefault then
-          Result.Border := LTheme.Base300;
+          Result.Border := LTheme.BorderColor;
       end;
     dsSoft:
       begin

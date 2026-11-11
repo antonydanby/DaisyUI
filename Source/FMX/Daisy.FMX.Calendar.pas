@@ -205,7 +205,7 @@ function TDaisyFmxCalendar.DefaultStyleColors(AState: TDaisyState): TDaisyColors
 begin
   Result := Default(TDaisyColors);
   Result.Background := Theme.Base100;
-  Result.Border := Theme.Base300;
+  Result.Border := Theme.BorderColor;
   Result.Text := Theme.BaseContent;
 end;
 

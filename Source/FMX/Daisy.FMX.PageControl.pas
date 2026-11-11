@@ -1,4 +1,4 @@
-unit Daisy.FMX.PageControl;
+﻿unit Daisy.FMX.PageControl;
 
 {
   TDaisyFmxPageControl / TDaisyFmxTabSheet - the DaisyUI "tabs" with tab content.
@@ -834,7 +834,7 @@ begin
   LFont := DaisyFontSize(SizeKind);
 
   FillRound(LBox, LBoxRadius, DaisyWithAlpha(Theme.Base100, LFade));
-  StrokeRound(LBox, LBoxRadius, DaisyWithAlpha(Theme.Base300, LFade), LBorder, False);
+  StrokeRound(LBox, LBoxRadius, DaisyWithAlpha(Theme.BorderColor, LFade), LBorder, False);
 
   if FTabStyle = dtsBox then
     FillRound(FStripRect, LFieldRadius + 4, DaisyWithAlpha(Theme.Base200, LFade));
@@ -864,7 +864,7 @@ begin
             LActiveFill := LTint;
           FillRound(LTab, LFieldRadius, DaisyWithAlpha(LActiveFill, LFade));
           if (Variant = dvDefault) and not LCustom then
-            StrokeRound(LTab, LFieldRadius, DaisyWithAlpha(Theme.Base300, LFade), LBorder, False);
+            StrokeRound(LTab, LFieldRadius, DaisyWithAlpha(Theme.BorderColor, LFade), LBorder, False);
         end;
       dtsBorder:
         begin
@@ -894,7 +894,7 @@ begin
           Canvas.Fill.Color := DaisyWithAlpha(IfThenColor(LCustom, LTabTint, Theme.Base100), LFade);
           Canvas.FillRect(LRect, LHalf, LHalf, LCorners, AbsoluteOpacity);
           Canvas.Stroke.Kind := TBrushKind.Solid;
-          Canvas.Stroke.Color := DaisyWithAlpha(Theme.Base300, LFade);
+          Canvas.Stroke.Color := DaisyWithAlpha(Theme.BorderColor, LFade);
           Canvas.Stroke.Thickness := LBorder;
           Canvas.Stroke.Dash := TStrokeDash.Solid;
           LBox := LRect;

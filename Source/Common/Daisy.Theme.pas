@@ -35,6 +35,7 @@ type
     Name: string;
     IsDark: Boolean;
     Base100, Base200, Base300, BaseContent: TAlphaColor;
+    BorderColor: TAlphaColor;
     Primary, PrimaryContent: TAlphaColor;
     Secondary, SecondaryContent: TAlphaColor;
     Accent, AccentContent: TAlphaColor;
@@ -224,11 +225,8 @@ end;
 
 { Themes }
 
-function DaisyGetTheme(AKind: TDaisyThemeKind): TDaisyTheme;
+function DaisyBuildTheme(AKind: TDaisyThemeKind): TDaisyTheme;
 begin
-  if AKind = dtInherit then
-    AKind := DaisyThemes.Current;
-
   Result := Default(TDaisyTheme);
   Result.BorderWidth := 1;
   Result.RadiusSelector := 8;
@@ -773,6 +771,19 @@ begin
     Result.Error := $FFFF627D;
     Result.ErrorContent := $FF4C0519;
   end;
+end;
+
+function DaisyGetTheme(AKind: TDaisyThemeKind): TDaisyTheme;
+begin
+  if AKind = dtInherit then
+    AKind := DaisyThemes.Current;
+
+  Result := DaisyBuildTheme(AKind);
+  // Base300 is nearly the same as Base100 on dark themes, so borders derive from the content colour.
+  if Result.IsDark then
+    Result.BorderColor := DaisyMix(Result.Base100, Result.BaseContent, 0.2)
+  else
+    Result.BorderColor := Result.Base300;
 end;
 
 function DaisyThemeCaption(AKind: TDaisyThemeKind): string;

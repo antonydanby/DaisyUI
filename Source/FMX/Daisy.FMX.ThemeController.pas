@@ -546,7 +546,7 @@ begin
   LBody.Inflate(-0.5, -0.5);
   FillRound(LBody, Theme.RadiusField,
     DaisyWithAlpha(DaisyMix(Theme.Base200, Theme.BaseContent, IfThen(Hot, 0.06, 0.0)), LFade));
-  StrokeRound(LBody, Theme.RadiusField, DaisyWithAlpha(Theme.Base300, LFade),
+  StrokeRound(LBody, Theme.RadiusField, DaisyWithAlpha(Theme.BorderColor, LFade),
     System.Math.Max(1, Theme.BorderWidth), False);
   DrawText(DaisyThemeControllerCaption(ThemeFor(FChecked)), RectF(0, 0, Width, Height),
     DaisyWithAlpha(Theme.BaseContent, LFade), DaisyFontSize(SizeKind), False,
