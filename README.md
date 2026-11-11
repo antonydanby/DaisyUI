@@ -112,6 +112,10 @@ Each demo exists as a VCL and an FMX application with identical content.
 
 Every demo has a Theme Controller to switch between two themes.
 
+## Screenshots
+
+See [Screenshots.md](Screenshots.md) for a gallery of the VCL demo applications. Each demo is shown with the Corporate theme, with a screenshot of every tab, so you can see the components in action.
+
 ## Notes
 
 - Demos use components placed at design time; nothing is created on the fly.
