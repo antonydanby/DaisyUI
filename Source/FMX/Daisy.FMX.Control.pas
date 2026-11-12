@@ -13,8 +13,8 @@ unit Daisy.FMX.Control;
 interface
 
 uses
-  System.SysUtils, System.Classes, System.Types, System.UITypes, System.Math,
-  FMX.Types, FMX.Controls, FMX.Graphics, FMX.TextLayout, Daisy.Theme, Daisy.SVG, Daisy.Animation, Daisy.Widgets;
+  System.SysUtils, System.Classes, System.Types, System.UITypes, System.Math, System.Math.Vectors,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.TextLayout, Daisy.Theme, Daisy.SVG, Daisy.Animation, Daisy.Widgets;
 
 type
   TDaisyControl = class(TControl)
@@ -29,6 +29,15 @@ type
     FHot: Boolean;
     FPressed: Boolean;
     FShowFocus: Boolean;
+    FBiDiMode: TBiDiMode;
+    FParentBiDiMode: Boolean;
+    FFlipGlyphs: Boolean;
+    FUprightDepth: Integer;
+    function GetBiDiMode: TBiDiMode;
+    procedure SetBiDiMode(const Value: TBiDiMode);
+    procedure SetParentBiDiMode(const Value: Boolean);
+    function IsBiDiModeStored: Boolean;
+    procedure BiDiModeChanged;
     procedure SetThemeKind(const Value: TDaisyThemeKind);
     procedure SetVariant(const Value: TDaisyVariant);
     procedure SetStyle(const Value: TDaisyStyle);
@@ -64,6 +73,22 @@ type
     function DefaultContentPadding: Integer; virtual;
     function DefaultStyleColors(AState: TDaisyState): TDaisyColors; virtual;
     procedure SizeChanged; virtual;
+
+    { Right-to-left support: components lay out in left-to-right coordinates and
+      the canvas and mouse are mirrored when RTL }
+    function IsRTL: Boolean;        // layout and alignment are mirrored
+    function IsRTLReading: Boolean; // text reads right to left
+    function MirrorMatrix: TMatrix;
+    // Mirrors the canvas; call first in a Paint override that does not call inherited
+    procedure ApplyRTLMatrix;
+    // Draws upright (not mirrored) inside ABox while the canvas is mirrored
+    function BeginUpright(var ABox: TRectF; AGlyph: Boolean = False): Boolean;
+    procedure EndUpright(AActive: Boolean);
+    function MirrorX(AX: Single): Single;
+    function LocalToAbsoluteRect(const ARect: TRectF): TRectF;
+    procedure ParentChanged; override;
+    // Directional glyphs (arrows, chevrons) stay mirrored when this is True
+    property FlipGlyphs: Boolean read FFlipGlyphs write FFlipGlyphs;
     procedure DrawContent(const AColors: TDaisyColors; const ARect: TRectF); virtual;
 
     { State and metrics }
@@ -108,8 +133,13 @@ type
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
+    function AbsoluteToLocal(const APoint: TPointF): TPointF; override;
+    function LocalToAbsolute(const APoint: TPointF): TPointF; override;
     // Re-colours the caption of every visible form from the current theme (Windows only)
     class procedure ApplyTitleBars;
+    // Sets the form's BiDiMode (and optionally flips its child controls) and refreshes every Daisy control
+    class procedure ApplyBiDiMode(AForm: TCommonCustomForm; AMode: TBiDiMode;
+      AFlipChildren: Boolean = True);
     // When True, form title bars (Windows 11+) follow the current Daisy theme
     class property ThemedTitleBar: Boolean read FThemedTitleBar write SetThemedTitleBar;
     property Theme: TDaisyTheme read GetTheme;
@@ -124,6 +154,9 @@ type
     property ContentPadding: Integer read FContentPadding write SetContentPadding default -1;
     property CornerRadius: Integer read FCornerRadius write SetCornerRadius default -1;
     property ShadowSize: Integer read FShadowSize write SetShadowSize default -1;
+    // Right-to-left: mirrors the layout and drawing; children inherit when ParentBiDiMode
+    property BiDiMode: TBiDiMode read GetBiDiMode write SetBiDiMode stored IsBiDiModeStored;
+    property ParentBiDiMode: Boolean read FParentBiDiMode write SetParentBiDiMode default True;
 
     property Align;
     property Anchors;
@@ -154,9 +187,9 @@ type
 
 implementation
 
-uses
 {$IFDEF MSWINDOWS}
-  FMX.Forms, FMX.Platform.Win;
+uses
+  FMX.Platform.Win;
 {$ENDIF}
 
 type
@@ -220,6 +253,8 @@ begin
   FContentPadding := -1;
   FCornerRadius := -1;
   FShadowSize := -1;
+  FBiDiMode := bdLeftToRight;
+  FParentBiDiMode := True;
   AutoCapture := True; // keeps the pressed state correct when the mouse leaves
   DaisyThemes.AddListener(GlobalThemeChanged);
 end;
@@ -466,6 +501,194 @@ begin
   Result.Inflate(-LPadding, -LPadding);
 end;
 
+{ Right-to-left }
+
+function TDaisyControl.GetBiDiMode: TBiDiMode;
+var
+  LParent: TFmxObject;
+begin
+  if not FParentBiDiMode then
+    Exit(FBiDiMode);
+  LParent := Parent;
+  while (LParent <> nil) and not (LParent is TDaisyControl) do
+    LParent := LParent.Parent;
+  if LParent <> nil then
+    Result := TDaisyControl(LParent).BiDiMode
+  else if Root <> nil then
+    Result := Root.BiDiMode
+  else
+    Result := FBiDiMode;
+end;
+
+function TDaisyControl.IsBiDiModeStored: Boolean;
+begin
+  Result := not FParentBiDiMode;
+end;
+
+procedure TDaisyControl.SetBiDiMode(const Value: TBiDiMode);
+begin
+  if (FBiDiMode = Value) and not FParentBiDiMode then
+    Exit;
+  FBiDiMode := Value;
+  FParentBiDiMode := False;
+  BiDiModeChanged;
+end;
+
+procedure TDaisyControl.SetParentBiDiMode(const Value: Boolean);
+begin
+  if FParentBiDiMode = Value then
+    Exit;
+  FParentBiDiMode := Value;
+  BiDiModeChanged;
+end;
+
+procedure TDaisyControl.BiDiModeChanged;
+
+  procedure Notify(AParent: TFmxObject);
+  var
+    I: Integer;
+    LChild: TFmxObject;
+  begin
+    if AParent.Children = nil then
+      Exit;
+    for I := 0 to AParent.Children.Count - 1 do
+    begin
+      LChild := AParent.Children[I];
+      if LChild is TDaisyControl then
+      begin
+        if TDaisyControl(LChild).FParentBiDiMode then
+          TDaisyControl(LChild).BiDiModeChanged;
+      end
+      else
+        Notify(LChild);
+    end;
+  end;
+
+begin
+  Notify(Self);
+  SizeChanged;
+  Repaint;
+end;
+
+class procedure TDaisyControl.ApplyBiDiMode(AForm: TCommonCustomForm; AMode: TBiDiMode;
+  AFlipChildren: Boolean);
+
+  procedure Notify(AParent: TFmxObject);
+  var
+    I: Integer;
+    LChild: TFmxObject;
+  begin
+    if AParent.Children = nil then
+      Exit;
+    for I := 0 to AParent.Children.Count - 1 do
+    begin
+      LChild := AParent.Children[I];
+      if LChild is TDaisyControl then
+      begin
+        if TDaisyControl(LChild).FParentBiDiMode then
+          TDaisyControl(LChild).BiDiModeChanged;
+      end
+      else
+        Notify(LChild);
+    end;
+  end;
+
+begin
+  if AForm.BiDiMode = AMode then
+    Exit;
+  AForm.BiDiMode := AMode;
+  if AFlipChildren then
+    AForm.FlipChildren(True);
+  Notify(AForm);
+  AForm.Invalidate;
+end;
+
+procedure TDaisyControl.ParentChanged;
+begin
+  inherited;
+  if FParentBiDiMode then
+    Repaint;
+end;
+
+function TDaisyControl.IsRTL: Boolean;
+begin
+  Result := BiDiMode = bdRightToLeft;
+end;
+
+function TDaisyControl.IsRTLReading: Boolean;
+begin
+  Result := BiDiMode <> bdLeftToRight;
+end;
+
+function TDaisyControl.MirrorX(AX: Single): Single;
+begin
+  Result := Width - AX;
+end;
+
+function TDaisyControl.MirrorMatrix: TMatrix;
+begin
+  Result := TMatrix.Identity;
+  Result.m11 := -1;
+  Result.m31 := Width;
+end;
+
+procedure TDaisyControl.ApplyRTLMatrix;
+begin
+  if IsRTL then
+    Canvas.SetMatrix(MirrorMatrix * AbsoluteMatrix);
+end;
+
+function TDaisyControl.BeginUpright(var ABox: TRectF; AGlyph: Boolean): Boolean;
+var
+  LLeft: Single;
+begin
+  Result := IsRTL and (FUprightDepth = 0) and not (AGlyph and FFlipGlyphs);
+  if Result then
+  begin
+    FUprightDepth := 1;
+    Canvas.SetMatrix(AbsoluteMatrix);
+    LLeft := Width - ABox.Right;
+    ABox.Right := Width - ABox.Left;
+    ABox.Left := LLeft;
+  end;
+end;
+
+procedure TDaisyControl.EndUpright(AActive: Boolean);
+begin
+  if AActive then
+  begin
+    FUprightDepth := 0;
+    Canvas.SetMatrix(MirrorMatrix * AbsoluteMatrix);
+  end;
+end;
+
+function TDaisyControl.AbsoluteToLocal(const APoint: TPointF): TPointF;
+begin
+  Result := inherited AbsoluteToLocal(APoint);
+  if IsRTL then
+    Result.X := Width - Result.X;
+end;
+
+function TDaisyControl.LocalToAbsolute(const APoint: TPointF): TPointF;
+var
+  LPoint: TPointF;
+begin
+  LPoint := APoint;
+  if IsRTL then
+    LPoint.X := Width - LPoint.X;
+  Result := inherited LocalToAbsolute(LPoint);
+end;
+
+function TDaisyControl.LocalToAbsoluteRect(const ARect: TRectF): TRectF;
+var
+  LTopLeft, LBottomRight: TPointF;
+begin
+  LTopLeft := LocalToAbsolute(ARect.TopLeft);
+  LBottomRight := LocalToAbsolute(ARect.BottomRight);
+  Result := RectF(Min(LTopLeft.X, LBottomRight.X), Min(LTopLeft.Y, LBottomRight.Y),
+    Max(LTopLeft.X, LBottomRight.X), Max(LTopLeft.Y, LBottomRight.Y));
+end;
+
 { Painting }
 
 procedure TDaisyControl.Paint;
@@ -483,6 +706,7 @@ begin
   LBody := BodyRect;
   LBorder := Theme.BorderWidth;
 
+  ApplyRTLMatrix;
   Canvas.Fill.Kind := TBrushKind.Solid;
 
   // Soft shadow: stacked translucent rounded rects growing outwards
@@ -535,9 +759,19 @@ procedure TDaisyControl.DrawText(const AText: string; const ARect: TRectF; AColo
   AFontSize: Integer; ABold: Boolean; AHorzAlign, AVertAlign: TTextAlign; AWordWrap: Boolean);
 var
   LLayout: TTextLayout;
+  LBox: TRectF;
+  LUpright: Boolean;
 begin
   if (AText = '') or (ARect.Width <= 0) or (ARect.Height <= 0) then
     Exit;
+  LBox := ARect;
+  LUpright := BeginUpright(LBox);
+  // Wanted alignment is mirrored when upright; the layout flips Leading/Trailing itself when RightToLeft.
+  if LUpright <> IsRTLReading then
+    case AHorzAlign of
+      TTextAlign.Leading: AHorzAlign := TTextAlign.Trailing;
+      TTextAlign.Trailing: AHorzAlign := TTextAlign.Leading;
+    end;
   LLayout := TTextLayoutManager.DefaultTextLayout.Create;
   try
     LLayout.BeginUpdate;
@@ -550,18 +784,20 @@ begin
         LLayout.Font.Style := [];
       LLayout.Color := AColor;
       LLayout.Opacity := AbsoluteOpacity;
-      LLayout.TopLeft := ARect.TopLeft;
-      LLayout.MaxSize := PointF(ARect.Width, ARect.Height);
+      LLayout.TopLeft := LBox.TopLeft;
+      LLayout.MaxSize := PointF(LBox.Width, LBox.Height);
       LLayout.HorizontalAlign := AHorzAlign;
       LLayout.VerticalAlign := AVertAlign;
       LLayout.WordWrap := AWordWrap;
       LLayout.Trimming := TTextTrimming.Character;
+      LLayout.RightToLeft := IsRTLReading;
     finally
       LLayout.EndUpdate;
     end;
     LLayout.RenderLayout(Canvas);
   finally
     LLayout.Free;
+    EndUpright(LUpright);
   end;
 end;
 
@@ -597,28 +833,36 @@ var
   LScale: Single;
   I: Integer;
   LPoint: TPointF;
+  LBox: TRectF;
+  LUpright: Boolean;
 begin
-  LScale := ABounds.Width / 24; // icon geometry lives in a 24 x 24 box
-  Canvas.Stroke.Kind := TBrushKind.Solid;
-  Canvas.Stroke.Color := AColor;
-  Canvas.Stroke.Thickness := AStrokeWidth * LScale;
-  Canvas.Stroke.Cap := TStrokeCap.Round;
-  Canvas.Stroke.Join := TStrokeJoin.Round;
-  Canvas.Stroke.Dash := TStrokeDash.Solid;
-  LData := TPathData.Create;
+  LBox := ABounds;
+  LUpright := BeginUpright(LBox, True);
   try
-    for LPath in APaths do
-      for I := 0 to High(LPath) do
-      begin
-        LPoint := PointF(ABounds.Left + LPath[I].X * LScale, ABounds.Top + LPath[I].Y * LScale);
-        if I = 0 then
-          LData.MoveTo(LPoint)
-        else
-          LData.LineTo(LPoint);
-      end;
-    Canvas.DrawPath(LData, AbsoluteOpacity);
+    LScale := LBox.Width / 24; // icon geometry lives in a 24 x 24 box
+    Canvas.Stroke.Kind := TBrushKind.Solid;
+    Canvas.Stroke.Color := AColor;
+    Canvas.Stroke.Thickness := AStrokeWidth * LScale;
+    Canvas.Stroke.Cap := TStrokeCap.Round;
+    Canvas.Stroke.Join := TStrokeJoin.Round;
+    Canvas.Stroke.Dash := TStrokeDash.Solid;
+    LData := TPathData.Create;
+    try
+      for LPath in APaths do
+        for I := 0 to High(LPath) do
+        begin
+          LPoint := PointF(LBox.Left + LPath[I].X * LScale, LBox.Top + LPath[I].Y * LScale);
+          if I = 0 then
+            LData.MoveTo(LPoint)
+          else
+            LData.LineTo(LPoint);
+        end;
+      Canvas.DrawPath(LData, AbsoluteOpacity);
+    finally
+      LData.Free;
+    end;
   finally
-    LData.Free;
+    EndUpright(LUpright);
   end;
 end;
 
@@ -632,6 +876,8 @@ var
   LScale: Single;
   I, J: Integer;
   LPoint: TPointF;
+  LBox: TRectF;
+  LUpright: Boolean;
 begin
   LPaths := TDaisySVG.ToPaths(AData, LFilled);
   if Length(LPaths) = 0 then
@@ -641,26 +887,32 @@ begin
     DrawPolylines(LPaths, ABox, AColor, 2);
     Exit;
   end;
-  LScale := ABox.Width / 24;
-  Canvas.Fill.Kind := TBrushKind.Solid;
-  Canvas.Fill.Color := AColor;
-  LData := TPathData.Create;
+  LBox := ABox;
+  LUpright := BeginUpright(LBox, True);
   try
-    for I := 0 to High(LPaths) do
-    begin
-      for J := 0 to High(LPaths[I]) do
+    LScale := LBox.Width / 24;
+    Canvas.Fill.Kind := TBrushKind.Solid;
+    Canvas.Fill.Color := AColor;
+    LData := TPathData.Create;
+    try
+      for I := 0 to High(LPaths) do
       begin
-        LPoint := PointF(ABox.Left + LPaths[I][J].X * LScale, ABox.Top + LPaths[I][J].Y * LScale);
-        if J = 0 then
-          LData.MoveTo(LPoint)
-        else
-          LData.LineTo(LPoint);
+        for J := 0 to High(LPaths[I]) do
+        begin
+          LPoint := PointF(LBox.Left + LPaths[I][J].X * LScale, LBox.Top + LPaths[I][J].Y * LScale);
+          if J = 0 then
+            LData.MoveTo(LPoint)
+          else
+            LData.LineTo(LPoint);
+        end;
+        LData.ClosePath;
       end;
-      LData.ClosePath;
+      Canvas.FillPath(LData, AbsoluteOpacity);
+    finally
+      LData.Free;
     end;
-    Canvas.FillPath(LData, AbsoluteOpacity);
   finally
-    LData.Free;
+    EndUpright(LUpright);
   end;
 end;
 
@@ -671,6 +923,8 @@ var
   LData: TPathData;
   LScale: Single;
   LPoint: TPointF;
+  LBox: TRectF;
+  LUpright: Boolean;
 
   procedure BuildPath(AClose: Boolean);
   var
@@ -683,8 +937,8 @@ var
         Continue;
       for L := 0 to High(LLayer.Paths[K]) do
       begin
-        LPoint := PointF(ABox.Left + LLayer.Paths[K][L].X * LScale,
-          ABox.Top + LLayer.Paths[K][L].Y * LScale);
+        LPoint := PointF(LBox.Left + LLayer.Paths[K][L].X * LScale,
+          LBox.Top + LLayer.Paths[K][L].Y * LScale);
         if L = 0 then
           LData.MoveTo(LPoint)
         else
@@ -699,6 +953,8 @@ begin
   if (Length(ALayers) = 0) or (ABox.Width <= 0) then
     Exit;
   LScale := ABox.Width / 24;
+  LBox := ABox;
+  LUpright := BeginUpright(LBox, True);
   LData := TPathData.Create;
   try
     for LLayer in ALayers do
@@ -724,6 +980,7 @@ begin
     end;
   finally
     LData.Free;
+    EndUpright(LUpright);
   end;
 end;
 
@@ -850,9 +1107,13 @@ procedure TDaisyControl.DrawEmoji(const AText: string; const ARect: TRectF; ACol
   AFontSize: Integer);
 var
   LLayout: TTextLayout;
+  LBox: TRectF;
+  LUpright: Boolean;
 begin
   if (AText = '') or (ARect.Width <= 0) or (ARect.Height <= 0) then
     Exit;
+  LBox := ARect;
+  LUpright := BeginUpright(LBox);
   LLayout := TTextLayoutManager.DefaultTextLayout.Create;
   try
     LLayout.BeginUpdate;
@@ -868,8 +1129,8 @@ begin
       LLayout.Font.Size := AFontSize;
       LLayout.Color := AColor;
       LLayout.Opacity := AbsoluteOpacity;
-      LLayout.TopLeft := ARect.TopLeft;
-      LLayout.MaxSize := PointF(ARect.Width, ARect.Height);
+      LLayout.TopLeft := LBox.TopLeft;
+      LLayout.MaxSize := PointF(LBox.Width, LBox.Height);
       LLayout.HorizontalAlign := TTextAlign.Center;
       LLayout.VerticalAlign := TTextAlign.Center;
       LLayout.WordWrap := False;
@@ -879,6 +1140,7 @@ begin
     LLayout.RenderLayout(Canvas);
   finally
     LLayout.Free;
+    EndUpright(LUpright);
   end;
 end;
 

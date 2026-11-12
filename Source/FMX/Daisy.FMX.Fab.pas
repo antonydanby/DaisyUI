@@ -405,6 +405,7 @@ var
   end;
 
 begin
+  ApplyRTLMatrix;
   LColors := ResolveColors;
   LMain := MainRect;
   LItemBack := Theme.Base100;

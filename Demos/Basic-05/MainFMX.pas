@@ -103,6 +103,8 @@ type
     tbXl: TDaisyFmxTable;
     tbRtl: TDaisyFmxTable;
     DaisyFmxSVGImage1: TDaisyFmxSVGImage;
+    chkRTL: TDaisyFmxCheckBox;
+    procedure RTLChange(Sender: TObject);
     procedure ThemeSelectChange(Sender: TObject);
     procedure ThemeControllerChange(Sender: TObject);
     procedure chkTitleBarChange(Sender: TObject);
@@ -116,6 +118,13 @@ var
 implementation
 
 {$R *.fmx}
+
+procedure TForm19.RTLChange(Sender: TObject);
+const
+  Modes: array[Boolean] of TBiDiMode = (bdLeftToRight, bdRightToLeft);
+begin
+  TDaisyControl.ApplyBiDiMode(Self, Modes[chkRTL.Checked]);
+end;
 
 procedure TForm19.FormShow(Sender: TObject);
 begin

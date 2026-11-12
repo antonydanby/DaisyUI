@@ -43,6 +43,17 @@ object Form18: TForm18
     Checked = True
     Caption = 'Theme the title bar'
   end
+  object chkRTL: TDaisyCheckBox
+    Left = 470
+    Top = 17
+    Width = 200
+    Height = 30
+    Cursor = crHandPoint
+    TabOrder = 6
+    TabStop = True
+    Caption = 'Right-to-left'
+    OnChange = RTLChange
+  end
   object selTheme: TDaisySelect
     Left = 80
     Top = 4

@@ -259,7 +259,7 @@ procedure TDaisyFmxDatePicker.DropDown;
 var
   LForm: TCommonCustomForm;
   LField: TRectF;
-  LTopLeft, LBottomRight, LOrigin: TPointF;
+  LOrigin: TPointF;
 begin
   if IsOpen or ReadOnly or not Enabled or (csDesigning in ComponentState) then
     Exit;
@@ -275,6 +275,7 @@ begin
   if FPopup.Parent <> LForm then
     LForm.AddObject(FPopup);
   FPopup.ThemeKind := ThemeKind;
+  FPopup.BiDiMode := BiDiMode;
   FPopup.Variant := FCalVariant;
   FPopup.FirstDayOfWeek := FFirstDay;
   FPopup.ShowOutsideDays := FShowOutside;
@@ -288,10 +289,8 @@ begin
   finally
     FSyncing := False;
   end;
-  LField := FieldRect;
-  LTopLeft := LocalToAbsolute(LField.TopLeft);
-  LBottomRight := LocalToAbsolute(LField.BottomRight);
-  LOrigin := DaisyPopupOrigin(TRectF.Create(LTopLeft.X, LTopLeft.Y, LBottomRight.X, LBottomRight.Y),
+  LField := LocalToAbsoluteRect(FieldRect);
+  LOrigin := DaisyPopupOrigin(LField,
     TRectF.Create(0, 0, LForm.ClientWidth, LForm.ClientHeight), CPopupWidth, CPopupHeight, 4,
     FPlacement);
   FPopup.Popup(LOrigin.X, LOrigin.Y, CPopupWidth, CPopupHeight);

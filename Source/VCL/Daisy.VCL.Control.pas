@@ -29,6 +29,7 @@ type
     FHot: Boolean;
     FPressed: Boolean;
     FShowFocus: Boolean;
+    FFlipGlyphs: Boolean;
     procedure SetThemeKind(const Value: TDaisyThemeKind);
     procedure SetVariant(const Value: TDaisyVariant);
     procedure SetStyle(const Value: TDaisyStyle);
@@ -46,10 +47,12 @@ type
     procedure CMMouseLeave(var Message: TMessage); message CM_MOUSELEAVE;
     procedure CMEnabledChanged(var Message: TMessage); message CM_ENABLEDCHANGED;
     procedure CMTextChanged(var Message: TMessage); message CM_TEXTCHANGED;
+    procedure CMBiDiModeChanged(var Message: TMessage); message CM_BIDIMODECHANGED;
     class var FThemedTitleBar: Boolean;
     class procedure SetThemedTitleBar(const Value: Boolean); static;
   protected
     procedure CreateWnd; override;
+    procedure WndProc(var Message: TMessage); override;
     procedure WMKillFocus(var Message: TWMKillFocus); message WM_KILLFOCUS;
     procedure Paint; override;
     procedure Resize; override;
@@ -79,6 +82,26 @@ type
     function ContentRect: TRect;
     property Hot: Boolean read FHot;
     property Pressed: Boolean read FPressed write SetPressed;
+
+    { Right-to-left support.
+      Components lay out in left-to-right coordinates; when IsRTL is True everything drawn
+      through the helpers below (and mouse input) is mirrored across the control's width. }
+    // True when the layout is mirrored (BiDiMode = bdRightToLeft)
+    function IsRTL: Boolean;
+    // True when text should read right to left (any right-to-left BiDiMode)
+    function IsRTLReading: Boolean;
+    // Mirrors a logical X / rect / point into physical coordinates (and back: it is its own inverse)
+    function MirrorX(AX: Integer): Integer;
+    function MirrorRect(const ARect: TRect): TRect;
+    function MirrorPoint(const APoint: TPoint): TPoint;
+    // Logical client coordinates <-> screen coordinates (VCL's own conversions are physical)
+    function LogicalToScreen(const APoint: TPoint): TPoint;
+    function ScreenToLogical(const APoint: TPoint): TPoint;
+    function LogicalToScreenRect(const ARect: TRect): TRect;    // Directional icons (arrows, chevrons) keep mirroring with the layout; others are drawn upright
+    property FlipGlyphs: Boolean read FFlipGlyphs write FFlipGlyphs;
+    // Counter-flips non-directional glyphs about the box centre; pair with AGraphics.EndContainer
+    function BeginGlyphFlip(AGraphics: TGPGraphics; const ABox: TRectF;
+      out AState: GraphicsContainer): Boolean;
 
     { Drawing helpers }
     function NewGraphics: TGPGraphics;
@@ -135,11 +158,13 @@ type
 
     property Align;
     property Anchors;
+    property BiDiMode;
     property Constraints;
     property Cursor;
     property Enabled;
     property Font;
     property Hint;
+    property ParentBiDiMode;
     property ParentShowHint;
     property PopupMenu;
     property ShowHint;
@@ -477,11 +502,82 @@ end;
 
 { Drawing helpers }
 
+function TDaisyControl.IsRTL: Boolean;
+begin
+  Result := BiDiMode = bdRightToLeft; // not UseRightToLeftAlignment: that is False on non Middle East systems
+end;
+
+function TDaisyControl.IsRTLReading: Boolean;
+begin
+  Result := BiDiMode <> bdLeftToRight;
+end;
+
+function TDaisyControl.MirrorX(AX: Integer): Integer;
+begin
+  if IsRTL then
+    Result := Width - AX
+  else
+    Result := AX;
+end;
+
+function TDaisyControl.MirrorRect(const ARect: TRect): TRect;
+begin
+  if IsRTL then
+    Result := Rect(Width - ARect.Right, ARect.Top, Width - ARect.Left, ARect.Bottom)
+  else
+    Result := ARect;
+end;
+
+function TDaisyControl.MirrorPoint(const APoint: TPoint): TPoint;
+begin
+  Result := APoint;
+  if IsRTL then
+    Result.X := Width - 1 - APoint.X;
+end;
+
+function TDaisyControl.LogicalToScreen(const APoint: TPoint): TPoint;
+begin
+  Result := ClientToScreen(MirrorPoint(APoint));
+end;
+
+function TDaisyControl.ScreenToLogical(const APoint: TPoint): TPoint;
+begin
+  Result := MirrorPoint(ScreenToClient(APoint));
+end;
+
+function TDaisyControl.LogicalToScreenRect(const ARect: TRect): TRect;
+begin
+  Result := MirrorRect(ARect);
+  Result.TopLeft := ClientToScreen(Result.TopLeft);
+  Result.BottomRight := ClientToScreen(Result.BottomRight);
+end;
+
+function TDaisyControl.BeginGlyphFlip(AGraphics: TGPGraphics; const ABox: TRectF;
+  out AState: GraphicsContainer): Boolean;
+var
+  LCenter: Single;
+begin
+  Result := IsRTL and not FFlipGlyphs;
+  AState := 0;
+  if not Result then
+    Exit;
+  LCenter := (ABox.Left + ABox.Right) / 2;
+  AState := AGraphics.BeginContainer;
+  AGraphics.TranslateTransform(LCenter, 0);
+  AGraphics.ScaleTransform(-1, 1);
+  AGraphics.TranslateTransform(-LCenter, 0);
+end;
+
 function TDaisyControl.NewGraphics: TGPGraphics;
 begin
   Result := TGPGraphics.Create(Canvas.Handle);
   Result.SetSmoothingMode(SmoothingModeAntiAlias);
   Result.SetPixelOffsetMode(PixelOffsetModeHalf); // keeps 1px strokes on whole pixels instead of straddling two rows
+  if IsRTL then
+  begin
+    Result.TranslateTransform(Width, 0); // x' = Width - x
+    Result.ScaleTransform(-1, 1);
+  end;
 end;
 
 function CreateRoundRectPath(const ARect: TRectF; ARadius: Single): TGPGraphicsPath;
@@ -611,7 +707,11 @@ begin
     Canvas.Font.Style := Canvas.Font.Style - [fsBold];
   Canvas.Brush.Style := bsClear;
 
-  LRect := ARect;
+  LRect := MirrorRect(ARect);
+  if IsRTL and (AFlags and DT_CENTER = 0) then
+    AFlags := AFlags xor DT_RIGHT; // DT_LEFT is 0, so toggling DT_RIGHT swaps the alignment
+  if IsRTLReading then
+    AFlags := AFlags or DT_RTLREADING;
   SetBkMode(Canvas.Handle, Winapi.Windows.TRANSPARENT);
   Winapi.Windows.DrawText(Canvas.Handle, PChar(AText), Length(AText), LRect,
     AFlags or DT_NOPREFIX);
@@ -662,8 +762,10 @@ begin
   LFormats := [];
   if AFlags and DT_CENTER <> 0 then
     Include(LFormats, tfCenter)
-  else if AFlags and DT_RIGHT <> 0 then
+  else if (AFlags and DT_RIGHT <> 0) <> IsRTL then
     Include(LFormats, tfRight);
+  if IsRTLReading then
+    Include(LFormats, tfRtlReading);
   if AFlags and DT_VCENTER <> 0 then
     Include(LFormats, tfVerticalCenter)
   else if AFlags and DT_BOTTOM <> 0 then
@@ -672,7 +774,7 @@ begin
     Include(LFormats, tfSingleLine)
   else if AFlags and DT_WORDBREAK <> 0 then
     Include(LFormats, tfWordBreak);
-  LRect := ARect;
+  LRect := MirrorRect(ARect);
   LText := AText;
   LD2D := TDirect2DCanvas.Create(Canvas, ClientRect);
   try
@@ -713,9 +815,12 @@ var
   LPath: TDaisyPolyline;
   LFrom, LTo: TGPPointF;
   LScale: Single;
+  LFlipped: Boolean;
+  LState: GraphicsContainer;
   I: Integer;
 begin
   LScale := ABounds.Width / 24; // icon geometry lives in a 24 x 24 box
+  LFlipped := BeginGlyphFlip(AGraphics, ABounds, LState);
   LPen := TGPPen.Create(AColor, AStrokeWidth * LScale);
   try
     LPen.SetLineCap(LineCapRound, LineCapRound, DashCapRound);
@@ -729,6 +834,8 @@ begin
       end;
   finally
     LPen.Free;
+    if LFlipped then
+      AGraphics.EndContainer(LState);
   end;
 end;
 
@@ -743,6 +850,8 @@ var
   LBrush: TGPSolidBrush;
   LPoints: array of TGPPointF;
   LScale: Single;
+  LFlipped: Boolean;
+  LState: GraphicsContainer;
   I, J: Integer;
 begin
   LPaths := TDaisySVG.ToPaths(AData, LFilled);
@@ -755,6 +864,7 @@ begin
     else
     begin
       LScale := ABox.Width / 24;
+      LFlipped := BeginGlyphFlip(LGraphics, ABox, LState);
       LPath := TGPGraphicsPath.Create(FillModeWinding);
       LBrush := TGPSolidBrush.Create(AColor);
       try
@@ -771,6 +881,8 @@ begin
       finally
         LBrush.Free;
         LPath.Free;
+        if LFlipped then
+          LGraphics.EndContainer(LState);
       end;
     end;
   finally
@@ -788,6 +900,8 @@ var
   LPen: TGPPen;
   LPoints: array of TGPPointF;
   LScale: Single;
+  LFlipped: Boolean;
+  LState: GraphicsContainer;
   I, J: Integer;
 
   procedure LoadPoints(const APolyline: TDaisyPolyline);
@@ -804,6 +918,7 @@ begin
     Exit;
   LScale := ABox.Width / 24;
   LGraphics := NewGraphics;
+  LFlipped := BeginGlyphFlip(LGraphics, ABox, LState);
   try
     for LLayer in ALayers do
     begin
@@ -852,6 +967,8 @@ begin
       end;
     end;
   finally
+    if LFlipped then
+      LGraphics.EndContainer(LState);
     LGraphics.Free; // flush before any GDI text
   end;
 end;
@@ -991,7 +1108,7 @@ begin
     Exit;
   end;
 
-  LRect := ARect;
+  LRect := MirrorRect(ARect);
   LText := AText;
   LD2D := TDirect2DCanvas.Create(Canvas, ClientRect);
   try
@@ -1153,6 +1270,22 @@ procedure TDaisyControl.CMTextChanged(var Message: TMessage);
 begin
   inherited;
   Invalidate;
+end;
+
+procedure TDaisyControl.CMBiDiModeChanged(var Message: TMessage);
+begin
+  inherited; // TWinControl also propagates CM_PARENTBIDIMODECHANGED to the children
+  Invalidate;
+  SizeChanged;
+end;
+
+// Painting is mirrored in NewGraphics, so mouse coordinates are mirrored back for hit testing.
+procedure TDaisyControl.WndProc(var Message: TMessage);
+begin
+  if IsRTL and (Message.Msg >= WM_MOUSEFIRST) and (Message.Msg <= WM_MBUTTONDBLCLK)
+    and (Message.Msg <> WM_MOUSEWHEEL) then
+    TWMMouse(Message).XPos := Width - 1 - TWMMouse(Message).XPos;
+  inherited WndProc(Message);
 end;
 
 end.

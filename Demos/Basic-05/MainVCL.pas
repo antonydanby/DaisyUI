@@ -17,6 +17,7 @@ type
     lblStatusColors: TLabel;
     lblStatusMore: TLabel;
     chkTitleBar: TDaisyCheckBox;
+    chkRTL: TDaisyCheckBox;
     alMain: TActionList;
     actTitleBar: TAction;
     selTheme: TDaisySelect;
@@ -102,6 +103,7 @@ type
     tbXl: TDaisyTable;
     tbRtl: TDaisyTable;
     DaisySVGImage1: TDaisySVGImage;
+    procedure RTLChange(Sender: TObject);
     procedure ThemeSelectChange(Sender: TObject);
     procedure ThemeControllerChange(Sender: TObject);
     procedure chkTitleBarClick(Sender: TObject);
@@ -115,6 +117,16 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TForm18.RTLChange(Sender: TObject);
+const
+  Modes: array[Boolean] of TBiDiMode = (bdLeftToRight, bdRightToLeft);
+begin
+  if BiDiMode = Modes[chkRTL.Checked] then
+    Exit;
+  BiDiMode := Modes[chkRTL.Checked];
+  FlipChildren(True);
+end;
 
 procedure TForm18.FormShow(Sender: TObject);
 begin

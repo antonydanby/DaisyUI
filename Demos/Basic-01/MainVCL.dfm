@@ -39,6 +39,17 @@ object Form10: TForm10
     Caption = 'Dark mode'
     OnChange = ThemeControllerChange
   end
+  object chkRTL: TDaisyCheckBox
+    Left = 560
+    Top = 22
+    Width = 116
+    Height = 30
+    Cursor = crHandPoint
+    TabOrder = 3
+    TabStop = True
+    Caption = 'Right-to-left'
+    OnChange = RTLChange
+  end
   object selTheme: TDaisySelect
     Left = 96
     Top = 16
@@ -82,187 +93,6 @@ object Form10: TForm10
     TabOrder = 1
     TabStop = True
     ActivePageIndex = 0
-    object tsSizes: TDaisyTabSheet
-      Left = 1
-      Top = 41
-      Width = 966
-      Height = 470
-      TabOrder = 2
-      Caption = 'Sizes'
-      object lblSizes: TLabel
-        Left = 16
-        Top = 8
-        Width = 92
-        Height = 21
-        Caption = 'Button sizes'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Segoe UI'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object btnXS: TDaisyButton
-        Left = 16
-        Top = 40
-        Width = 96
-        Height = 24
-        Cursor = crHandPoint
-        Variant = dvSecondary
-        SizeKind = dzXS
-        TabOrder = 0
-        TabStop = True
-        Caption = 'XS'
-      end
-      object btnSM: TDaisyButton
-        Left = 120
-        Top = 40
-        Width = 96
-        Height = 32
-        Cursor = crHandPoint
-        Variant = dvSecondary
-        SizeKind = dzSM
-        TabOrder = 1
-        TabStop = True
-        Caption = 'SM'
-      end
-      object btnMD: TDaisyButton
-        Left = 224
-        Top = 40
-        Width = 96
-        Height = 40
-        Cursor = crHandPoint
-        Variant = dvSecondary
-        TabOrder = 2
-        TabStop = True
-        Caption = 'MD'
-      end
-      object btnLG: TDaisyButton
-        Left = 328
-        Top = 40
-        Width = 96
-        Height = 48
-        Cursor = crHandPoint
-        Variant = dvSecondary
-        SizeKind = dzLG
-        TabOrder = 3
-        TabStop = True
-        Caption = 'LG'
-      end
-      object btnXL: TDaisyButton
-        Left = 432
-        Top = 40
-        Width = 96
-        Height = 56
-        Cursor = crHandPoint
-        Variant = dvSecondary
-        SizeKind = dzXL
-        TabOrder = 4
-        TabStop = True
-        Caption = 'XL'
-      end
-    end
-    object tsCards: TDaisyTabSheet
-      Left = 1
-      Top = 41
-      Width = 966
-      Height = 470
-      TabOrder = 3
-      Caption = 'Cards'
-      object lblCards: TLabel
-        Left = 16
-        Top = 8
-        Width = 42
-        Height = 21
-        Caption = 'Cards'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Segoe UI'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
-      object cardDefault: TDaisyCard
-        Left = 16
-        Top = 40
-        Width = 300
-        Height = 210
-        TabOrder = 0
-        Title = 'Life hack'
-        Body = 
-          'How to park your car at your garage, and then actually get out o' +
-          'f it.'
-        DesignSize = (
-          300
-          210)
-        object btnBuyDefault: TDaisyButton
-          Left = 172
-          Top = 142
-          Width = 96
-          Height = 40
-          Cursor = crHandPoint
-          Variant = dvPrimary
-          Anchors = [akRight, akBottom]
-          TabOrder = 0
-          TabStop = True
-          Action = actBuyNow
-          Caption = 'Button'
-        end
-      end
-      object cardPrimary: TDaisyCard
-        Left = 336
-        Top = 40
-        Width = 300
-        Height = 210
-        Variant = dvPrimary
-        TabOrder = 1
-        Title = 'Primary card'
-        Body = 'Cards can use any variant, just like buttons.'
-        DesignSize = (
-          300
-          210)
-        object btnBuyPrimary: TDaisyButton
-          Left = 172
-          Top = 142
-          Width = 96
-          Height = 40
-          Cursor = crHandPoint
-          Variant = dvNeutral
-          Anchors = [akRight, akBottom]
-          TabOrder = 0
-          TabStop = True
-          Action = actBuyNow
-          Caption = 'Button'
-        end
-      end
-      object cardBordered: TDaisyCard
-        Left = 656
-        Top = 40
-        Width = 300
-        Height = 210
-        Style = dsOutline
-        ShadowSize = 0
-        TabOrder = 2
-        Title = 'Bordered'
-        Body = 'A flat card with a border and no shadow.'
-        DesignSize = (
-          300
-          210)
-        object btnBuyBordered: TDaisyButton
-          Left = 172
-          Top = 142
-          Width = 96
-          Height = 40
-          Cursor = crHandPoint
-          Variant = dvNeutral
-          Anchors = [akRight, akBottom]
-          TabOrder = 0
-          TabStop = True
-          Action = actBuyNow
-          Caption = 'Button'
-        end
-      end
-    end
     object tsAlerts: TDaisyTabSheet
       Left = 1
       Top = 41
@@ -1386,9 +1216,192 @@ object Form10: TForm10
         Caption = 'Disabled'
       end
     end
+    object tsCards: TDaisyTabSheet
+      Left = 1
+      Top = 41
+      Width = 966
+      Height = 470
+      TabOrder = 3
+      Caption = 'Cards'
+      object lblCards: TLabel
+        Left = 16
+        Top = 8
+        Width = 42
+        Height = 21
+        Caption = 'Cards'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object cardDefault: TDaisyCard
+        Left = 16
+        Top = 40
+        Width = 300
+        Height = 210
+        TabOrder = 0
+        Title = 'Life hack'
+        Body = 
+          'How to park your car at your garage, and then actually get out o' +
+          'f it.'
+        DesignSize = (
+          300
+          210)
+        object btnBuyDefault: TDaisyButton
+          Left = 172
+          Top = 142
+          Width = 96
+          Height = 40
+          Cursor = crHandPoint
+          Variant = dvPrimary
+          Anchors = [akRight, akBottom]
+          TabOrder = 0
+          TabStop = True
+          Action = actBuyNow
+          Caption = 'Button'
+        end
+      end
+      object cardPrimary: TDaisyCard
+        Left = 336
+        Top = 40
+        Width = 300
+        Height = 210
+        Variant = dvPrimary
+        BiDiMode = bdLeftToRight
+        ParentBiDiMode = False
+        TabOrder = 1
+        Title = 'Primary card'
+        Body = 'Cards can use any variant, just like buttons.'
+        DesignSize = (
+          300
+          210)
+        object btnBuyPrimary: TDaisyButton
+          Left = 172
+          Top = 142
+          Width = 96
+          Height = 40
+          Cursor = crHandPoint
+          Variant = dvNeutral
+          Anchors = [akRight, akBottom]
+          TabOrder = 0
+          TabStop = True
+          Action = actBuyNow
+          Caption = 'Button'
+        end
+      end
+      object cardBordered: TDaisyCard
+        Left = 656
+        Top = 40
+        Width = 300
+        Height = 210
+        Style = dsOutline
+        ShadowSize = 0
+        TabOrder = 2
+        Title = 'Bordered'
+        Body = 'A flat card with a border and no shadow.'
+        DesignSize = (
+          300
+          210)
+        object btnBuyBordered: TDaisyButton
+          Left = 172
+          Top = 142
+          Width = 96
+          Height = 40
+          Cursor = crHandPoint
+          Variant = dvNeutral
+          Anchors = [akRight, akBottom]
+          TabOrder = 0
+          TabStop = True
+          Action = actBuyNow
+          Caption = 'Button'
+        end
+      end
+    end
+    object tsSizes: TDaisyTabSheet
+      Left = 1
+      Top = 41
+      Width = 966
+      Height = 470
+      TabOrder = 2
+      Caption = 'Sizes'
+      object lblSizes: TLabel
+        Left = 16
+        Top = 8
+        Width = 92
+        Height = 21
+        Caption = 'Button sizes'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object btnXS: TDaisyButton
+        Left = 16
+        Top = 40
+        Width = 96
+        Height = 24
+        Cursor = crHandPoint
+        Variant = dvSecondary
+        SizeKind = dzXS
+        TabOrder = 0
+        TabStop = True
+        Caption = 'XS'
+      end
+      object btnSM: TDaisyButton
+        Left = 120
+        Top = 40
+        Width = 96
+        Height = 32
+        Cursor = crHandPoint
+        Variant = dvSecondary
+        SizeKind = dzSM
+        TabOrder = 1
+        TabStop = True
+        Caption = 'SM'
+      end
+      object btnMD: TDaisyButton
+        Left = 224
+        Top = 40
+        Width = 96
+        Height = 40
+        Cursor = crHandPoint
+        Variant = dvSecondary
+        TabOrder = 2
+        TabStop = True
+        Caption = 'MD'
+      end
+      object btnLG: TDaisyButton
+        Left = 328
+        Top = 40
+        Width = 96
+        Height = 48
+        Cursor = crHandPoint
+        Variant = dvSecondary
+        SizeKind = dzLG
+        TabOrder = 3
+        TabStop = True
+        Caption = 'LG'
+      end
+      object btnXL: TDaisyButton
+        Left = 432
+        Top = 40
+        Width = 96
+        Height = 56
+        Cursor = crHandPoint
+        Variant = dvSecondary
+        SizeKind = dzXL
+        TabOrder = 4
+        TabStop = True
+        Caption = 'XL'
+      end
+    end
   end
   object alMain: TActionList
-    Left = 560
+    Left = 720
     Top = 22
     object actBuyNow: TAction
       Caption = 'Buy Now'

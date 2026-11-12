@@ -32,7 +32,6 @@ type
     FZebra: Boolean;
     FHoverRows: Boolean;
     FBordered: Boolean;
-    FRightToLeft: Boolean;
     FPinRows: Boolean;
     FAutoHeight: Boolean;
     FScrollX, FScrollY: Single;
@@ -50,6 +49,7 @@ type
     procedure SetHoverRows(const Value: Boolean);
     procedure SetBordered(const Value: Boolean);
     procedure SetRightToLeft(const Value: Boolean);
+    function GetRightToLeft: Boolean;
     procedure SetPinRows(const Value: Boolean);
     procedure SetAutoHeight(const Value: Boolean);
     procedure ModelChanged(Sender: TObject);
@@ -118,7 +118,7 @@ type
     // Draws the outer border and the base-100 background
     property Bordered: Boolean read FBordered write SetBordered default False;
     // Mirrors the columns and the text alignment
-    property RightToLeft: Boolean read FRightToLeft write SetRightToLeft default False;
+    property RightToLeft: Boolean read GetRightToLeft write SetRightToLeft stored False;
     // Header and footer stay in view while the rows scroll
     property PinRows: Boolean read FPinRows write SetPinRows default False;
     // The height follows the rows; turn off to scroll inside a fixed height
@@ -261,11 +261,15 @@ end;
 
 procedure TDaisyFmxTable.SetRightToLeft(const Value: Boolean);
 begin
-  if FRightToLeft <> Value then
-  begin
-    FRightToLeft := Value;
-    Repaint;
-  end;
+  if Value then
+    BiDiMode := bdRightToLeft
+  else
+    BiDiMode := bdLeftToRight;
+end;
+
+function TDaisyFmxTable.GetRightToLeft: Boolean;
+begin
+  Result := IsRTL;
 end;
 
 procedure TDaisyFmxTable.SetPinRows(const Value: Boolean);
@@ -499,14 +503,8 @@ begin
 end;
 
 function TDaisyFmxTable.Mirror(const ARect: TRectF): TRectF;
-var
-  LArea: TRectF;
 begin
-  if not FRightToLeft then
-    Exit(ARect);
-  LArea := Area;
-  Result := RectF(LArea.Left + LArea.Right - ARect.Right, ARect.Top,
-    LArea.Left + LArea.Right - ARect.Left, ARect.Bottom);
+  Result := ARect;
 end;
 
 // Final column positions (area relative, before mirroring): scrolling and pinning applied
@@ -575,11 +573,6 @@ end;
 function TDaisyFmxTable.EffectiveAlign(AColumn: TDaisyTableColumn): TDaisyTextAlign;
 begin
   Result := AColumn.Alignment;
-  if FRightToLeft then
-    case Result of
-      taStart: Result := taEnd;
-      taEnd: Result := taStart;
-    end;
 end;
 
 function TDaisyFmxTable.CheckRect(const ACell: TRectF; AAlign: TDaisyTextAlign): TRectF;

@@ -229,8 +229,12 @@ begin
     else
       LPath := CMenuUpPath;
     end;
-    DrawIconPath(LPath, TRectF.Create(LBox), DaisyWithAlpha(LText, 0.7));
-    Dec(LR, LChevron + ScaleValue(8));
+    FlipGlyphs := AStyle.Chevron = mcRight; // submenu arrow follows the reading direction
+    try
+      DrawIconPath(LPath, TRectF.Create(LBox), DaisyWithAlpha(LText, 0.7));
+    finally
+      FlipGlyphs := False;
+    end;
   end;
 
   if AStyle.ShowExtras then
@@ -409,9 +413,8 @@ begin
   FChild.SizeKind := SizeKind;
   FChild.Font.Assign(Font);
   FChildSource := FShown[AIndex];
-  LAnchor := FRects[AIndex];
-  LAnchor.TopLeft := ClientToScreen(LAnchor.TopLeft);
-  LAnchor.BottomRight := ClientToScreen(LAnchor.BottomRight);
+  FChild.BiDiMode := BiDiMode;
+  LAnchor := LogicalToScreenRect(FRects[AIndex]);
   FChild.Popup(FChildSource.Items, FIconPx, LAnchor, False, 0);
 end;
 
@@ -460,19 +463,33 @@ begin
   LWork := Screen.MonitorFromPoint(AAnchor.TopLeft).WorkareaRect;
   if ABelow then
   begin
-    LX := AAnchor.Left;
+    if IsRTL then
+      LX := AAnchor.Right - LWidth
+    else
+      LX := AAnchor.Left;
     LY := AAnchor.Bottom + ScaleValue(AGap);
     if LX + LWidth > LWork.Right then
       LX := Max(LWork.Left, LWork.Right - LWidth);
+    if LX < LWork.Left then
+      LX := LWork.Left;
     if LY + LHeight > LWork.Bottom then
       LY := Max(LWork.Top, AAnchor.Top - LHeight - ScaleValue(AGap)); // flip above
   end
   else
   begin
-    LX := AAnchor.Right;
+    if IsRTL then
+    begin
+      LX := AAnchor.Left - LWidth;
+      if LX < LWork.Left then
+        LX := AAnchor.Right; // flip to the other side
+    end
+    else
+    begin
+      LX := AAnchor.Right;
+      if LX + LWidth > LWork.Right then
+        LX := AAnchor.Left - LWidth; // flip to the other side
+    end;
     LY := AAnchor.Top - Pad;
-    if LX + LWidth > LWork.Right then
-      LX := AAnchor.Left - LWidth; // flip to the other side
     if LY + LHeight > LWork.Bottom then
       LY := Max(LWork.Top, LWork.Bottom - LHeight);
   end;
@@ -536,7 +553,7 @@ procedure TDaisyMenuPopup.HandleMove(const AScreen: TPoint);
 var
   LIndex: Integer;
 begin
-  LIndex := ItemAt(ScreenToClient(AScreen));
+  LIndex := ItemAt(ScreenToLogical(AScreen));
   if (LIndex >= 0) and (FShown[LIndex].IsSeparator or FShown[LIndex].Title) then
     LIndex := -1;
   SetHot(LIndex);
@@ -548,7 +565,7 @@ var
   LItem: TDaisyMenuItem;
   LRoot: TDaisyMenuPopup;
 begin
-  LIndex := ItemAt(ScreenToClient(AScreen));
+  LIndex := ItemAt(ScreenToLogical(AScreen));
   if LIndex < 0 then
     Exit;
   LItem := FShown[LIndex];
@@ -569,7 +586,7 @@ end;
 
 procedure TDaisyMenuPopup.MouseDown(Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-  if Deepest(ClientToScreen(Point(X, Y))) = nil then
+  if Deepest(LogicalToScreen(Point(X, Y))) = nil then
     CloseAll;
 end;
 
@@ -580,7 +597,7 @@ var
 begin
   if Button <> mbLeft then
     Exit;
-  LPoint := ClientToScreen(Point(X, Y));
+  LPoint := LogicalToScreen(Point(X, Y));
   LTarget := Deepest(LPoint);
   if LTarget <> nil then
     LTarget.HandleUp(LPoint);
@@ -592,7 +609,7 @@ var
   LPoint: TPoint;
 begin
   inherited;
-  LPoint := ClientToScreen(Point(X, Y));
+  LPoint := LogicalToScreen(Point(X, Y));
   LTarget := Deepest(LPoint);
   if LTarget <> nil then
     LTarget.HandleMove(LPoint)

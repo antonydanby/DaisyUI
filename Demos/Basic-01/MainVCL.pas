@@ -149,6 +149,8 @@ type
     themeCtl: TDaisyThemeController;
     alMain: TActionList;
     actBuyNow: TAction;
+    chkRTL: TDaisyCheckBox;
+    procedure RTLChange(Sender: TObject);
     procedure SwapChange(Sender: TObject);
     procedure ThemeControllerChange(Sender: TObject);
     procedure IndicatorItemClick(Sender: TObject);
@@ -162,6 +164,16 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TForm10.RTLChange(Sender: TObject);
+const
+  Modes: array[Boolean] of TBiDiMode = (bdLeftToRight, bdRightToLeft);
+begin
+  if BiDiMode = Modes[chkRTL.Checked] then
+    Exit;
+  BiDiMode := Modes[chkRTL.Checked];
+  FlipChildren(True);
+end;
 
 procedure TForm10.ThemeSelectChange(Sender: TObject);
 begin

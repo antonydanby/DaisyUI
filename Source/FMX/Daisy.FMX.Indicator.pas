@@ -181,6 +181,7 @@ procedure TDaisyFmxIndicator.PaintChildren;
 begin
   inherited PaintChildren;
   Canvas.SetMatrix(AbsoluteMatrix);
+  ApplyRTLMatrix;
   DrawItem;
 end;
 

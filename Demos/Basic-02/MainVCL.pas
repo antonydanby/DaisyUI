@@ -65,6 +65,7 @@ type
     themeCtl: TDaisyThemeController;
     Styler: TDaisyFormStyler;
     chkTitleBar: TDaisyCheckBox;
+    chkRTL: TDaisyCheckBox;
     alMain: TActionList;
     actTitleBar: TAction;
     actToastClear: TAction;
@@ -133,6 +134,7 @@ type
     procedure ToastDurationChange(Sender: TObject);
     procedure ToastPlacementChange(Sender: TObject);
     procedure ThemeSelectChange(Sender: TObject);
+    procedure RTLChange(Sender: TObject);
     procedure ThemeControllerChange(Sender: TObject);
     procedure chkTitleBarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -196,6 +198,16 @@ end;
 procedure TForm12.ThemeControllerChange(Sender: TObject);
 begin
   selTheme.ItemIndex := Ord(DaisyThemes.Current) - 1;
+end;
+
+procedure TForm12.RTLChange(Sender: TObject);
+const
+  Modes: array[Boolean] of TBiDiMode = (bdLeftToRight, bdRightToLeft);
+begin
+  if BiDiMode = Modes[chkRTL.Checked] then
+    Exit;
+  BiDiMode := Modes[chkRTL.Checked];
+  FlipChildren(True);
 end;
 
 procedure TForm12.ThemeSelectChange(Sender: TObject);

@@ -116,6 +116,17 @@ Every demo has a Theme Controller to switch between two themes.
 
 See [Screenshots.md](Screenshots.md) for a gallery of the VCL demo applications. Each demo is shown with the Corporate theme, with a screenshot of every tab, so you can see the components in action.
 
+## Right-to-left (RTL) support
+
+Every Daisy control has published `BiDiMode` and `ParentBiDiMode` properties, as on the standard controls. With `bdRightToLeft` (or `bdRightToLeftReadingOnly` for text only) a control mirrors its drawing, text alignment and reading order, hit-testing, popups and drop-downs, tables, menus and calendars. Directional icons (chevrons, arrows) flip; icons that are not directional (check marks, logos, emoji) stay upright.
+
+- **VCL:** like the standard VCL, child positions are not moved automatically. Set `BiDiMode` on the form, then call `FlipChildren(True)` to mirror the layout.
+- **FMX:** call `TDaisyControl.ApplyBiDiMode(Form, bdRightToLeft)`. It sets `BiDiMode` and flips the children.
+- Popups (select, dropdown, menus, date picker) inherit `BiDiMode` from their owner.
+- In your own controls, draw through the `TDaisyControl` helpers and use `FlipGlyphs` for directional glyphs.
+
+The demos have a "Right-to-left" check box to try it. See [Screenshots.md](Screenshots.md).
+
 ## Notes
 
 - Demos use components placed at design time; nothing is created on the fly.

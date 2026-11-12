@@ -111,6 +111,8 @@ type
     tsSpecial: TDaisyFmxTabSheet;
     tsButtons: TDaisyFmxTabSheet;
     tsSvg: TDaisyFmxTabSheet;
+    chkRTL: TDaisyFmxCheckBox;
+    procedure RTLChange(Sender: TObject);
     procedure ThemeSelectChange(Sender: TObject);
     procedure ThemeControllerChange(Sender: TObject);
     procedure chkTitleBarChange(Sender: TObject);
@@ -126,6 +128,13 @@ var
 implementation
 
 {$R *.fmx}
+
+procedure TForm15.RTLChange(Sender: TObject);
+const
+  Modes: array[Boolean] of TBiDiMode = (bdLeftToRight, bdRightToLeft);
+begin
+  TDaisyControl.ApplyBiDiMode(Self, Modes[chkRTL.Checked]);
+end;
 
 procedure TForm15.FormShow(Sender: TObject);
 begin

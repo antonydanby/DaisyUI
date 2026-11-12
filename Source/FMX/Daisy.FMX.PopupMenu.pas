@@ -221,6 +221,7 @@ begin
     FPopup.CloseAll;
   FPopup.ThemeKind := ThemeKind;
   FPopup.SizeKind := SizeKind;
+  FPopup.BiDiMode := BiDiMode;
   FPopup.Popup(LForm, FItems, DaisyMenuIconPixels(FIconSize), RectF(X, Y, X, Y), True, 0);
 end;
 

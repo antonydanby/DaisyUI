@@ -100,6 +100,7 @@ type
     themeCtl: TDaisyThemeController;
     Styler: TDaisyFormStyler;
     chkTitleBar: TDaisyCheckBox;
+    chkRTL: TDaisyCheckBox;
     alMain: TActionList;
     actTitleBar: TAction;
     actInbox: TAction;
@@ -110,6 +111,7 @@ type
     tsSpecial: TDaisyTabSheet;
     tsButtons: TDaisyTabSheet;
     tsSvg: TDaisyTabSheet;
+    procedure RTLChange(Sender: TObject);
     procedure ThemeSelectChange(Sender: TObject);
     procedure ThemeControllerChange(Sender: TObject);
     procedure chkTitleBarClick(Sender: TObject);
@@ -125,6 +127,16 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TForm14.RTLChange(Sender: TObject);
+const
+  Modes: array[Boolean] of TBiDiMode = (bdLeftToRight, bdRightToLeft);
+begin
+  if BiDiMode = Modes[chkRTL.Checked] then
+    Exit;
+  BiDiMode := Modes[chkRTL.Checked];
+  FlipChildren(True);
+end;
 
 procedure TForm14.FormShow(Sender: TObject);
 begin

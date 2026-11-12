@@ -420,6 +420,7 @@ var
   end;
 
 begin
+  ApplyRTLMatrix;
   LColors := ResolveColors;
   LRadius := ResolvedCornerRadius;
   LBorder := Max(1, Theme.BorderWidth);

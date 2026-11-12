@@ -170,3 +170,13 @@ Selected tabs from the demos using the Dim theme.
 
 ### Basic-05 - Status
 ![Status (Dim)](Screenshots/Basic-05-VCL-Dark-Tab02.png)
+
+## Right-to-left (FMX)
+
+The demos have a "Right-to-left" check box that sets `BiDiMode` on the form.
+
+### Basic-05 - Table
+![Table (RTL)](Screenshots/Basic-05-FMX-RTL-Table.png)
+
+### Basic-05 - Select
+![Select (RTL)](Screenshots/Basic-05-FMX-RTL-Select.png)

@@ -63,6 +63,17 @@ object Form14: TForm14
     TabOrder = 1
     Action = actTitleBar
   end
+  object chkRTL: TDaisyCheckBox
+    Left = 700
+    Top = 22
+    Width = 200
+    Height = 24
+    Cursor = crHandPoint
+    TabOrder = 5
+    TabStop = True
+    Caption = 'Right-to-left'
+    OnChange = RTLChange
+  end
   object alMain: TActionList
     Left = 570
     Top = 20

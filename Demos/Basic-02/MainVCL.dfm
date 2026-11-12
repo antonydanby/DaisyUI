@@ -80,6 +80,17 @@ object Form12: TForm12
     Caption = ''
     OnChange = ThemeControllerChange
   end
+  object chkRTL: TDaisyCheckBox
+    Left = 600
+    Top = 20
+    Width = 140
+    Height = 30
+    Cursor = crHandPoint
+    TabOrder = 4
+    TabStop = True
+    Caption = 'Right-to-left'
+    OnChange = RTLChange
+  end
   object pcMain: TDaisyPageControl
     Left = 8
     Top = 64

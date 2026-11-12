@@ -392,9 +392,8 @@ begin
   FOpenIndex := AIndex;
   FPopup.ThemeKind := ThemeKind;
   FPopup.SizeKind := SizeKind;
-  LRect := FRects[AIndex];
-  LRect.TopLeft := LocalToAbsolute(LRect.TopLeft);
-  LRect.BottomRight := LocalToAbsolute(LRect.BottomRight);
+  FPopup.BiDiMode := BiDiMode;
+  LRect := LocalToAbsoluteRect(FRects[AIndex]);
   FPopup.Popup(LForm, FRows[AIndex].Item.Items, IconPx, LRect, FOrientation = moHorizontal, CGap);
   Repaint;
 end;

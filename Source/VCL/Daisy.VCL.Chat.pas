@@ -364,8 +364,9 @@ begin
   LDest := Rect(ARect.Left + (ARect.Width - LW) div 2, ARect.Top + (ARect.Height - LH) div 2, 0, 0);
   LDest.Right := LDest.Left + LW;
   LDest.Bottom := LDest.Top + LH;
+  LDest := MirrorRect(LDest);
   LSaved := SaveDC(Canvas.Handle);
-  LRegion := CreateEllipticRgn(ARect.Left, ARect.Top, ARect.Right + 1, ARect.Bottom + 1);
+  LRegion := CreateEllipticRgn(MirrorRect(ARect).Left, ARect.Top, MirrorRect(ARect).Right + 1, ARect.Bottom + 1);
   try
     SelectClipRgn(Canvas.Handle, LRegion);
     Canvas.StretchDraw(LDest, LGraphic);

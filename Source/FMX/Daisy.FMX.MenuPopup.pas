@@ -210,7 +210,12 @@ begin
     else
       LPath := CMenuUpPath;
     end;
-    DrawIconPath(LPath, LBox, DaisyWithAlpha(LText, 0.7));
+    FlipGlyphs := AStyle.Chevron = mcRight; // submenu arrow follows the reading direction
+    try
+      DrawIconPath(LPath, LBox, DaisyWithAlpha(LText, 0.7));
+    finally
+      FlipGlyphs := False;
+    end;
     LR := LR - 20;
   end;
 
@@ -349,9 +354,9 @@ begin
   end;
   FChild.ThemeKind := ThemeKind;
   FChild.SizeKind := SizeKind;
+  FChild.BiDiMode := BiDiMode;
   FChildSource := FShown[AIndex];
-  LAnchor.TopLeft := LocalToAbsolute(FRects[AIndex].TopLeft);
-  LAnchor.BottomRight := LocalToAbsolute(FRects[AIndex].BottomRight);
+  LAnchor := LocalToAbsoluteRect(FRects[AIndex]);
   FChild.Popup(LForm, FChildSource.Items, FIconPx, LAnchor, False, 0);
 end;
 
@@ -390,19 +395,33 @@ var
 begin
   if ABelow then
   begin
-    LX := AAnchor.Left;
+    if IsRTL then
+      LX := AAnchor.Right - Width
+    else
+      LX := AAnchor.Left;
     LY := AAnchor.Bottom + AGap;
     if LX + Width > AForm.ClientWidth then
       LX := Max(0, AForm.ClientWidth - Width);
+    if LX < 0 then
+      LX := 0;
     if LY + Height > AForm.ClientHeight then
       LY := Max(0, AAnchor.Top - Height - AGap); // flip above
   end
   else
   begin
-    LX := AAnchor.Right;
     LY := AAnchor.Top - 6;
-    if LX + Width > AForm.ClientWidth then
-      LX := Max(0, AAnchor.Left - Width); // flip to the other side
+    if IsRTL then
+    begin
+      LX := AAnchor.Left - Width;
+      if LX < 0 then
+        LX := AAnchor.Right; // flip to the other side
+    end
+    else
+    begin
+      LX := AAnchor.Right;
+      if LX + Width > AForm.ClientWidth then
+        LX := Max(0, AAnchor.Left - Width); // flip to the other side
+    end;
     if LY + Height > AForm.ClientHeight then
       LY := Max(0, AForm.ClientHeight - Height);
   end;

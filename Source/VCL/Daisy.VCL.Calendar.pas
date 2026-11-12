@@ -448,7 +448,12 @@ begin
         LPath := [[PointF(15, 5), PointF(8, 12), PointF(15, 19)]]
       else
         LPath := [[PointF(9, 5), PointF(16, 12), PointF(9, 19)]];
-      DrawPolylines(LGraphics, LPath, LBox, Theme.BaseContent, 2);
+      FlipGlyphs := True; // prev/next arrows keep their mirrored direction
+      try
+        DrawPolylines(LGraphics, LPath, LBox, Theme.BaseContent, 2);
+      finally
+        FlipGlyphs := False;
+      end;
     end;
 
     for I := 0 to DaisyCalendarCells - 1 do

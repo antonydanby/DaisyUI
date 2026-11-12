@@ -222,6 +222,7 @@ begin
   FPopup.ThemeKind := ThemeKind;
   FPopup.SizeKind := SizeKind;
   FPopup.Font.Assign(Font);
+  FPopup.BiDiMode := BiDiMode;
   FPopup.Popup(FItems, DaisyMenuIconPixels(FIconSize), Rect(X, Y, X, Y), True, 0);
 end;
 

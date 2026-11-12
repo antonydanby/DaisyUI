@@ -763,7 +763,8 @@ begin
   GetLayout(LLegend, LField, LHint);
   LGap := ScaleValue(4);
   LHeight := FPopup.MeasureHeight(FItems.Count, RowHeight);
-  LOrigin := ClientToScreen(Point(LField.Left, LField.Bottom));
+  LOrigin := ClientToScreen(Point(MirrorRect(LField).Left, LField.Bottom));
+  FPopup.BiDiMode := BiDiMode;
   LWork := Screen.MonitorFromWindow(Handle).WorkareaRect;
   LY := LOrigin.Y + LGap;
   if LY + LHeight > LWork.Bottom then

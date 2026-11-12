@@ -344,14 +344,17 @@ begin
   finally
     FSyncing := False;
   end;
-  LField := FieldRect;
-  LTopLeft := ClientToScreen(LField.TopLeft);
-  LBottomRight := ClientToScreen(LField.BottomRight);
+  LField := LogicalToScreenRect(FieldRect);
+  LTopLeft := LField.TopLeft;
+  LBottomRight := LField.BottomRight;
   LWidth := ScaleValue(CPopupWidth);
   LHeight := ScaleValue(CPopupHeight);
   LOrigin := DaisyPopupOrigin(TRectF.Create(LTopLeft.X, LTopLeft.Y, LBottomRight.X, LBottomRight.Y),
     TRectF.Create(Screen.MonitorFromWindow(Handle).WorkareaRect), LWidth, LHeight, ScaleValue(4),
     FPlacement);
+  if IsRTL then
+    LOrigin.X := Max(Screen.MonitorFromWindow(Handle).WorkareaRect.Left, LBottomRight.X - LWidth);
+  FPopup.BiDiMode := BiDiMode;
   FPopup.Popup(Round(LOrigin.X), Round(LOrigin.Y), LWidth, LHeight);
   if CanFocus and not Focused then
     SetFocus;

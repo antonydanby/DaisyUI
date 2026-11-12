@@ -344,6 +344,7 @@ procedure TDaisyFmxDropdownMenu.DropDown;
 var
   LForm: TCommonCustomForm;
   LOrigin: TPointF;
+  LPlacement: TDaisyPlacement;
   LWidth, LHeight, LX, LY: Single;
 begin
   if IsOpen or (FItems.Count = 0) or (csDesigning in ComponentState) then
@@ -361,12 +362,23 @@ begin
     LForm.AddObject(FPopup);
   FPopup.ThemeKind := ThemeKind;
   FPopup.SizeKind := SizeKind;
+  FPopup.BiDiMode := BiDiMode;
 
   LWidth := Max(FPopup.MeasureWidth(FItems), 160);
   LHeight := FPopup.MeasureHeight(FItems);
-  LOrigin := LocalToAbsolute(PointF(0, 0));
+  LOrigin := LocalToAbsoluteRect(RectF(0, 0, Width, Height)).TopLeft;
+  LPlacement := FPlacement;
+  if IsRTL then
+    case FPlacement of
+      dpBottomStart: LPlacement := dpBottomEnd;
+      dpBottomEnd: LPlacement := dpBottomStart;
+      dpTopStart: LPlacement := dpTopEnd;
+      dpTopEnd: LPlacement := dpTopStart;
+      dpLeft: LPlacement := dpRight;
+      dpRight: LPlacement := dpLeft;
+    end;
 
-  case FPlacement of
+  case LPlacement of
     dpBottomStart: begin LX := LOrigin.X; LY := LOrigin.Y + Height + 4; end;
     dpBottomEnd:   begin LX := LOrigin.X + Width - LWidth; LY := LOrigin.Y + Height + 4; end;
     dpTopStart:    begin LX := LOrigin.X; LY := LOrigin.Y - LHeight - 4; end;
@@ -377,7 +389,7 @@ begin
     LY := LOrigin.Y;
   end;
 
-  if (FPlacement in [dpBottomStart, dpBottomEnd]) and (LY + LHeight > LForm.ClientHeight) then
+  if (LPlacement in [dpBottomStart, dpBottomEnd]) and (LY + LHeight > LForm.ClientHeight) then
     LY := LOrigin.Y - LHeight - 4; // flip above when there is no room below
   LX := Max(0, Min(LX, LForm.ClientWidth - LWidth));
   LY := Max(0, Min(LY, LForm.ClientHeight - LHeight));

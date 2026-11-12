@@ -668,15 +668,16 @@ begin
     LForm.AddObject(FPopup);
   FPopup.ThemeKind := ThemeKind;
   FPopup.SizeKind := SizeKind;
+  FPopup.BiDiMode := BiDiMode;
   FPopup.MaxRows := FDropDownRows;
   FPopup.Indicator := FSelectedIndicator;
   GetLayout(LLegend, LField, LHint);
   LHeight := FPopup.MeasureHeight(FItems.Count, RowHeight);
-  LOrigin := LocalToAbsolute(PointF(LField.Left, LField.Bottom));
+  LOrigin := LocalToAbsoluteRect(LField).TopLeft;
+  LY := LocalToAbsoluteRect(LField).Bottom + 4;
   LX := LOrigin.X;
-  LY := LOrigin.Y + 4;
   if LY + LHeight > LForm.ClientHeight then
-    LY := LocalToAbsolute(PointF(0, LField.Top)).Y - LHeight - 4; // flip above
+    LY := LOrigin.Y - LHeight - 4; // flip above
   LX := Max(0, Min(LX, LForm.ClientWidth - LField.Width));
   LY := Max(0, Min(LY, LForm.ClientHeight - LHeight));
   FPopup.Popup(FItems, FItemIndex, RowHeight, LX, LY, LField.Width);

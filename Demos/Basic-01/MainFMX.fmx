@@ -41,6 +41,17 @@ object Form11: TForm11
     Text = 'Dark mode'
     OnChange = ThemeControllerChange
   end
+  object chkRTL: TDaisyFmxCheckBox
+    Cursor = crHandPoint
+    Position.X = 560.000000000000000000
+    Position.Y = 22.000000000000000000
+    Size.Width = 200.000000000000000000
+    Size.Height = 30.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 4
+    Text = 'Right-to-left'
+    OnChange = RTLChange
+  end
   object selTheme: TDaisyFmxSelect
     Cursor = crHandPoint
     Hint = ''

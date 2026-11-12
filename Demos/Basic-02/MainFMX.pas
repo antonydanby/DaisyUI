@@ -126,6 +126,8 @@ type
     ratXL: TDaisyFmxRating;
     ratThree: TDaisyFmxRating;
     ratTen: TDaisyFmxRating;
+    chkRTL: TDaisyFmxCheckBox;
+    procedure RTLChange(Sender: TObject);
     procedure RangeChange(Sender: TObject);
     procedure RatingChange(Sender: TObject);
     procedure ToastPostClick(Sender: TObject);
@@ -149,6 +151,13 @@ var
 implementation
 
 {$R *.fmx}
+
+procedure TForm13.RTLChange(Sender: TObject);
+const
+  Modes: array[Boolean] of TBiDiMode = (bdLeftToRight, bdRightToLeft);
+begin
+  TDaisyControl.ApplyBiDiMode(Self, Modes[chkRTL.Checked]);
+end;
 
 procedure TForm13.RangeChange(Sender: TObject);
 begin

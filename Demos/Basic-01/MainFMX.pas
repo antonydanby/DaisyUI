@@ -149,6 +149,7 @@ type
     stkNeutralEndB: TDaisyFmxCard;
     stkNeutralEndA: TDaisyFmxCard;
     themeCtl: TDaisyFmxThemeController;
+    chkRTL: TDaisyFmxCheckBox;
     alMain: TActionList;
     actBuyNow: TAction;
     procedure SwapChange(Sender: TObject);
@@ -157,6 +158,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure ThemeSelectChange(Sender: TObject);
     procedure CardActionClick(Sender: TObject);
+    procedure RTLChange(Sender: TObject);
   end;
 
 var
@@ -173,6 +175,13 @@ begin
   for I := 0 to ComponentCount - 1 do
     if Components[I] is TLabel then
       TLabel(Components[I]).TextSettings.Font.Style := [TFontStyle.fsBold];
+end;
+
+procedure TForm11.RTLChange(Sender: TObject);
+const
+  Modes: array[Boolean] of TBiDiMode = (bdLeftToRight, bdRightToLeft);
+begin
+  TDaisyControl.ApplyBiDiMode(Self, Modes[chkRTL.Checked]);
 end;
 
 procedure TForm11.ThemeSelectChange(Sender: TObject);

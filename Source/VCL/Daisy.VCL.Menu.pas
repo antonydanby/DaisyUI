@@ -408,9 +408,8 @@ begin
   FPopup.ThemeKind := ThemeKind;
   FPopup.SizeKind := SizeKind;
   FPopup.Font.Assign(Font);
-  LRect := FRects[AIndex];
-  LRect.TopLeft := ClientToScreen(LRect.TopLeft);
-  LRect.BottomRight := ClientToScreen(LRect.BottomRight);
+  LRect := LogicalToScreenRect(FRects[AIndex]);
+  FPopup.BiDiMode := BiDiMode;
   FPopup.Popup(FRows[AIndex].Item.Items, IconPx, LRect, FOrientation = moHorizontal, 2);
   Invalidate;
 end;
@@ -438,7 +437,7 @@ procedure TDaisyMenu.PopupOutsideMove(Sender: TObject; const APoint: TPoint);
 var
   LIndex: Integer;
 begin
-  LIndex := ItemAt(ScreenToClient(APoint));
+  LIndex := ItemAt(ScreenToLogical(APoint));
   if (LIndex >= 0) and (LIndex <> FOpenIndex) and FRows[LIndex].Item.HasChildren and
     FRows[LIndex].Item.Enabled then
     OpenPopup(LIndex);

@@ -70,6 +70,17 @@ object Form15: TForm15
     Checked = True
     OnChange = chkTitleBarChange
   end
+  object chkRTL: TDaisyFmxCheckBox
+    Cursor = crHandPoint
+    Position.X = 720.000000000000000000
+    Position.Y = 22.000000000000000000
+    Size.Width = 200.000000000000000000
+    Size.Height = 24.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 96
+    Text = 'Right-to-left'
+    OnChange = RTLChange
+  end
   object alMain: TActionList
     Left = 590
     Top = 20

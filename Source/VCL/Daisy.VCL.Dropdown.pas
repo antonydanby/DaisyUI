@@ -387,6 +387,7 @@ procedure TDaisyDropdownMenu.DropDown;
 var
   LOrigin: TPoint;
   LWidth, LHeight, LX, LY, LGap: Integer;
+  APlace: TDaisyPlacement;
   LWork: TRect;
 begin
   if IsOpen or (FItems.Count = 0) or (csDesigning in ComponentState) then
@@ -400,13 +401,25 @@ begin
   FPopup.ThemeKind := ThemeKind;
   FPopup.SizeKind := SizeKind;
   FPopup.Font.Assign(Font);
+  FPopup.BiDiMode := BiDiMode;
 
   LGap := ScaleValue(4);
   LWidth := Max(FPopup.MeasureWidth(FItems), ScaleValue(160));
   LHeight := FPopup.MeasureHeight(FItems);
   LOrigin := ClientToScreen(Point(0, 0));
 
-  case FPlacement of
+  APlace := FPlacement;
+  if IsRTL then
+    case FPlacement of
+      dpBottomStart: APlace := dpBottomEnd;
+      dpBottomEnd: APlace := dpBottomStart;
+      dpTopStart: APlace := dpTopEnd;
+      dpTopEnd: APlace := dpTopStart;
+      dpLeft: APlace := dpRight;
+      dpRight: APlace := dpLeft;
+    end;
+
+  case APlace of
     dpBottomStart: begin LX := LOrigin.X; LY := LOrigin.Y + Height + LGap; end;
     dpBottomEnd:   begin LX := LOrigin.X + Width - LWidth; LY := LOrigin.Y + Height + LGap; end;
     dpTopStart:    begin LX := LOrigin.X; LY := LOrigin.Y - LHeight - LGap; end;
@@ -418,7 +431,7 @@ begin
   end;
 
   LWork := Screen.MonitorFromWindow(Handle).WorkareaRect;
-  if (FPlacement in [dpBottomStart, dpBottomEnd]) and (LY + LHeight > LWork.Bottom) then
+  if (APlace in [dpBottomStart, dpBottomEnd]) and (LY + LHeight > LWork.Bottom) then
     LY := LOrigin.Y - LHeight - LGap; // flip above when there is no room below
   LX := Max(LWork.Left, Min(LX, LWork.Right - LWidth));
   LY := Max(LWork.Top, Min(LY, LWork.Bottom - LHeight));

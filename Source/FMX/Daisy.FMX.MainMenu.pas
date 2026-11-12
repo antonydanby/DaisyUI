@@ -218,9 +218,8 @@ begin
   FOpenIndex := AIndex;
   FPopup.ThemeKind := ThemeKind;
   FPopup.SizeKind := SizeKind;
-  LRect := ItemRect(AIndex);
-  LRect.TopLeft := LocalToAbsolute(LRect.TopLeft);
-  LRect.BottomRight := LocalToAbsolute(LRect.BottomRight);
+  FPopup.BiDiMode := BiDiMode;
+  LRect := LocalToAbsoluteRect(ItemRect(AIndex));
   FPopup.Popup(LForm, FItems[AIndex].Items, DaisyMenuIconPixels(FIconSize), LRect, True, 2);
   Repaint;
 end;

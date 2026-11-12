@@ -95,6 +95,8 @@ type
     radThick: TDaisyFmxRadialProgress;
     radText: TDaisyFmxRadialProgress;
     radLive: TDaisyFmxRadialProgress;
+    chkRTL: TDaisyFmxCheckBox;
+    procedure RTLChange(Sender: TObject);
     procedure ProgressAddClick(Sender: TObject);
     procedure ProgressResetClick(Sender: TObject);
     procedure actProgResetUpdate(Sender: TObject);
@@ -115,6 +117,13 @@ var
 implementation
 
 {$R *.fmx}
+
+procedure TForm17.RTLChange(Sender: TObject);
+const
+  Modes: array[Boolean] of TBiDiMode = (bdLeftToRight, bdRightToLeft);
+begin
+  TDaisyControl.ApplyBiDiMode(Self, Modes[chkRTL.Checked]);
+end;
 
 procedure TForm17.FormShow(Sender: TObject);
 begin

@@ -501,7 +501,8 @@ begin
   LShift := Round(LProgress * ACell.Number.Height);
   LSaved := SaveDC(Canvas.Handle);
   try
-    IntersectClipRect(Canvas.Handle, ACell.Number.Left, ACell.Number.Top, ACell.Number.Right, ACell.Number.Bottom);
+    LRect := MirrorRect(ACell.Number);
+    IntersectClipRect(Canvas.Handle, LRect.Left, LRect.Top, LRect.Right, LRect.Bottom);
     if Length(LOld) <> Length(ACell.Text) then
     begin
       LRect := ACell.Number;

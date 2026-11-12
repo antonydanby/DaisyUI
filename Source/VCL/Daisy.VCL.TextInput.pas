@@ -1260,7 +1260,7 @@ begin
     begin
       Canvas.Brush.Style := bsSolid;
       Canvas.Brush.Color := DaisyToColor(Theme.BaseContent);
-      Canvas.FillRect(LCaretRect);
+      Canvas.FillRect(MirrorRect(LCaretRect));
     end;
   end;
   LSel := Rect(0, 0, 0, 0);

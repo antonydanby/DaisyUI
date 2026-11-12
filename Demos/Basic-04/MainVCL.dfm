@@ -89,6 +89,17 @@ object Form16: TForm16
     Action = actTitleBar
     Checked = True
   end
+  object chkRTL: TDaisyCheckBox
+    Left = 680
+    Top = 16
+    Width = 200
+    Height = 30
+    Cursor = crHandPoint
+    TabOrder = 6
+    TabStop = True
+    Caption = 'Right-to-left'
+    OnChange = RTLChange
+  end
   object themeCtl: TDaisyThemeController
     Left = 1000
     Top = 16

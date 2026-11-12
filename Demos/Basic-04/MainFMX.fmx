@@ -86,6 +86,17 @@ object Form17: TForm17
     Checked = True
     OnChange = chkTitleBarChange
   end
+  object chkRTL: TDaisyFmxCheckBox
+    Cursor = crHandPoint
+    Position.X = 760.000000000000000000
+    Position.Y = 16.000000000000000000
+    Size.Width = 200.000000000000000000
+    Size.Height = 30.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 7
+    Text = 'Right-to-left'
+    OnChange = RTLChange
+  end
   object lblStatus: TLabel
     AutoSize = True
     StyledSettings = [Family]

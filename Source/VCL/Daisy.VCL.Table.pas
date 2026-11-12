@@ -32,7 +32,6 @@ type
     FZebra: Boolean;
     FHoverRows: Boolean;
     FBordered: Boolean;
-    FRightToLeft: Boolean;
     FPinRows: Boolean;
     FAutoHeight: Boolean;
     FScrollX, FScrollY: Integer;
@@ -50,6 +49,7 @@ type
     procedure SetHoverRows(const Value: Boolean);
     procedure SetBordered(const Value: Boolean);
     procedure SetRightToLeft(const Value: Boolean);
+    function GetRightToLeft: Boolean;
     procedure SetPinRows(const Value: Boolean);
     procedure SetAutoHeight(const Value: Boolean);
     procedure ModelChanged(Sender: TObject);
@@ -119,7 +119,7 @@ type
     // Draws the outer border and the base-100 background
     property Bordered: Boolean read FBordered write SetBordered default False;
     // Mirrors the columns and the text alignment
-    property RightToLeft: Boolean read FRightToLeft write SetRightToLeft default False;
+    property RightToLeft: Boolean read GetRightToLeft write SetRightToLeft stored False;
     // Header and footer stay in view while the rows scroll
     property PinRows: Boolean read FPinRows write SetPinRows default False;
     // The height follows the rows; turn off to scroll inside a fixed height
@@ -251,11 +251,15 @@ end;
 
 procedure TDaisyTable.SetRightToLeft(const Value: Boolean);
 begin
-  if FRightToLeft <> Value then
-  begin
-    FRightToLeft := Value;
-    Invalidate;
-  end;
+  if Value then
+    BiDiMode := bdRightToLeft
+  else
+    BiDiMode := bdLeftToRight;
+end;
+
+function TDaisyTable.GetRightToLeft: Boolean;
+begin
+  Result := IsRTL;
 end;
 
 procedure TDaisyTable.SetPinRows(const Value: Boolean);
@@ -495,15 +499,10 @@ begin
     Result[I] := Round(LShared[I]);
 end;
 
+// Mirroring is done once by TDaisyControl (BiDiMode); table layout stays in logical coordinates
 function TDaisyTable.Mirror(const ARect: TRect): TRect;
-var
-  LArea: TRect;
 begin
-  if not FRightToLeft then
-    Exit(ARect);
-  LArea := Area;
-  Result := Rect(LArea.Left + LArea.Right - ARect.Right, ARect.Top,
-    LArea.Left + LArea.Right - ARect.Left, ARect.Bottom);
+  Result := ARect;
 end;
 
 // Final column positions (area relative, before any mirroring): scrolling and pinning applied
@@ -572,11 +571,6 @@ end;
 function TDaisyTable.EffectiveAlign(AColumn: TDaisyTableColumn): TDaisyTextAlign;
 begin
   Result := AColumn.Alignment;
-  if FRightToLeft then
-    case Result of
-      taStart: Result := taEnd;
-      taEnd: Result := taStart;
-    end;
 end;
 
 function TDaisyTable.CheckRect(const ACell: TRect; AAlign: TDaisyTextAlign): TRect;
@@ -1067,7 +1061,7 @@ end;
 
 procedure TDaisyTable.DrawContent(const AColors: TDaisyColors; const ARect: TRect);
 var
-  LArea, LRowArea: TRect;
+  LArea, LRowArea, LClip: TRect;
   LGraphics: TGPGraphics;
   LX, LW: TArray<Integer>;
   LSaved, I, R, LTop, LPass, LRadius: Integer;
@@ -1086,13 +1080,17 @@ begin
     if FBordered then
     begin
       LRadius := Max(0, 2 * (ResolvedCornerRadius - Inset));
-      LRegion := CreateRoundRectRgn(LArea.Left, LArea.Top, LArea.Right + 1, LArea.Bottom + 1,
+      LClip := MirrorRect(LArea);
+      LRegion := CreateRoundRectRgn(LClip.Left, LClip.Top, LClip.Right + 1, LClip.Bottom + 1,
         LRadius, LRadius);
       SelectClipRgn(Canvas.Handle, LRegion);
       DeleteObject(LRegion);
     end
     else
-      IntersectClipRect(Canvas.Handle, LArea.Left, LArea.Top, LArea.Right, LArea.Bottom);
+    begin
+      LClip := MirrorRect(LArea);
+      IntersectClipRect(Canvas.Handle, LClip.Left, LClip.Top, LClip.Right, LClip.Bottom);
+    end;
 
     // Body: clip between pinned header and footer
     LRowArea := LArea;
@@ -1105,7 +1103,8 @@ begin
     end;
     I := SaveDC(Canvas.Handle);
     try
-      IntersectClipRect(Canvas.Handle, LRowArea.Left, LRowArea.Top, LRowArea.Right, LRowArea.Bottom);
+      LClip := MirrorRect(LRowArea);
+      IntersectClipRect(Canvas.Handle, LClip.Left, LClip.Top, LClip.Right, LClip.Bottom);
 
       LGraphics := NewGraphics;
       try
