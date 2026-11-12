@@ -241,7 +241,8 @@ end;
 procedure TDaisyFloatingActionButton.SetOpen(const Value: Boolean);
 var
   LSpan, LLabels, LNewW, LNewH: Integer;
-  LRight, LBottom: Integer;
+  LRight, LBottom, LNewLeft: Integer;
+  LAnchorRight: Boolean;
 begin
   if (FOpen = Value) or (csDesigning in ComponentState) or (csLoading in ComponentState) then
     Exit;
@@ -271,13 +272,17 @@ begin
           LNewH := Height + ArcRadius;
         end;
     end;
-    case FDirection of
-      fdUp, fdArc: SetBounds(LRight - LNewW, LBottom - LNewH, LNewW, LNewH);
-      fdDown: SetBounds(LRight - LNewW, Top, LNewW, LNewH);
-      fdLeft: SetBounds(LRight - LNewW, Top, LNewW, LNewH);
+    // The main button sits on the logical right for up/down/arc/left; mirroring puts it on the
+    // physical left in right-to-left mode, so the opposite physical edge must stay fixed
+    LAnchorRight := (FDirection in [fdUp, fdDown, fdLeft, fdArc]) <> IsRTL;
+    if LAnchorRight then
+      LNewLeft := LRight - LNewW
     else
-      SetBounds(Left, Top, LNewW, LNewH);
-    end;
+      LNewLeft := Left;
+    if FDirection in [fdUp, fdArc] then
+      SetBounds(LNewLeft, LBottom - LNewH, LNewW, LNewH)
+    else
+      SetBounds(LNewLeft, Top, LNewW, LNewH);
   end
   else
   begin

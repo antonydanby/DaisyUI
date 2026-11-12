@@ -17,6 +17,7 @@ type
     lblTheme: TLabel;
     lblStatusLine: TLabel;
     chkTitleBar: TDaisyCheckBox;
+    chkRTL: TDaisyCheckBox;
     alMain: TActionList;
     actTitleBar: TAction;
     actPrimaryToggle: TAction;
@@ -109,6 +110,7 @@ type
     procedure CalendarOptionChange(Sender: TObject);
     procedure CalendarTodayClick(Sender: TObject);
     procedure ThemeSelectChange(Sender: TObject);
+    procedure RTLChange(Sender: TObject);
     procedure ThemeControllerChange(Sender: TObject);
     procedure chkTitleBarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -132,6 +134,15 @@ end;
 procedure TFormEdits.ThemeControllerChange(Sender: TObject);
 begin
   selTheme.ItemIndex := Ord(DaisyThemes.Current) - 1;
+end;
+
+procedure TFormEdits.RTLChange(Sender: TObject);
+const
+  Modes: array[Boolean] of TBiDiMode = (bdLeftToRight, bdRightToLeft);
+begin
+  if BiDiMode = Modes[chkRTL.Checked] then
+    Exit;
+  TDaisyControl.ApplyBiDiMode(Self, Modes[chkRTL.Checked]);
 end;
 
 procedure TFormEdits.ThemeSelectChange(Sender: TObject);

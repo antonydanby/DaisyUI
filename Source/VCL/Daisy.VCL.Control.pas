@@ -97,7 +97,8 @@ type
     // Logical client coordinates <-> screen coordinates (VCL's own conversions are physical)
     function LogicalToScreen(const APoint: TPoint): TPoint;
     function ScreenToLogical(const APoint: TPoint): TPoint;
-    function LogicalToScreenRect(const ARect: TRect): TRect;    // Directional icons (arrows, chevrons) keep mirroring with the layout; others are drawn upright
+    function LogicalToScreenRect(const ARect: TRect): TRect;
+    // Directional icons (arrows, chevrons) keep mirroring with the layout; others are drawn upright
     property FlipGlyphs: Boolean read FFlipGlyphs write FFlipGlyphs;
     // Counter-flips non-directional glyphs about the box centre; pair with AGraphics.EndContainer
     function BeginGlyphFlip(AGraphics: TGPGraphics; const ABox: TRectF;
@@ -141,6 +142,9 @@ type
     procedure Invalidate; override;
     // Re-colours the caption of every open form from the current theme
     class procedure ApplyTitleBars;
+    // Switches a form's BiDiMode (and optionally flips its children) with painting suspended, so the
+    // many child windows are not repainted one by one (which flickers); repaints once at the end.
+    class procedure ApplyBiDiMode(AForm: TWinControl; AMode: TBiDiMode; AFlipChildren: Boolean = True);
     // When True, form title bars (Windows 11+) follow the current Daisy theme
     class property ThemedTitleBar: Boolean read FThemedTitleBar write SetThemedTitleBar;
     property Theme: TDaisyTheme read GetTheme;
@@ -563,6 +567,8 @@ begin
     Exit;
   LCenter := (ABox.Left + ABox.Right) / 2;
   AState := AGraphics.BeginContainer;
+  AGraphics.SetSmoothingMode(SmoothingModeAntiAlias); // a new container resets quality settings to defaults
+  AGraphics.SetPixelOffsetMode(PixelOffsetModeHalf);
   AGraphics.TranslateTransform(LCenter, 0);
   AGraphics.ScaleTransform(-1, 1);
   AGraphics.TranslateTransform(-LCenter, 0);
@@ -1277,6 +1283,28 @@ begin
   inherited; // TWinControl also propagates CM_PARENTBIDIMODECHANGED to the children
   Invalidate;
   SizeChanged;
+end;
+
+class procedure TDaisyControl.ApplyBiDiMode(AForm: TWinControl; AMode: TBiDiMode; AFlipChildren: Boolean);
+begin
+  if AForm.BiDiMode = AMode then
+    Exit;
+  if not AForm.HandleAllocated then
+  begin
+    AForm.BiDiMode := AMode;
+    if AFlipChildren then
+      AForm.FlipChildren(True);
+    Exit;
+  end;
+  LockWindowUpdate(AForm.Handle);
+  try
+    AForm.BiDiMode := AMode;
+    if AFlipChildren then
+      AForm.FlipChildren(True);
+  finally
+    LockWindowUpdate(0);
+  end;
+  RedrawWindow(AForm.Handle, nil, 0, RDW_INVALIDATE or RDW_ERASE or RDW_ALLCHILDREN or RDW_UPDATENOW);
 end;
 
 // Painting is mirrored in NewGraphics, so mouse coordinates are mirrored back for hit testing.

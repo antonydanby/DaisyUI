@@ -198,6 +198,8 @@ begin
   else
   begin
     LWidth := MeasureTextWidth(Caption, LFont, LBold) + ScaleValue(2);
+    if DaisyHasEmoji(Caption) then
+      Inc(LWidth, ScaleValue(16)); // Direct2D colour emoji are wider than GDI measures; RTL would clip the far end
     LHeight := Max(MeasureTextHeight('Ag', 1000, LFont, LBold),
       MeasureTextHeight(Caption, 100000, LFont, LBold));
   end;

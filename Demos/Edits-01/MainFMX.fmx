@@ -172,7 +172,7 @@ object FormEdits: TFormEdits
     end
     object lblStatusLine: TLabel
       StyledSettings = [Family]
-      Position.X = 560.000000000000000000
+      Position.X = 640.000000000000000000
       Position.Y = 22.000000000000000000
       Size.Width = 400.000000000000000000
       Size.Height = 15.000000000000000000
@@ -191,6 +191,17 @@ object FormEdits: TFormEdits
       Action = actTitleBar
       Checked = True
       OnChange = chkTitleBarChange
+    end
+    object chkRTL: TDaisyFmxCheckBox
+      Cursor = crHandPoint
+      Position.X = 470.000000000000000000
+      Position.Y = 16.000000000000000000
+      Size.Width = 160.000000000000000000
+      Size.Height = 30.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+      Text = 'Right-to-left'
+      OnChange = RTLChange
     end
     object selTheme: TDaisyFmxSelect
       Cursor = crHandPoint

@@ -490,7 +490,7 @@ var
   LOld: string;
   LDir, LShift, LSaved, LLeft, I: Integer;
   LProgress: Double;
-  LRect, LColumn: TRect;
+  LRect, LColumn, LVisual: TRect;
 begin
   if not FTransitions.InTransition(AIndex, LOld, LDir, LProgress) then
   begin
@@ -514,12 +514,16 @@ begin
       Exit;
     end;
     // only the digits that changed scroll; the others stay in place
-    LLeft := ACell.Number.Left + (ACell.Number.Width - MeasureTextWidth(ACell.Text, DigitSize, False)) div 2;
+    // digits keep their left-to-right order in RTL, so lay the columns out on the mirrored
+    // (visual) row and mirror each back, as DrawText mirrors again
+    LVisual := MirrorRect(ACell.Number);
+    LLeft := LVisual.Left + (LVisual.Width - MeasureTextWidth(ACell.Text, DigitSize, False)) div 2;
     for I := 1 to Length(ACell.Text) do
     begin
-      LColumn := ACell.Number;
+      LColumn := LVisual;
       LColumn.Left := LLeft + MeasureTextWidth(Copy(ACell.Text, 1, I - 1), DigitSize, False);
       LColumn.Right := LLeft + MeasureTextWidth(Copy(ACell.Text, 1, I), DigitSize, False);
+      LColumn := MirrorRect(LColumn);
       if LOld[I] = ACell.Text[I] then
       begin
         DrawText(ACell.Text[I], LColumn, AColor, DigitSize, False, Flags);

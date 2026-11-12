@@ -596,10 +596,15 @@ class procedure TDaisyControl.ApplyBiDiMode(AForm: TCommonCustomForm; AMode: TBi
 begin
   if AForm.BiDiMode = AMode then
     Exit;
-  AForm.BiDiMode := AMode;
-  if AFlipChildren then
-    AForm.FlipChildren(True);
-  Notify(AForm);
+  AForm.BeginUpdate;
+  try
+    AForm.BiDiMode := AMode;
+    if AFlipChildren then
+      AForm.FlipChildren(True);
+    Notify(AForm);
+  finally
+    AForm.EndUpdate;
+  end;
   AForm.Invalidate;
 end;
 

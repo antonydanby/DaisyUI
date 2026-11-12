@@ -173,10 +173,21 @@ object FormEdits: TFormEdits
       Caption = 'Theme:'
     end
     object lblStatusLine: TLabel
-      Left = 560
+      Left = 640
       Top = 22
       Width = 3
       Height = 15
+    end
+    object chkRTL: TDaisyCheckBox
+      Left = 470
+      Top = 16
+      Width = 116
+      Height = 30
+      Cursor = crHandPoint
+      TabOrder = 2
+      TabStop = True
+      Caption = 'Right-to-left'
+      OnChange = RTLChange
     end
     object chkTitleBar: TDaisyCheckBox
       Left = 300

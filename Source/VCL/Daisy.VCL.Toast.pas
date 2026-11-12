@@ -238,6 +238,7 @@ var
   LRects: TArray<TRect>;
   LRgn, LPart: HRGN;
   LRadius, I: Integer;
+  LRect: TRect;
 begin
   if (not HandleAllocated) or (csDesigning in ComponentState) then
     Exit;
@@ -246,8 +247,9 @@ begin
   LRgn := CreateRectRgn(0, 0, 0, 0);
   for I := 0 to High(LRects) do
   begin
-    LPart := CreateRoundRectRgn(LRects[I].Left, LRects[I].Top, LRects[I].Right + 1,
-      LRects[I].Bottom + 1, 2 * LRadius, 2 * LRadius);
+    LRect := MirrorRect(LRects[I]); // the region is in physical coordinates, the layout is logical
+    LPart := CreateRoundRectRgn(LRect.Left, LRect.Top, LRect.Right + 1,
+      LRect.Bottom + 1, 2 * LRadius, 2 * LRadius);
     CombineRgn(LRgn, LRgn, LPart, RGN_OR);
     DeleteObject(LPart);
   end;

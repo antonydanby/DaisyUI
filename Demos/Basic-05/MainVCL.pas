@@ -1,4 +1,4 @@
-unit MainVCL;
+﻿unit MainVCL;
 
 interface
 
@@ -124,8 +124,7 @@ const
 begin
   if BiDiMode = Modes[chkRTL.Checked] then
     Exit;
-  BiDiMode := Modes[chkRTL.Checked];
-  FlipChildren(True);
+  TDaisyControl.ApplyBiDiMode(Self, Modes[chkRTL.Checked]);
 end;
 
 procedure TForm18.FormShow(Sender: TObject);

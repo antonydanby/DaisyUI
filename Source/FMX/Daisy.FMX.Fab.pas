@@ -228,7 +228,8 @@ end;
 
 procedure TDaisyFmxFloatingActionButton.SetOpen(const Value: Boolean);
 var
-  LSpan, LLabels, LNewW, LNewH, LRight, LBottom: Single;
+  LSpan, LLabels, LNewW, LNewH, LRight, LBottom, LNewLeft: Single;
+  LAnchorRight: Boolean;
 begin
   if (FOpen = Value) or (csDesigning in ComponentState) or (csLoading in ComponentState) then
     Exit;
@@ -259,12 +260,17 @@ begin
         end;
     end;
     FOpen := True;
-    case FDirection of
-      fdUp, fdArc: SetBounds(LRight - LNewW, LBottom - LNewH, LNewW, LNewH);
-      fdDown, fdLeft: SetBounds(LRight - LNewW, Position.Y, LNewW, LNewH);
+    // Mirroring puts the logical-right main button on the physical left in RTL mode,
+    // so the opposite physical edge must stay fixed
+    LAnchorRight := (FDirection in [fdUp, fdDown, fdLeft, fdArc]) <> IsRTL;
+    if LAnchorRight then
+      LNewLeft := LRight - LNewW
     else
-      SetBounds(Position.X, Position.Y, LNewW, LNewH);
-    end;
+      LNewLeft := Position.X;
+    if FDirection in [fdUp, fdArc] then
+      SetBounds(LNewLeft, LBottom - LNewH, LNewW, LNewH)
+    else
+      SetBounds(LNewLeft, Position.Y, LNewW, LNewH);
   end
   else
   begin
