@@ -44,6 +44,7 @@ type
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
   published
+    property Style;
     // An empty caption gives the "empty badge" (a small square dot)
     property Caption: string read GetCaption write SetCaption;
     property Icon: TDaisyIconKind read FIcon write SetIcon default diNone;

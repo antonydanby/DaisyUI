@@ -18,6 +18,8 @@ type
     function DefaultStyleColors(AState: TDaisyState): TDaisyColors; override;
   public
     constructor Create(AOwner: TComponent); override;
+  published
+    property Style;
   end;
 
 implementation

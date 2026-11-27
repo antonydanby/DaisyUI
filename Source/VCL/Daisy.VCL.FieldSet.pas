@@ -31,6 +31,7 @@ type
   public
     constructor Create(AOwner: TComponent); override;
   published
+    property Style;
     property Legend: string read FLegend write SetLegend;
     property Description: string read FDescription write SetDescription;
   end;

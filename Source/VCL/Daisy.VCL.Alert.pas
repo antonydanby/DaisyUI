@@ -19,6 +19,7 @@ type
   public
     constructor Create(AOwner: TComponent); override;
   published
+    property Style;
     property Caption: string read GetCaption write SetCaption;
     property IconKind: TDaisyIconKind read FIconKind write SetIconKind default diAuto;
   end;

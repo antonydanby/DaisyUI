@@ -127,6 +127,7 @@ type
     property SelLength: Integer read GetSelLength write SetSelLength;
     property SelText: string read GetSelText;
   published
+    property Style;
     property Text: string read GetModelText write SetModelText;
     // Shown in a dimmed colour while the field is empty
     property Placeholder: string read FPlaceholder write SetPlaceholder;

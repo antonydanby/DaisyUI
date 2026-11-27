@@ -42,6 +42,7 @@ type
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
   published
+    property Style;
     // An empty text gives the "empty badge" (a small square dot)
     property Text: string read FText write SetText;
     property Icon: TDaisyIconKind read FIcon write SetIcon default diNone;

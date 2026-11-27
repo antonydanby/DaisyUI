@@ -78,6 +78,7 @@ type
   public
     constructor Create(AOwner: TComponent); override;
   published
+    property Style;
     property PageCount: Integer read FPageCount write SetPageCount default 10;
     property CurrentPage: Integer read FCurrentPage write SetCurrentPage default 1;
     // Pages shown on each side of the current page

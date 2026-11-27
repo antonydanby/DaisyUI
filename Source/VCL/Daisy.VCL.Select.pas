@@ -140,6 +140,7 @@ type
     // The chosen item, or '' when nothing is chosen
     property Text: string read GetText;
   published
+    property Style;
     property Items: TStrings read FItems write SetItems;
     property ItemIndex: Integer read FItemIndex write SetItemIndex default -1;
     // Shown while ItemIndex is -1

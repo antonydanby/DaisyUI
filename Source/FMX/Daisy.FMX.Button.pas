@@ -41,6 +41,7 @@ type
     destructor Destroy; override;
     procedure Click; override;
   published
+    property Style;
     property Action;
     property Text: string read FText write SetText;
     // Paste SVG markup or load an .svg file; the icon is drawn next to the text

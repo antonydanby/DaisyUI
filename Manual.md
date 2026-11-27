@@ -18,7 +18,7 @@ All visual components descend from `TDaisyControl` (VCL) or `TDaisyFmxControl` (
 | --- | --- |
 | `ThemeKind` | Theme to use. `dtInherit` (default) takes the theme from the parent control, then from the form's `TDaisyFormStyler`. Others: light, dark, cupcake, dracula, corporate, pastel, wireframe, cmyk, winter, dim, nord, silk, bumblebee, emerald, halloween, garden, forest, lofi, fantasy, autumn. |
 | `Variant` | Colour role: `dvDefault`, `dvNeutral`, `dvPrimary`, `dvSecondary`, `dvAccent`, `dvInfo`, `dvSuccess`, `dvWarning`, `dvError`. |
-| `Style` | `dsSolid`, `dsOutline`, `dsDash`, `dsSoft`, `dsGhost`. |
+| `Style` | `dsSolid`, `dsOutline`, `dsDash`, `dsSoft`, `dsGhost`. Only on the components that have these looks: buttons (`TDaisyButton` and its variants), `TDaisyBadge`, `TDaisyAlert`, `TDaisyPanel`/`TDaisyCard`, `TDaisyFieldSet`, `TDaisyTextInput`/`TDaisyTextArea`/`TDaisyDatePicker`, `TDaisySelect`, `TDaisyPagination`, `TDaisyToast` and `TDaisyFloatingActionButton`. Other components follow `Variant` and the theme only and have no `Style`. |
 | `SizeKind` | `dzXS`, `dzSM`, `dzMD` (default), `dzLG`, `dzXL`. Controls fonts and default metrics. |
 | `ContentPadding` | Inner padding in pixels. `-1` uses the theme/size default. |
 | `CornerRadius` | Corner radius in pixels. `-1` uses the theme/size default. |
@@ -316,7 +316,7 @@ A menu that can be vertical or horizontal, with icons, separators, titles and ne
 
 ### TDaisyPageControl, TDaisyFmxPageControl
 
-A tabbed container. Add pages with **New Page** at design time; each page is a `TDaisyTabSheet` / `TDaisyFmxTabSheet`. Tab headers are styled by `Variant`, `Style` and `SizeKind`. Pages can be selected at design time by clicking them.
+A tabbed container. Add pages with **New Page** at design time; each page is a `TDaisyTabSheet` / `TDaisyFmxTabSheet`. Tab headers are styled by `Variant` and `SizeKind`; `TabStyle` picks the tab look. Pages can be selected at design time by clicking them.
 
 - `TabStyle`: `dtsNone`, `dtsBox`, `dtsBorder` (default) or `dtsLift`. With `dtsBorder` the bar sits directly under the tab caption and is only as long as the caption.
 - `TabPosition`: tabs at the top or bottom.

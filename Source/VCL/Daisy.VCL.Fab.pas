@@ -57,6 +57,7 @@ type
     procedure Toggle;
     property IsOpen: Boolean read FOpen write SetOpen;
   published
+    property Style;
     property Caption: string read FCaption write SetCaption;
     property Items: TDaisyItems read FItems write SetItems;
     property Direction: TDaisyFabDirection read FDirection write SetDirection default fdUp;

@@ -13,7 +13,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, Winapi.GDIPAPI, Winapi.GDIPOBJ,
-  System.SysUtils, System.Classes, System.Types, System.UITypes, System.Math,
+  System.SysUtils, System.Classes, System.Types, System.UITypes, System.Math, System.TypInfo,
   Vcl.Controls, Vcl.Graphics, Vcl.Direct2D, Daisy.Theme, Daisy.SVG, Daisy.Animation, Daisy.Widgets;
 
 type
@@ -35,6 +35,7 @@ type
     procedure SetThemeKind(const Value: TDaisyThemeKind);
     procedure SetVariant(const Value: TDaisyVariant);
     procedure SetStyle(const Value: TDaisyStyle);
+    procedure ReadLegacyStyle(Reader: TReader);
     procedure SetSizeKind(const Value: TDaisySize);
     procedure SetContentPadding(const Value: Integer);
     procedure SetCornerRadius(const Value: Integer);
@@ -54,6 +55,7 @@ type
     class procedure SetThemedTitleBar(const Value: Boolean); static;
   protected
     procedure CreateWnd; override;
+    procedure DefineProperties(Filer: TFiler); override;
     procedure WndProc(var Message: TMessage); override;
     procedure WMKillFocus(var Message: TWMKillFocus); message WM_KILLFOCUS;
     procedure Paint; override;
@@ -62,6 +64,10 @@ type
     procedure MouseDown(Button: TMouseButton; Shift: TShiftState; X, Y: Integer); override;
     procedure MouseUp(Button: TMouseButton; Shift: TShiftState; X, Y: Integer); override;
     procedure MouseMove(Shift: TShiftState; X, Y: Integer); override;
+
+    // Only controls whose look has solid / outline / dash / soft / ghost forms (buttons, badges,
+    // fields, panels, alerts ...) redeclare Style as published; elsewhere it would do nothing.
+    property Style: TDaisyStyle read FStyle write SetStyle default dsSolid;
 
     { Hooks for descendants }
     function IsInteractive: Boolean; virtual;
@@ -171,7 +177,6 @@ type
   published
     property ThemeKind: TDaisyThemeKind read FThemeKind write SetThemeKind default dtInherit;
     property Variant: TDaisyVariant read FVariant write SetVariant default dvDefault;
-    property Style: TDaisyStyle read FStyle write SetStyle default dsSolid;
     property SizeKind: TDaisySize read FSize write SetSizeKind default dzMD;
     // -1 = use the value defined by the component / theme
     property ContentPadding: Integer read FContentPadding write SetContentPadding default -1;
@@ -361,6 +366,19 @@ begin
     FStyle := Value;
     Invalidate;
   end;
+end;
+
+procedure TDaisyControl.ReadLegacyStyle(Reader: TReader);
+begin
+  Reader.ReadIdent; // Style used to be published on every control; the value is ignored now
+end;
+
+procedure TDaisyControl.DefineProperties(Filer: TFiler);
+begin
+  inherited;
+  // Lets forms saved before Style was limited to the controls that support it still load
+  if GetPropInfo(ClassInfo, 'Style') = nil then
+    Filer.DefineProperty('Style', ReadLegacyStyle, nil, False);
 end;
 
 procedure TDaisyControl.SetSizeKind(const Value: TDaisySize);

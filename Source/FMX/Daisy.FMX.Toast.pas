@@ -49,6 +49,7 @@ type
     procedure Post(const AText: string; AVariant: TDaisyVariant; ASeconds: Integer); overload;
     procedure Clear;
   published
+    property Style;
     property HorizontalPlacement: TDaisyToastHPlacement read FHorizontal write SetHorizontal default thEnd;
     property VerticalPlacement: TDaisyToastVPlacement read FVertical write SetVertical default tvBottom;
     // How long a message stays before it disappears
